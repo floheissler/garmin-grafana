@@ -49,6 +49,80 @@ git fetch upstream && git merge upstream/main && git push origin main
 
 ---
 
+## MCP Server (Claude Integration)
+
+Query Garmin health data directly from Claude using the MCP (Model Context Protocol) server.
+
+**Location**: `mcp-server/`
+
+### Available Tools
+
+| Tool | Description |
+|------|-------------|
+| `get_daily_summary` | Daily metrics (steps, HR, stress, body battery) |
+| `get_sleep` | Sleep score, stages, HRV, breathing rate |
+| `get_heart_rate` | HR data with smart aggregation |
+| `get_stress_body_battery` | Stress levels and body battery |
+| `get_activities` | List workouts with distance, pace, HR |
+| `get_trends` | Long-term trend analysis (steps, HR, weight, etc.) |
+| `get_fitness_metrics` | VO2 max, fitness age, race predictions |
+| `get_body_composition` | Weight tracking |
+| `query_measurement` | Advanced: direct InfluxQL queries |
+
+### Smart Aggregation
+
+Data is automatically aggregated based on query duration to prevent context overflow:
+
+| Duration | Aggregation |
+|----------|-------------|
+| 1 day | Raw data |
+| 2-7 days | Hourly averages |
+| 8-30 days | Daily values |
+| 31-90 days | Daily with trends |
+| 91+ days | Weekly/monthly |
+
+Override with `aggregation="raw"` for full data (max 5000 points).
+
+### Running Locally
+
+```bash
+cd mcp-server
+./run-server.sh
+```
+
+### Claude Desktop/Code Configuration (SSH from main machine)
+
+```json
+{
+  "mcpServers": {
+    "garmin-health": {
+      "command": "ssh",
+      "args": ["batman@192.168.178.61", "cd /home/batman/docker/garmin-grafana/mcp-server && ./run-server.sh"]
+    }
+  }
+}
+```
+
+### Example Queries
+
+- "What was my sleep score last night?" → `get_sleep(date="2026-01-24")`
+- "Show my step trend over 3 months" → `get_trends(metric="steps", duration="90d")`
+- "List my runs this month" → `get_activities(activity_type="running", duration="30d")`
+- "What's my current VO2 max?" → `get_fitness_metrics()`
+
+### Environment Variables
+
+| Variable | Default | Description |
+|----------|---------|-------------|
+| `GARMIN_MCP_INFLUXDB_HOST` | `localhost` | InfluxDB host |
+| `GARMIN_MCP_INFLUXDB_PORT` | `8086` | InfluxDB port |
+| `GARMIN_MCP_INFLUXDB_DATABASE` | `GarminStats` | Database name |
+| `GARMIN_MCP_INFLUXDB_USERNAME` | `influxdb_user` | DB username |
+| `GARMIN_MCP_INFLUXDB_PASSWORD` | `influxdb_secret_password` | DB password |
+| `GARMIN_MCP_TIMEZONE` | `Europe/Berlin` | Timezone for queries |
+
+---
+
 ## Project Overview
 
 **Garmin-Grafana** is a Docker-based system that fetches health/fitness data from Garmin Connect and stores it in InfluxDB for visualization with Grafana dashboards. It enables self-hosted ownership of personal health metrics.
@@ -78,12 +152,21 @@ Garmin Connect Cloud
 │  InfluxDB 1.11              │  Time-series database
 │  Database: GarminStats      │  25+ measurements
 └─────────────┬───────────────┘
-              │ HTTP Query API
-              ▼
-┌─────────────────────────────┐
-│  Grafana                    │  Visualization
-│  Pre-built dashboard        │  50+ panels
-└─────────────────────────────┘
+              │
+    ┌─────────┴─────────┐
+    │                   │
+    ▼                   ▼
+┌───────────┐    ┌─────────────┐
+│  Grafana  │    │ MCP Server  │
+│  :3001    │    │ (stdio)     │
+└───────────┘    └──────┬──────┘
+                       │ SSH
+                       ▼
+                ┌─────────────┐
+                │   Claude    │
+                │ (Desktop/   │
+                │   Code)     │
+                └─────────────┘
 ```
 
 ## Key Files
@@ -99,6 +182,7 @@ Garmin Connect Cloud
 | `easy-install.sh` | One-command setup script |
 | `k8s/` | Kubernetes Helm chart |
 | `pyproject.toml` | Python dependencies via uv |
+| `mcp-server/` | MCP server for Claude integration |
 
 ## Technology Stack
 

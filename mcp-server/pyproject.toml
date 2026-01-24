@@ -1,0 +1,16 @@
+[project]
+name = "garmin-mcp"
+version = "0.1.0"
+description = "MCP server for querying Garmin health data from InfluxDB"
+requires-python = ">=3.10"
+dependencies = [
+    "mcp[cli]>=1.0.0",
+    "influxdb>=5.3.1",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/garmin_mcp"]
