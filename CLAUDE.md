@@ -28,6 +28,9 @@ docker compose pull && docker compose down && docker compose up -d
 docker exec garmin-fetch-data uv run /app/garmin_grafana/influxdb_exporter.py --last-n-days 30
 ```
 
+### Database Schema
+See [DATABASE_SCHEMA.md](./DATABASE_SCHEMA.md) for complete InfluxDB schema documentation including all measurements, fields, and example queries.
+
 ---
 
 ## Project Overview
