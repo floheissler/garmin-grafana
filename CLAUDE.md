@@ -31,6 +31,22 @@ docker exec garmin-fetch-data uv run /app/garmin_grafana/influxdb_exporter.py --
 ### Database Schema
 See [DATABASE_SCHEMA.md](./DATABASE_SCHEMA.md) for complete InfluxDB schema documentation including all measurements, fields, and example queries.
 
+### Git Repository
+This is a fork of the upstream project with local customizations.
+
+| Remote | Repository | Purpose |
+|--------|------------|---------|
+| `origin` | [floheissler/garmin-grafana](https://github.com/floheissler/garmin-grafana) | Our fork (push here) |
+| `upstream` | [arpanghosh8453/garmin-grafana](https://github.com/arpanghosh8453/garmin-grafana) | Original project (pull updates) |
+
+```bash
+# Push changes to our fork
+git push origin main
+
+# Pull upstream updates
+git fetch upstream && git merge upstream/main && git push origin main
+```
+
 ---
 
 ## Project Overview
