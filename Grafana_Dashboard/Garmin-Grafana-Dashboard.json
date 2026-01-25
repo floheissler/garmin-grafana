@@ -1,113 +1,4 @@
 {
-  "__inputs": [
-    {
-      "name": "DS_GARMIN_STATS",
-      "label": "Garmin Stats",
-      "description": "",
-      "type": "datasource",
-      "pluginId": "influxdb",
-      "pluginName": "InfluxDB"
-    }
-  ],
-  "__elements": {},
-  "__requires": [
-    {
-      "type": "panel",
-      "id": "barchart",
-      "name": "Bar chart",
-      "version": ""
-    },
-    {
-      "type": "panel",
-      "id": "gauge",
-      "name": "Gauge",
-      "version": ""
-    },
-    {
-      "type": "panel",
-      "id": "geomap",
-      "name": "Geomap",
-      "version": ""
-    },
-    {
-      "type": "grafana",
-      "id": "grafana",
-      "name": "Grafana",
-      "version": "12.0.1"
-    },
-    {
-      "type": "panel",
-      "id": "heatmap",
-      "name": "Heatmap",
-      "version": ""
-    },
-    {
-      "type": "panel",
-      "id": "histogram",
-      "name": "Histogram",
-      "version": ""
-    },
-    {
-      "type": "datasource",
-      "id": "influxdb",
-      "name": "InfluxDB",
-      "version": "1.0.0"
-    },
-    {
-      "type": "panel",
-      "id": "marcusolsson-hourly-heatmap-panel",
-      "name": "Hourly heatmap",
-      "version": "2.0.1"
-    },
-    {
-      "type": "panel",
-      "id": "piechart",
-      "name": "Pie chart",
-      "version": ""
-    },
-    {
-      "type": "panel",
-      "id": "stat",
-      "name": "Stat",
-      "version": ""
-    },
-    {
-      "type": "panel",
-      "id": "state-timeline",
-      "name": "State timeline",
-      "version": ""
-    },
-    {
-      "type": "panel",
-      "id": "table",
-      "name": "Table",
-      "version": ""
-    },
-    {
-      "type": "panel",
-      "id": "text",
-      "name": "Text",
-      "version": ""
-    },
-    {
-      "type": "panel",
-      "id": "timeseries",
-      "name": "Time series",
-      "version": ""
-    },
-    {
-      "type": "panel",
-      "id": "trend",
-      "name": "Trend",
-      "version": ""
-    },
-    {
-      "type": "panel",
-      "id": "xychart",
-      "name": "XY Chart",
-      "version": ""
-    }
-  ],
   "annotations": {
     "list": [
       {
@@ -127,7 +18,7 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": null,
+  "id": 1,
   "links": [],
   "panels": [
     {
@@ -144,6 +35,10 @@
       "type": "row"
     },
     {
+      "fieldConfig": {
+        "defaults": {},
+        "overrides": []
+      },
       "gridPos": {
         "h": 3,
         "w": 3,
@@ -160,7 +55,7 @@
         "content": "<center><a href='https://ko-fi.com/A0A84F3DP' target='_blank'><img height='36' style='border:0px;height:36px;' src='https://storage.ko-fi.com/cdn/kofi2.png?v=6' border='0' alt='Buy Me a Coffee at ko-fi.com' /></a></center>  ",
         "mode": "html"
       },
-      "pluginVersion": "12.0.1",
+      "pluginVersion": "12.3.1",
       "title": "Support Me!",
       "transparent": true,
       "type": "text"
@@ -199,6 +94,7 @@
               "type": "linear"
             },
             "showPoints": "auto",
+            "showValues": false,
             "spanNulls": false,
             "stacking": {
               "group": "A",
@@ -213,7 +109,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "semi-dark-blue"
+                "color": "semi-dark-blue",
+                "value": 0
               },
               {
                 "color": "semi-dark-green",
@@ -256,7 +153,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "12.0.1",
+      "pluginVersion": "12.3.1",
       "targets": [
         {
           "alias": "Heart Rate",
@@ -358,7 +255,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": 0
               },
               {
                 "color": "light-blue",
@@ -403,7 +301,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "12.0.1",
+      "pluginVersion": "12.3.1",
       "targets": [
         {
           "datasource": {
@@ -469,7 +367,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "light-blue"
+                "color": "light-blue",
+                "value": 0
               },
               {
                 "color": "semi-dark-green",
@@ -529,7 +428,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "12.0.1",
+      "pluginVersion": "12.3.1",
       "targets": [
         {
           "alias": "Heart rate histogram",
@@ -700,6 +599,7 @@
               "type": "linear"
             },
             "showPoints": "auto",
+            "showValues": false,
             "spanNulls": false,
             "stacking": {
               "group": "A",
@@ -715,7 +615,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "semi-dark-blue"
+                "color": "semi-dark-blue",
+                "value": 0
               },
               {
                 "color": "semi-dark-yellow",
@@ -774,7 +675,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "12.0.1",
+      "pluginVersion": "12.3.1",
       "targets": [
         {
           "alias": "Stress",
@@ -900,7 +801,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "light-blue"
+                "color": "light-blue",
+                "value": 0
               },
               {
                 "color": "semi-dark-green",
@@ -943,7 +845,7 @@
         "sizing": "auto",
         "text": {}
       },
-      "pluginVersion": "12.0.1",
+      "pluginVersion": "12.3.1",
       "targets": [
         {
           "datasource": {
@@ -1016,7 +918,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "semi-dark-red"
+                "color": "semi-dark-red",
+                "value": 0
               },
               {
                 "color": "light-orange",
@@ -1059,7 +962,7 @@
         "sizing": "auto",
         "text": {}
       },
-      "pluginVersion": "12.0.1",
+      "pluginVersion": "12.3.1",
       "targets": [
         {
           "datasource": {
@@ -1150,6 +1053,7 @@
               "type": "linear"
             },
             "showPoints": "never",
+            "showValues": false,
             "spanNulls": false,
             "stacking": {
               "group": "A",
@@ -1165,7 +1069,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "super-light-red"
+                "color": "super-light-red",
+                "value": 0
               },
               {
                 "color": "super-light-yellow",
@@ -1209,7 +1114,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "12.0.1",
+      "pluginVersion": "12.3.1",
       "targets": [
         {
           "alias": "Intraday Steps",
@@ -1323,7 +1228,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "semi-dark-red"
+                "color": "semi-dark-red",
+                "value": 0
               },
               {
                 "color": "semi-dark-orange",
@@ -1366,7 +1272,7 @@
         "sizing": "auto",
         "text": {}
       },
-      "pluginVersion": "12.0.1",
+      "pluginVersion": "12.3.1",
       "targets": [
         {
           "datasource": {
@@ -1448,7 +1354,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "super-light-red"
+                "color": "super-light-red",
+                "value": 0
               }
             ]
           },
@@ -1479,7 +1386,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "12.0.1",
+      "pluginVersion": "12.3.1",
       "targets": [
         {
           "alias": "Hourly Steps",
@@ -1552,7 +1459,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "blue"
+                "color": "blue",
+                "value": 0
               },
               {
                 "color": "semi-dark-red",
@@ -1599,7 +1507,7 @@
         "showThresholdMarkers": true,
         "sizing": "auto"
       },
-      "pluginVersion": "12.0.1",
+      "pluginVersion": "12.3.1",
       "targets": [
         {
           "alias": "Total Asleep",
@@ -1683,6 +1591,7 @@
               "type": "linear"
             },
             "showPoints": "never",
+            "showValues": false,
             "spanNulls": false,
             "stacking": {
               "group": "A",
@@ -1697,7 +1606,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": 0
               },
               {
                 "color": "red",
@@ -1748,7 +1658,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "12.0.1",
+      "pluginVersion": "12.3.1",
       "targets": [
         {
           "alias": "BR",
@@ -1866,7 +1776,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "blue"
+                "color": "blue",
+                "value": 0
               },
               {
                 "color": "semi-dark-red",
@@ -1912,7 +1823,7 @@
         "showThresholdMarkers": true,
         "sizing": "auto"
       },
-      "pluginVersion": "12.0.1",
+      "pluginVersion": "12.3.1",
       "targets": [
         {
           "alias": "Stress",
@@ -1995,6 +1906,7 @@
               "type": "linear"
             },
             "showPoints": "never",
+            "showValues": false,
             "spanNulls": false,
             "stacking": {
               "group": "A",
@@ -2009,7 +1921,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": 0
               },
               {
                 "color": "red",
@@ -2060,7 +1973,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "12.0.1",
+      "pluginVersion": "12.3.1",
       "targets": [
         {
           "alias": "Sleeping Movement Activity",
@@ -2202,6 +2115,7 @@
           "fields": "",
           "values": false
         },
+        "sort": "desc",
         "tooltip": {
           "hideZeros": false,
           "maxHeight": 600,
@@ -2209,7 +2123,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "12.0.1",
+      "pluginVersion": "12.3.1",
       "targets": [
         {
           "alias": "Deep",
@@ -2431,6 +2345,7 @@
               "type": "linear"
             },
             "showPoints": "never",
+            "showValues": false,
             "spanNulls": false,
             "stacking": {
               "group": "A",
@@ -2445,7 +2360,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": 0
               },
               {
                 "color": "red",
@@ -2571,7 +2487,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "12.0.1",
+      "pluginVersion": "12.3.1",
       "targets": [
         {
           "alias": "Sleeping Heart Rate",
@@ -2827,6 +2743,7 @@
           "fields": "",
           "values": false
         },
+        "sort": "desc",
         "text": {},
         "tooltip": {
           "hideZeros": false,
@@ -2835,7 +2752,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "12.0.1",
+      "pluginVersion": "12.3.1",
       "targets": [
         {
           "alias": "Sedentary",
@@ -3061,6 +2978,7 @@
               "type": "linear"
             },
             "showPoints": "never",
+            "showValues": false,
             "spanNulls": true,
             "stacking": {
               "group": "A",
@@ -3098,7 +3016,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "dark-blue"
+                "color": "dark-blue",
+                "value": 0
               }
             ]
           }
@@ -3186,7 +3105,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "12.0.1",
+      "pluginVersion": "12.3.1",
       "targets": [
         {
           "alias": "Deep",
@@ -3346,13 +3265,14 @@
           "fields": "",
           "values": false
         },
+        "sort": "desc",
         "tooltip": {
           "hideZeros": false,
           "mode": "single",
           "sort": "none"
         }
       },
-      "pluginVersion": "12.0.1",
+      "pluginVersion": "12.3.1",
       "targets": [
         {
           "alias": "Zone 1",
@@ -3615,13 +3535,14 @@
           "fields": "",
           "values": false
         },
+        "sort": "desc",
         "tooltip": {
           "hideZeros": false,
           "mode": "single",
           "sort": "none"
         }
       },
-      "pluginVersion": "12.0.1",
+      "pluginVersion": "12.3.1",
       "targets": [
         {
           "alias": "calories",
@@ -3713,7 +3634,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": 0
               },
               {
                 "color": "red",
@@ -3769,7 +3691,7 @@
         "xTickLabelRotation": 0,
         "xTickLabelSpacing": 100
       },
-      "pluginVersion": "12.0.1",
+      "pluginVersion": "12.3.1",
       "targets": [
         {
           "alias": "avgHR",
@@ -3944,7 +3866,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": 0
               },
               {
                 "color": "red",
@@ -4001,7 +3924,7 @@
         "xTickLabelRotation": 0,
         "xTickLabelSpacing": 100
       },
-      "pluginVersion": "12.0.1",
+      "pluginVersion": "12.3.1",
       "targets": [
         {
           "alias": "Distance",
@@ -4095,7 +4018,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": 0
               },
               {
                 "color": "red",
@@ -4182,7 +4106,7 @@
         "xTickLabelRotation": 0,
         "xTickLabelSpacing": 100
       },
-      "pluginVersion": "12.0.1",
+      "pluginVersion": "12.3.1",
       "targets": [
         {
           "alias": "Duration",
@@ -4276,7 +4200,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": 0
               },
               {
                 "color": "red",
@@ -4390,12 +4315,13 @@
           "lat": 47.473641,
           "layer": "Layer 1",
           "lon": 19.054979,
+          "noRepeat": false,
           "padding": 3,
           "shared": true,
           "zoom": 16
         }
       },
-      "pluginVersion": "12.0.1",
+      "pluginVersion": "12.3.1",
       "targets": [
         {
           "alias": "lat",
@@ -4573,7 +4499,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": 0
               },
               {
                 "color": "red",
@@ -4734,12 +4661,13 @@
           "lat": 47.473641,
           "layer": "Layer 1",
           "lon": 19.054979,
+          "noRepeat": false,
           "padding": 3,
           "shared": true,
           "zoom": 16
         }
       },
-      "pluginVersion": "12.0.1",
+      "pluginVersion": "12.3.1",
       "targets": [
         {
           "alias": "lat",
@@ -4926,7 +4854,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "light-yellow"
+                "color": "light-yellow",
+                "value": 0
               },
               {
                 "color": "light-red",
@@ -5004,7 +4933,7 @@
         "xTickLabelRotation": 0,
         "xTickLabelSpacing": 100
       },
-      "pluginVersion": "12.0.1",
+      "pluginVersion": "12.3.1",
       "targets": [
         {
           "alias": "HR",
@@ -5104,7 +5033,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": 0
               }
             ]
           },
@@ -5177,7 +5107,7 @@
         "xTickLabelRotation": 0,
         "xTickLabelSpacing": 100
       },
-      "pluginVersion": "12.0.1",
+      "pluginVersion": "12.3.1",
       "targets": [
         {
           "alias": "Cadence",
@@ -5277,6 +5207,7 @@
               "type": "linear"
             },
             "showPoints": "auto",
+            "showValues": false,
             "spanNulls": false,
             "stacking": {
               "group": "A",
@@ -5293,7 +5224,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": 0
               },
               {
                 "color": "red",
@@ -5374,7 +5306,7 @@
         },
         "xField": "Duration"
       },
-      "pluginVersion": "12.0.0",
+      "pluginVersion": "12.3.1",
       "targets": [
         {
           "alias": "Distance",
@@ -5577,7 +5509,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": 0
               },
               {
                 "color": "red",
@@ -5660,7 +5593,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "12.0.0",
+      "pluginVersion": "12.3.1",
       "targets": [
         {
           "alias": "Speed (Km/h)",
@@ -5783,7 +5716,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "semi-dark-green"
+                "color": "semi-dark-green",
+                "value": 0
               },
               {
                 "color": "light-green",
@@ -5879,7 +5813,7 @@
         "xTickLabelRotation": 0,
         "xTickLabelSpacing": 100
       },
-      "pluginVersion": "12.0.0",
+      "pluginVersion": "12.3.1",
       "targets": [
         {
           "alias": "m/s",
@@ -6064,7 +5998,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": 0
               },
               {
                 "color": "red",
@@ -6166,7 +6101,7 @@
         "xTickLabelRotation": 0,
         "xTickLabelSpacing": 100
       },
-      "pluginVersion": "12.0.0",
+      "pluginVersion": "12.3.1",
       "targets": [
         {
           "alias": "Altitude",
@@ -6242,6 +6177,9 @@
               "type": "color-text"
             },
             "filterable": true,
+            "footer": {
+              "reducers": []
+            },
             "inspect": false
           },
           "fieldMinMax": true,
@@ -6250,7 +6188,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "super-light-red"
+                "color": "super-light-red",
+                "value": 0
               },
               {
                 "color": "semi-dark-red",
@@ -6282,9 +6221,12 @@
               {
                 "id": "custom.cellOptions",
                 "value": {
-                  "type": "color-text",
-                  "wrapText": true
+                  "type": "color-text"
                 }
+              },
+              {
+                "id": "custom.wrapText",
+                "value": true
               },
               {
                 "id": "custom.width",
@@ -6301,9 +6243,12 @@
               {
                 "id": "custom.cellOptions",
                 "value": {
-                  "type": "color-text",
-                  "wrapText": false
+                  "type": "color-text"
                 }
+              },
+              {
+                "id": "custom.wrapText",
+                "value": false
               },
               {
                 "id": "color",
@@ -6432,17 +6377,7 @@
       "id": 38,
       "options": {
         "cellHeight": "sm",
-        "footer": {
-          "countRows": false,
-          "enablePagination": false,
-          "fields": [
-            "Duration"
-          ],
-          "reducer": [
-            "sum"
-          ],
-          "show": false
-        },
+        "enablePagination": false,
         "frameIndex": 1,
         "showHeader": true,
         "sortBy": [
@@ -6452,7 +6387,7 @@
           }
         ]
       },
-      "pluginVersion": "12.0.0",
+      "pluginVersion": "12.3.1",
       "targets": [
         {
           "alias": "Activity Type",
@@ -6726,7 +6661,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": 0
               },
               {
                 "color": "red",
@@ -6760,7 +6696,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "12.0.0",
+      "pluginVersion": "12.3.1",
       "targets": [
         {
           "alias": "Activity Timeline",
@@ -6822,6 +6758,11 @@
               "type": "gauge"
             },
             "filterable": false,
+            "footer": {
+              "reducers": [
+                "mean"
+              ]
+            },
             "inspect": false
           },
           "fieldMinMax": true,
@@ -6830,7 +6771,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": 0
               },
               {
                 "color": "red",
@@ -7073,15 +7015,7 @@
       "id": 59,
       "options": {
         "cellHeight": "sm",
-        "footer": {
-          "countRows": false,
-          "enablePagination": false,
-          "fields": "",
-          "reducer": [
-            "mean"
-          ],
-          "show": true
-        },
+        "enablePagination": false,
         "showHeader": true,
         "sortBy": [
           {
@@ -7090,7 +7024,7 @@
           }
         ]
       },
-      "pluginVersion": "12.0.0",
+      "pluginVersion": "12.3.1",
       "targets": [
         {
           "alias": "Distance Covered",
@@ -7482,7 +7416,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "super-light-red"
+                "color": "super-light-red",
+                "value": 0
               },
               {
                 "color": "green",
@@ -7529,7 +7464,7 @@
         "xTickLabelRotation": 0,
         "xTickLabelSpacing": 100
       },
-      "pluginVersion": "12.0.0",
+      "pluginVersion": "12.3.1",
       "targets": [
         {
           "alias": "Steps",
@@ -7614,7 +7549,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "super-light-red"
+                "color": "super-light-red",
+                "value": 0
               },
               {
                 "color": "green",
@@ -7661,7 +7597,7 @@
         "xTickLabelRotation": 0,
         "xTickLabelSpacing": 100
       },
-      "pluginVersion": "12.0.0",
+      "pluginVersion": "12.3.1",
       "targets": [
         {
           "alias": "Distance Covered",
@@ -7746,7 +7682,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "super-light-red"
+                "color": "super-light-red",
+                "value": 0
               },
               {
                 "color": "dark-green",
@@ -7823,7 +7760,7 @@
         "xTickLabelRotation": 0,
         "xTickLabelSpacing": 100
       },
-      "pluginVersion": "12.0.0",
+      "pluginVersion": "12.3.1",
       "targets": [
         {
           "alias": "BMR Calories",
@@ -7969,6 +7906,7 @@
               "type": "linear"
             },
             "showPoints": "auto",
+            "showValues": false,
             "spanNulls": 259200000,
             "stacking": {
               "group": "A",
@@ -7983,7 +7921,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "super-light-red"
+                "color": "super-light-red",
+                "value": 0
               }
             ]
           },
@@ -8091,7 +8030,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "12.0.0",
+      "pluginVersion": "12.3.1",
       "targets": [
         {
           "alias": "Avg SpO2",
@@ -8263,6 +8202,7 @@
               "type": "linear"
             },
             "showPoints": "auto",
+            "showValues": false,
             "spanNulls": 259200000,
             "stacking": {
               "group": "A",
@@ -8278,7 +8218,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "super-light-red"
+                "color": "super-light-red",
+                "value": 0
               }
             ]
           },
@@ -8401,7 +8342,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "12.0.0",
+      "pluginVersion": "12.3.1",
       "targets": [
         {
           "alias": "Avg Breathing Rate",
@@ -8573,6 +8514,7 @@
               "type": "linear"
             },
             "showPoints": "auto",
+            "showValues": false,
             "spanNulls": 259200000,
             "stacking": {
               "group": "A",
@@ -8587,7 +8529,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "super-light-red"
+                "color": "super-light-red",
+                "value": 0
               }
             ]
           },
@@ -8681,7 +8624,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "12.0.0",
+      "pluginVersion": "12.3.1",
       "targets": [
         {
           "alias": "Time 5K",
@@ -8900,6 +8843,7 @@
               "type": "linear"
             },
             "showPoints": "auto",
+            "showValues": false,
             "spanNulls": true,
             "stacking": {
               "group": "A",
@@ -8914,7 +8858,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "super-light-red"
+                "color": "super-light-red",
+                "value": 0
               }
             ]
           },
@@ -9007,7 +8952,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "12.0.0",
+      "pluginVersion": "12.3.1",
       "targets": [
         {
           "alias": "VO2 Max",
@@ -9081,7 +9026,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": 0
               },
               {
                 "color": "red",
@@ -9196,12 +9142,13 @@
           "lat": 47.473641,
           "layer": "Layer 1",
           "lon": 19.054979,
+          "noRepeat": false,
           "padding": 3,
           "shared": false,
           "zoom": 16
         }
       },
-      "pluginVersion": "12.0.0",
+      "pluginVersion": "12.3.1",
       "targets": [
         {
           "alias": "lat",
@@ -9305,7 +9252,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "super-light-red"
+                "color": "super-light-red",
+                "value": 0
               }
             ]
           },
@@ -9418,7 +9366,7 @@
         "xTickLabelRotation": 0,
         "xTickLabelSpacing": 100
       },
-      "pluginVersion": "12.0.0",
+      "pluginVersion": "12.3.1",
       "targets": [
         {
           "alias": "Deep Sleep",
@@ -9726,6 +9674,7 @@
           "fields": "",
           "values": false
         },
+        "sort": "desc",
         "text": {},
         "tooltip": {
           "hideZeros": false,
@@ -9734,7 +9683,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "12.0.0",
+      "pluginVersion": "12.3.1",
       "targets": [
         {
           "alias": "Sedentary",
@@ -9949,7 +9898,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "super-light-red"
+                "color": "super-light-red",
+                "value": 0
               },
               {
                 "color": "dark-green",
@@ -9995,7 +9945,7 @@
         "xTickLabelRotation": 0,
         "xTickLabelSpacing": 100
       },
-      "pluginVersion": "12.0.0",
+      "pluginVersion": "12.3.1",
       "targets": [
         {
           "alias": "Sleep Score",
@@ -10099,7 +10049,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "super-light-red"
+                "color": "super-light-red",
+                "value": 0
               },
               {
                 "color": "green",
@@ -10237,7 +10188,7 @@
         "xTickLabelRotation": 0,
         "xTickLabelSpacing": 100
       },
-      "pluginVersion": "12.0.0",
+      "pluginVersion": "12.3.1",
       "targets": [
         {
           "alias": "Sleeping",
@@ -10451,7 +10402,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "super-light-red"
+                "color": "super-light-red",
+                "value": 0
               }
             ]
           },
@@ -10525,7 +10477,7 @@
         "xTickLabelRotation": 0,
         "xTickLabelSpacing": 100
       },
-      "pluginVersion": "12.0.0",
+      "pluginVersion": "12.3.1",
       "targets": [
         {
           "alias": "Charged",
@@ -10660,7 +10612,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "super-light-red"
+                "color": "super-light-red",
+                "value": 0
               },
               {
                 "color": "green",
@@ -10738,7 +10691,7 @@
         "xTickLabelRotation": 0,
         "xTickLabelSpacing": 100
       },
-      "pluginVersion": "12.0.0",
+      "pluginVersion": "12.3.1",
       "targets": [
         {
           "alias": "Moderate Intensity",
@@ -10878,7 +10831,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "super-light-red"
+                "color": "super-light-red",
+                "value": 0
               },
               {
                 "color": "green",
@@ -11091,7 +11045,7 @@
         "xTickLabelRotation": 0,
         "xTickLabelSpacing": 100
       },
-      "pluginVersion": "12.0.0",
+      "pluginVersion": "12.3.1",
       "targets": [
         {
           "alias": "Low Stress duration",
@@ -11419,6 +11373,7 @@
           "fields": "",
           "values": false
         },
+        "sort": "desc",
         "tooltip": {
           "hideZeros": false,
           "maxHeight": 600,
@@ -11426,7 +11381,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "12.0.0",
+      "pluginVersion": "12.3.1",
       "targets": [
         {
           "alias": "Deep",
@@ -11648,7 +11603,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": 0
               },
               {
                 "color": "red",
@@ -11719,7 +11675,7 @@
         "xTickLabelRotation": 0,
         "xTickLabelSpacing": 100
       },
-      "pluginVersion": "12.0.0",
+      "pluginVersion": "12.3.1",
       "targets": [
         {
           "alias": "bb_low",
@@ -11890,6 +11846,7 @@
               "type": "linear"
             },
             "showPoints": "always",
+            "showValues": false,
             "spanNulls": true,
             "stacking": {
               "group": "A",
@@ -11904,7 +11861,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": 0
               },
               {
                 "color": "red",
@@ -11971,7 +11929,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "12.0.0",
+      "pluginVersion": "12.3.1",
       "targets": [
         {
           "alias": "Weight in KG",
@@ -12056,7 +12014,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": 0
               },
               {
                 "color": "red",
@@ -12127,7 +12086,7 @@
         "xTickLabelRotation": 0,
         "xTickLabelSpacing": 100
       },
-      "pluginVersion": "12.0.0",
+      "pluginVersion": "12.3.1",
       "targets": [
         {
           "alias": "hr_low",
@@ -12286,7 +12245,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "super-light-blue"
+                "color": "super-light-blue",
+                "value": 0
               },
               {
                 "color": "dark-green",
@@ -12394,7 +12354,8 @@
                   "mode": "absolute",
                   "steps": [
                     {
-                      "color": "yellow"
+                      "color": "yellow",
+                      "value": 0
                     },
                     {
                       "color": "light-yellow",
@@ -12533,7 +12494,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "12.0.0",
+      "pluginVersion": "12.3.1",
       "targets": [
         {
           "alias": "Resting HR",
@@ -12955,7 +12916,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "super-light-blue"
+                "color": "super-light-blue",
+                "value": 0
               },
               {
                 "color": "dark-green",
@@ -13118,7 +13080,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "12.0.0",
+      "pluginVersion": "12.3.1",
       "targets": [
         {
           "alias": "Band Wearing",
@@ -13410,7 +13372,7 @@
           "unit": "BPM"
         }
       },
-      "pluginVersion": "12.0.0",
+      "pluginVersion": "12.3.1",
       "targets": [
         {
           "alias": "Heart Rate",
@@ -13484,7 +13446,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "dark-red"
+                "color": "dark-red",
+                "value": 0
               },
               {
                 "color": "light-yellow",
@@ -13611,7 +13574,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": 0
               },
               {
                 "color": "red",
@@ -13758,6 +13722,7 @@
               "type": "linear"
             },
             "showPoints": "auto",
+            "showValues": false,
             "spanNulls": 21600000,
             "stacking": {
               "group": "A",
@@ -13772,7 +13737,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": 0
               },
               {
                 "color": "red",
@@ -13819,7 +13785,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "12.0.0",
+      "pluginVersion": "12.3.1",
       "targets": [
         {
           "alias": "Device Battery Level",
@@ -13863,7 +13829,7 @@
       "type": "timeseries"
     },
     {
-      "collapsed": true,
+      "collapsed": false,
       "gridPos": {
         "h": 1,
         "w": 24,
@@ -13871,888 +13837,883 @@
         "y": 260
       },
       "id": 70,
-      "panels": [
-        {
-          "datasource": {
-            "type": "influxdb",
-            "uid": "garmin_influxdb"
-          },
-          "description": "Systolic and diastolic blood pressure over time. Bar height shows pulse pressure (systolic - diastolic).",
-          "fieldConfig": {
-            "defaults": {
-              "color": {
-                "mode": "palette-classic"
-              },
-              "custom": {
-                "axisBorderShow": false,
-                "axisCenteredZero": false,
-                "axisColorMode": "text",
-                "axisLabel": "",
-                "axisPlacement": "auto",
-                "fillOpacity": 80,
-                "gradientMode": "none",
-                "hideFrom": {
-                  "legend": false,
-                  "tooltip": false,
-                  "viz": false
-                },
-                "lineWidth": 1,
-                "scaleDistribution": {
-                  "type": "linear"
-                },
-                "thresholdsStyle": {
-                  "mode": "off"
-                }
-              },
-              "mappings": [],
-              "thresholds": {
-                "mode": "absolute",
-                "steps": [
-                  {
-                    "color": "green"
-                  },
-                  {
-                    "color": "red",
-                    "value": 80
-                  }
-                ]
-              }
-            },
-            "overrides": [
-              {
-                "matcher": {
-                  "id": "byName",
-                  "options": "Systolic"
-                },
-                "properties": [
-                  {
-                    "id": "color",
-                    "value": {
-                      "fixedColor": "semi-dark-red",
-                      "mode": "fixed"
-                    }
-                  },
-                  {
-                    "id": "custom.hideFrom",
-                    "value": {
-                      "legend": false,
-                      "tooltip": false,
-                      "viz": true
-                    }
-                  }
-                ]
-              },
-              {
-                "matcher": {
-                  "id": "byName",
-                  "options": "Diastolic"
-                },
-                "properties": [
-                  {
-                    "id": "color",
-                    "value": {
-                      "fixedColor": "#181b1f",
-                      "mode": "fixed"
-                    }
-                  }
-                ]
-              },
-              {
-                "matcher": {
-                  "id": "byName",
-                  "options": "Pulse Pressure"
-                },
-                "properties": [
-                  {
-                    "id": "color",
-                    "value": {
-                      "fixedColor": "semi-dark-blue",
-                      "mode": "fixed"
-                    }
-                  }
-                ]
-              }
-            ]
-          },
-          "gridPos": {
-            "h": 10,
-            "w": 12,
-            "x": 0,
-            "y": 261
-          },
-          "id": 71,
-          "options": {
-            "barRadius": 0,
-            "barWidth": 0.6,
-            "fullHighlight": false,
-            "groupWidth": 0.7,
-            "legend": {
-              "calcs": [
-                "min",
-                "max",
-                "mean"
-              ],
-              "displayMode": "table",
-              "placement": "bottom",
-              "showLegend": true
-            },
-            "orientation": "auto",
-            "showValue": "never",
-            "stacking": "normal",
-            "tooltip": {
-              "hideZeros": false,
-              "mode": "multi",
-              "sort": "none"
-            },
-            "xTickLabelRotation": 0,
-            "xTickLabelSpacing": 100
-          },
-          "pluginVersion": "12.0.1",
-          "targets": [
-            {
-              "alias": "Systolic",
-              "datasource": {
-                "type": "influxdb",
-                "uid": "garmin_influxdb"
-              },
-              "groupBy": [],
-              "measurement": "BloodPressure",
-              "orderByTime": "ASC",
-              "policy": "default",
-              "refId": "A",
-              "resultFormat": "time_series",
-              "select": [
-                [
-                  {
-                    "params": [
-                      "Systolic"
-                    ],
-                    "type": "field"
-                  }
-                ]
-              ],
-              "tags": []
-            },
-            {
-              "alias": "Diastolic",
-              "datasource": {
-                "type": "influxdb",
-                "uid": "garmin_influxdb"
-              },
-              "groupBy": [],
-              "hide": false,
-              "measurement": "BloodPressure",
-              "orderByTime": "ASC",
-              "policy": "default",
-              "refId": "B",
-              "resultFormat": "time_series",
-              "select": [
-                [
-                  {
-                    "params": [
-                      "Diastolic"
-                    ],
-                    "type": "field"
-                  }
-                ]
-              ],
-              "tags": []
-            }
-          ],
-          "title": "Blood Pressure Trend",
-          "transformations": [
-            {
-              "id": "calculateField",
-              "options": {
-                "alias": "Pulse Pressure",
-                "binary": {
-                  "left": "Systolic",
-                  "operator": "-",
-                  "right": "Diastolic"
-                },
-                "mode": "binary",
-                "reduce": {
-                  "reducer": "sum"
-                }
-              }
-            }
-          ],
-          "transparent": true,
-          "type": "barchart"
-        },
-        {
-          "datasource": {
-            "type": "influxdb",
-            "uid": "garmin_influxdb"
-          },
-          "description": "Each dot represents a blood pressure reading. Colors indicate diastolic threshold zones.",
-          "fieldConfig": {
-            "defaults": {
-              "color": {
-                "mode": "thresholds"
-              },
-              "custom": {
-                "axisBorderShow": false,
-                "axisCenteredZero": false,
-                "axisColorMode": "text",
-                "axisLabel": "",
-                "axisPlacement": "auto",
-                "fillOpacity": 60,
-                "hideFrom": {
-                  "legend": false,
-                  "tooltip": false,
-                  "viz": false
-                },
-                "pointShape": "circle",
-                "pointSize": {
-                  "fixed": 10
-                },
-                "pointStrokeWidth": 0,
-                "scaleDistribution": {
-                  "type": "linear"
-                },
-                "show": "points"
-              },
-              "decimals": 0,
-              "fieldMinMax": false,
-              "mappings": [],
-              "max": 100,
-              "min": 40,
-              "thresholds": {
-                "mode": "absolute",
-                "steps": [
-                  {
-                    "color": "semi-dark-green"
-                  },
-                  {
-                    "color": "semi-dark-yellow",
-                    "value": 80
-                  },
-                  {
-                    "color": "orange",
-                    "value": 85
-                  },
-                  {
-                    "color": "semi-dark-red",
-                    "value": 90
-                  }
-                ]
-              },
-              "unit": "pressurembar"
-            },
-            "overrides": [
-              {
-                "matcher": {
-                  "id": "byName",
-                  "options": "Systolic"
-                },
-                "properties": [
-                  {
-                    "id": "unit",
-                    "value": "pressurembar"
-                  },
-                  {
-                    "id": "min",
-                    "value": 90
-                  },
-                  {
-                    "id": "max",
-                    "value": 180
-                  }
-                ]
-              },
-              {
-                "matcher": {
-                  "id": "byName",
-                  "options": "Diastolic"
-                },
-                "properties": [
-                  {
-                    "id": "color",
-                    "value": {
-                      "mode": "thresholds"
-                    }
-                  },
-                  {
-                    "id": "thresholds",
-                    "value": {
-                      "mode": "absolute",
-                      "steps": [
-                        {
-                          "color": "semi-dark-green",
-                          "value": null
-                        },
-                        {
-                          "color": "semi-dark-yellow",
-                          "value": 80
-                        },
-                        {
-                          "color": "orange",
-                          "value": 85
-                        },
-                        {
-                          "color": "semi-dark-red",
-                          "value": 90
-                        }
-                      ]
-                    }
-                  }
-                ]
-              }
-            ]
-          },
-          "gridPos": {
-            "h": 10,
-            "w": 12,
-            "x": 12,
-            "y": 261
-          },
-          "id": 72,
-          "options": {
-            "legend": {
-              "calcs": [],
-              "displayMode": "list",
-              "placement": "bottom",
-              "showLegend": false
-            },
-            "mapping": "auto",
-            "series": [
-              {
-                "frame": {
-                  "matcher": {
-                    "id": "byIndex",
-                    "options": 0
-                  }
-                },
-                "x": {
-                  "matcher": {
-                    "id": "byName",
-                    "options": "Systolic"
-                  }
-                },
-                "y": {
-                  "matcher": {
-                    "id": "byName",
-                    "options": "Diastolic"
-                  }
-                }
-              }
-            ],
-            "tooltip": {
-              "hideZeros": false,
-              "mode": "single",
-              "sort": "none"
-            }
-          },
-          "pluginVersion": "12.0.1",
-          "targets": [
-            {
-              "alias": "Systolic",
-              "datasource": {
-                "type": "influxdb",
-                "uid": "garmin_influxdb"
-              },
-              "groupBy": [],
-              "measurement": "BloodPressure",
-              "orderByTime": "ASC",
-              "policy": "default",
-              "refId": "A",
-              "resultFormat": "time_series",
-              "select": [
-                [
-                  {
-                    "params": [
-                      "Systolic"
-                    ],
-                    "type": "field"
-                  }
-                ]
-              ],
-              "tags": []
-            },
-            {
-              "alias": "Diastolic",
-              "datasource": {
-                "type": "influxdb",
-                "uid": "garmin_influxdb"
-              },
-              "groupBy": [],
-              "hide": false,
-              "measurement": "BloodPressure",
-              "orderByTime": "ASC",
-              "policy": "default",
-              "refId": "B",
-              "resultFormat": "time_series",
-              "select": [
-                [
-                  {
-                    "params": [
-                      "Diastolic"
-                    ],
-                    "type": "field"
-                  }
-                ]
-              ],
-              "tags": []
-            }
-          ],
-          "title": "Systolic vs Diastolic",
-          "transformations": [
-            {
-              "id": "joinByField",
-              "options": {}
-            }
-          ],
-          "transparent": true,
-          "type": "xychart"
-        },
-        {
-          "datasource": {
-            "type": "influxdb",
-            "uid": "garmin_influxdb"
-          },
-          "description": "Distribution of systolic blood pressure readings by clinical zone",
-          "fieldConfig": {
-            "defaults": {
-              "color": {
-                "mode": "palette-classic"
-              },
-              "custom": {
-                "fillOpacity": 70,
-                "gradientMode": "none",
-                "hideFrom": {
-                  "legend": false,
-                  "tooltip": false,
-                  "viz": false
-                },
-                "lineWidth": 1,
-                "stacking": {
-                  "group": "A",
-                  "mode": "none"
-                }
-              },
-              "mappings": [],
-              "unit": "pressurembar"
-            },
-            "overrides": [
-              {
-                "matcher": {
-                  "id": "byName",
-                  "options": "Normal (<120)"
-                },
-                "properties": [
-                  {
-                    "id": "color",
-                    "value": {
-                      "fixedColor": "semi-dark-green",
-                      "mode": "fixed"
-                    }
-                  }
-                ]
-              },
-              {
-                "matcher": {
-                  "id": "byName",
-                  "options": "Elevated (120-129)"
-                },
-                "properties": [
-                  {
-                    "id": "color",
-                    "value": {
-                      "fixedColor": "semi-dark-yellow",
-                      "mode": "fixed"
-                    }
-                  }
-                ]
-              },
-              {
-                "matcher": {
-                  "id": "byName",
-                  "options": "Stage 1 (130-139)"
-                },
-                "properties": [
-                  {
-                    "id": "color",
-                    "value": {
-                      "fixedColor": "orange",
-                      "mode": "fixed"
-                    }
-                  }
-                ]
-              },
-              {
-                "matcher": {
-                  "id": "byName",
-                  "options": "Stage 2 (>=140)"
-                },
-                "properties": [
-                  {
-                    "id": "color",
-                    "value": {
-                      "fixedColor": "semi-dark-red",
-                      "mode": "fixed"
-                    }
-                  }
-                ]
-              }
-            ]
-          },
-          "gridPos": {
-            "h": 6,
-            "w": 12,
-            "x": 0,
-            "y": 271
-          },
-          "id": 73,
-          "options": {
-            "bucketOffset": 0,
-            "bucketSize": 5,
-            "combine": false,
-            "legend": {
-              "calcs": [],
-              "displayMode": "list",
-              "placement": "bottom",
-              "showLegend": true
-            },
-            "tooltip": {
-              "hideZeros": false,
-              "mode": "single",
-              "sort": "none"
-            }
-          },
-          "pluginVersion": "12.0.1",
-          "targets": [
-            {
-              "alias": "Normal (<120)",
-              "datasource": {
-                "type": "influxdb",
-                "uid": "garmin_influxdb"
-              },
-              "groupBy": [],
-              "measurement": "BloodPressure",
-              "orderByTime": "ASC",
-              "policy": "default",
-              "query": "SELECT \"Systolic\" FROM \"BloodPressure\" WHERE $timeFilter AND \"Systolic\" < 120",
-              "rawQuery": true,
-              "refId": "A",
-              "resultFormat": "time_series",
-              "select": [
-                [
-                  {
-                    "params": ["Systolic"],
-                    "type": "field"
-                  }
-                ]
-              ],
-              "tags": []
-            },
-            {
-              "alias": "Elevated (120-129)",
-              "datasource": {
-                "type": "influxdb",
-                "uid": "garmin_influxdb"
-              },
-              "groupBy": [],
-              "hide": false,
-              "measurement": "BloodPressure",
-              "orderByTime": "ASC",
-              "policy": "default",
-              "query": "SELECT \"Systolic\" FROM \"BloodPressure\" WHERE $timeFilter AND \"Systolic\" >= 120 AND \"Systolic\" < 130",
-              "rawQuery": true,
-              "refId": "B",
-              "resultFormat": "time_series",
-              "select": [
-                [
-                  {
-                    "params": ["Systolic"],
-                    "type": "field"
-                  }
-                ]
-              ],
-              "tags": []
-            },
-            {
-              "alias": "Stage 1 (130-139)",
-              "datasource": {
-                "type": "influxdb",
-                "uid": "garmin_influxdb"
-              },
-              "groupBy": [],
-              "hide": false,
-              "measurement": "BloodPressure",
-              "orderByTime": "ASC",
-              "policy": "default",
-              "query": "SELECT \"Systolic\" FROM \"BloodPressure\" WHERE $timeFilter AND \"Systolic\" >= 130 AND \"Systolic\" < 140",
-              "rawQuery": true,
-              "refId": "C",
-              "resultFormat": "time_series",
-              "select": [
-                [
-                  {
-                    "params": ["Systolic"],
-                    "type": "field"
-                  }
-                ]
-              ],
-              "tags": []
-            },
-            {
-              "alias": "Stage 2 (>=140)",
-              "datasource": {
-                "type": "influxdb",
-                "uid": "garmin_influxdb"
-              },
-              "groupBy": [],
-              "hide": false,
-              "measurement": "BloodPressure",
-              "orderByTime": "ASC",
-              "policy": "default",
-              "query": "SELECT \"Systolic\" FROM \"BloodPressure\" WHERE $timeFilter AND \"Systolic\" >= 140",
-              "rawQuery": true,
-              "refId": "D",
-              "resultFormat": "time_series",
-              "select": [
-                [
-                  {
-                    "params": ["Systolic"],
-                    "type": "field"
-                  }
-                ]
-              ],
-              "tags": []
-            }
-          ],
-          "title": "Systolic Distribution",
-          "transparent": true,
-          "type": "histogram"
-        },
-        {
-          "datasource": {
-            "type": "influxdb",
-            "uid": "garmin_influxdb"
-          },
-          "description": "Distribution of diastolic blood pressure readings by clinical zone",
-          "fieldConfig": {
-            "defaults": {
-              "color": {
-                "mode": "palette-classic"
-              },
-              "custom": {
-                "fillOpacity": 70,
-                "gradientMode": "none",
-                "hideFrom": {
-                  "legend": false,
-                  "tooltip": false,
-                  "viz": false
-                },
-                "lineWidth": 1,
-                "stacking": {
-                  "group": "A",
-                  "mode": "none"
-                }
-              },
-              "mappings": [],
-              "unit": "pressurembar"
-            },
-            "overrides": [
-              {
-                "matcher": {
-                  "id": "byName",
-                  "options": "Normal (<80)"
-                },
-                "properties": [
-                  {
-                    "id": "color",
-                    "value": {
-                      "fixedColor": "semi-dark-green",
-                      "mode": "fixed"
-                    }
-                  }
-                ]
-              },
-              {
-                "matcher": {
-                  "id": "byName",
-                  "options": "Elevated (80-84)"
-                },
-                "properties": [
-                  {
-                    "id": "color",
-                    "value": {
-                      "fixedColor": "semi-dark-yellow",
-                      "mode": "fixed"
-                    }
-                  }
-                ]
-              },
-              {
-                "matcher": {
-                  "id": "byName",
-                  "options": "Stage 1 (85-89)"
-                },
-                "properties": [
-                  {
-                    "id": "color",
-                    "value": {
-                      "fixedColor": "orange",
-                      "mode": "fixed"
-                    }
-                  }
-                ]
-              },
-              {
-                "matcher": {
-                  "id": "byName",
-                  "options": "Stage 2 (>=90)"
-                },
-                "properties": [
-                  {
-                    "id": "color",
-                    "value": {
-                      "fixedColor": "semi-dark-red",
-                      "mode": "fixed"
-                    }
-                  }
-                ]
-              }
-            ]
-          },
-          "gridPos": {
-            "h": 6,
-            "w": 12,
-            "x": 12,
-            "y": 271
-          },
-          "id": 74,
-          "options": {
-            "bucketOffset": 0,
-            "bucketSize": 5,
-            "combine": false,
-            "legend": {
-              "calcs": [],
-              "displayMode": "list",
-              "placement": "bottom",
-              "showLegend": true
-            },
-            "tooltip": {
-              "hideZeros": false,
-              "mode": "single",
-              "sort": "none"
-            }
-          },
-          "pluginVersion": "12.0.1",
-          "targets": [
-            {
-              "alias": "Normal (<80)",
-              "datasource": {
-                "type": "influxdb",
-                "uid": "garmin_influxdb"
-              },
-              "groupBy": [],
-              "measurement": "BloodPressure",
-              "orderByTime": "ASC",
-              "policy": "default",
-              "query": "SELECT \"Diastolic\" FROM \"BloodPressure\" WHERE $timeFilter AND \"Diastolic\" < 80",
-              "rawQuery": true,
-              "refId": "A",
-              "resultFormat": "time_series",
-              "select": [
-                [
-                  {
-                    "params": ["Diastolic"],
-                    "type": "field"
-                  }
-                ]
-              ],
-              "tags": []
-            },
-            {
-              "alias": "Elevated (80-84)",
-              "datasource": {
-                "type": "influxdb",
-                "uid": "garmin_influxdb"
-              },
-              "groupBy": [],
-              "hide": false,
-              "measurement": "BloodPressure",
-              "orderByTime": "ASC",
-              "policy": "default",
-              "query": "SELECT \"Diastolic\" FROM \"BloodPressure\" WHERE $timeFilter AND \"Diastolic\" >= 80 AND \"Diastolic\" < 85",
-              "rawQuery": true,
-              "refId": "B",
-              "resultFormat": "time_series",
-              "select": [
-                [
-                  {
-                    "params": ["Diastolic"],
-                    "type": "field"
-                  }
-                ]
-              ],
-              "tags": []
-            },
-            {
-              "alias": "Stage 1 (85-89)",
-              "datasource": {
-                "type": "influxdb",
-                "uid": "garmin_influxdb"
-              },
-              "groupBy": [],
-              "hide": false,
-              "measurement": "BloodPressure",
-              "orderByTime": "ASC",
-              "policy": "default",
-              "query": "SELECT \"Diastolic\" FROM \"BloodPressure\" WHERE $timeFilter AND \"Diastolic\" >= 85 AND \"Diastolic\" < 90",
-              "rawQuery": true,
-              "refId": "C",
-              "resultFormat": "time_series",
-              "select": [
-                [
-                  {
-                    "params": ["Diastolic"],
-                    "type": "field"
-                  }
-                ]
-              ],
-              "tags": []
-            },
-            {
-              "alias": "Stage 2 (>=90)",
-              "datasource": {
-                "type": "influxdb",
-                "uid": "garmin_influxdb"
-              },
-              "groupBy": [],
-              "hide": false,
-              "measurement": "BloodPressure",
-              "orderByTime": "ASC",
-              "policy": "default",
-              "query": "SELECT \"Diastolic\" FROM \"BloodPressure\" WHERE $timeFilter AND \"Diastolic\" >= 90",
-              "rawQuery": true,
-              "refId": "D",
-              "resultFormat": "time_series",
-              "select": [
-                [
-                  {
-                    "params": ["Diastolic"],
-                    "type": "field"
-                  }
-                ]
-              ],
-              "tags": []
-            }
-          ],
-          "title": "Diastolic Distribution",
-          "transparent": true,
-          "type": "histogram"
-        }
-      ],
+      "panels": [],
       "title": "Blood Pressure",
       "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "garmin_influxdb"
+      },
+      "description": "Systolic and diastolic blood pressure over time. Bar height shows pulse pressure (systolic - diastolic).",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "fillOpacity": 80,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineWidth": 1,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Systolic"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "semi-dark-red",
+                  "mode": "fixed"
+                }
+              },
+              {
+                "id": "custom.hideFrom",
+                "value": {
+                  "legend": false,
+                  "tooltip": true,
+                  "viz": true
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Diastolic"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "#181b1f",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Pulse Pressure"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "semi-dark-blue",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 12,
+        "x": 0,
+        "y": 261
+      },
+      "id": 71,
+      "options": {
+        "barRadius": 0,
+        "barWidth": 0.6,
+        "fullHighlight": false,
+        "groupWidth": 0.7,
+        "legend": {
+          "calcs": [
+            "min",
+            "max",
+            "mean"
+          ],
+          "displayMode": "table",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "orientation": "auto",
+        "showValue": "never",
+        "stacking": "normal",
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "multi",
+          "sort": "none"
+        },
+        "xTickLabelRotation": 0,
+        "xTickLabelSpacing": 100
+      },
+      "pluginVersion": "12.3.1",
+      "targets": [
+        {
+          "alias": "Systolic",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "garmin_influxdb"
+          },
+          "groupBy": [],
+          "measurement": "BloodPressure",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "Systolic"
+                ],
+                "type": "field"
+              }
+            ]
+          ],
+          "tags": []
+        },
+        {
+          "alias": "Diastolic",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "garmin_influxdb"
+          },
+          "groupBy": [],
+          "hide": false,
+          "measurement": "BloodPressure",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "B",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "Diastolic"
+                ],
+                "type": "field"
+              }
+            ]
+          ],
+          "tags": []
+        }
+      ],
+      "title": "Blood Pressure Trend",
+      "transformations": [
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "Pulse Pressure",
+            "binary": {
+              "left": "Systolic",
+              "operator": "-",
+              "right": "Diastolic"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        }
+      ],
+      "transparent": true,
+      "type": "barchart"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "garmin_influxdb"
+      },
+      "description": "Each dot represents a blood pressure reading. Colors indicate diastolic threshold zones.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "fixedColor": "blue",
+            "mode": "continuous-blues",
+            "seriesBy": "last"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "fillOpacity": 60,
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "pointShape": "circle",
+            "pointSize": {
+              "fixed": 9,
+              "max": 30,
+              "min": 10
+            },
+            "pointStrokeWidth": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "show": "points"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 10,
+        "w": 12,
+        "x": 12,
+        "y": 261
+      },
+      "id": 72,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": false
+        },
+        "mapping": "auto",
+        "series": [
+          {
+            "color": {
+              "matcher": {
+                "id": "byName",
+                "options": "C"
+              }
+            },
+            "frame": {
+              "matcher": {
+                "id": "byIndex",
+                "options": 0
+              }
+            },
+            "size": {
+              "matcher": {
+                "id": "byName",
+                "options": "C"
+              }
+            },
+            "x": {
+              "matcher": {
+                "id": "byName",
+                "options": "Systolic"
+              }
+            },
+            "y": {
+              "matcher": {
+                "id": "byName",
+                "options": "Diastolic"
+              }
+            }
+          }
+        ],
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "12.3.1",
+      "targets": [
+        {
+          "alias": "Systolic",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "garmin_influxdb"
+          },
+          "groupBy": [],
+          "measurement": "BloodPressure",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "Systolic"
+                ],
+                "type": "field"
+              }
+            ]
+          ],
+          "tags": []
+        },
+        {
+          "alias": "Diastolic",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "garmin_influxdb"
+          },
+          "groupBy": [],
+          "hide": false,
+          "measurement": "BloodPressure",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "B",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "Diastolic"
+                ],
+                "type": "field"
+              }
+            ]
+          ],
+          "tags": []
+        },
+        {
+          "datasource": {
+            "name": "Expression",
+            "type": "__expr__",
+            "uid": "__expr__"
+          },
+          "expression": "$A-$B",
+          "hide": false,
+          "refId": "Pulse Pressure",
+          "type": "math"
+        }
+      ],
+      "title": "Systolic vs Diastolic",
+      "transformations": [
+        {
+          "id": "joinByField",
+          "options": {}
+        }
+      ],
+      "transparent": true,
+      "type": "xychart"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "garmin_influxdb"
+      },
+      "description": "Distribution of systolic blood pressure readings by clinical zone",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "fillOpacity": 70,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineWidth": 1,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "pressurembar"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Normal (<120)"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "semi-dark-green",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Elevated (120-129)"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "semi-dark-yellow",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Stage 1 (130-139)"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "orange",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Stage 2 (>=140)"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "semi-dark-red",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 12,
+        "x": 0,
+        "y": 270
+      },
+      "id": 73,
+      "options": {
+        "bucketOffset": 0,
+        "bucketSize": 5,
+        "combine": false,
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "12.3.1",
+      "targets": [
+        {
+          "alias": "Normal (<120)",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "garmin_influxdb"
+          },
+          "groupBy": [],
+          "measurement": "BloodPressure",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query": "SELECT \"Systolic\" FROM \"BloodPressure\" WHERE $timeFilter AND \"Systolic\" < 120",
+          "rawQuery": true,
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "Systolic"
+                ],
+                "type": "field"
+              }
+            ]
+          ],
+          "tags": []
+        },
+        {
+          "alias": "Elevated (120-129)",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "garmin_influxdb"
+          },
+          "groupBy": [],
+          "hide": false,
+          "measurement": "BloodPressure",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query": "SELECT \"Systolic\" FROM \"BloodPressure\" WHERE $timeFilter AND \"Systolic\" >= 120 AND \"Systolic\" < 130",
+          "rawQuery": true,
+          "refId": "B",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "Systolic"
+                ],
+                "type": "field"
+              }
+            ]
+          ],
+          "tags": []
+        },
+        {
+          "alias": "Stage 1 (130-139)",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "garmin_influxdb"
+          },
+          "groupBy": [],
+          "hide": false,
+          "measurement": "BloodPressure",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query": "SELECT \"Systolic\" FROM \"BloodPressure\" WHERE $timeFilter AND \"Systolic\" >= 130 AND \"Systolic\" < 140",
+          "rawQuery": true,
+          "refId": "C",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "Systolic"
+                ],
+                "type": "field"
+              }
+            ]
+          ],
+          "tags": []
+        },
+        {
+          "alias": "Stage 2 (>=140)",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "garmin_influxdb"
+          },
+          "groupBy": [],
+          "hide": false,
+          "measurement": "BloodPressure",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query": "SELECT \"Systolic\" FROM \"BloodPressure\" WHERE $timeFilter AND \"Systolic\" >= 140",
+          "rawQuery": true,
+          "refId": "D",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "Systolic"
+                ],
+                "type": "field"
+              }
+            ]
+          ],
+          "tags": []
+        }
+      ],
+      "title": "Systolic Distribution",
+      "transparent": true,
+      "type": "histogram"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "garmin_influxdb"
+      },
+      "description": "Distribution of diastolic blood pressure readings by clinical zone",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "fillOpacity": 70,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineWidth": 1,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "pressurembar"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Normal (<80)"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "semi-dark-green",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Elevated (80-84)"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "semi-dark-yellow",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Stage 1 (85-89)"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "orange",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Stage 2 (>=90)"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "semi-dark-red",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 12,
+        "x": 12,
+        "y": 271
+      },
+      "id": 74,
+      "options": {
+        "bucketOffset": 0,
+        "bucketSize": 5,
+        "combine": false,
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "12.3.1",
+      "targets": [
+        {
+          "alias": "Normal (<80)",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "garmin_influxdb"
+          },
+          "groupBy": [],
+          "measurement": "BloodPressure",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query": "SELECT \"Diastolic\" FROM \"BloodPressure\" WHERE $timeFilter AND \"Diastolic\" < 80",
+          "rawQuery": true,
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "Diastolic"
+                ],
+                "type": "field"
+              }
+            ]
+          ],
+          "tags": []
+        },
+        {
+          "alias": "Elevated (80-84)",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "garmin_influxdb"
+          },
+          "groupBy": [],
+          "hide": false,
+          "measurement": "BloodPressure",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query": "SELECT \"Diastolic\" FROM \"BloodPressure\" WHERE $timeFilter AND \"Diastolic\" >= 80 AND \"Diastolic\" < 85",
+          "rawQuery": true,
+          "refId": "B",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "Diastolic"
+                ],
+                "type": "field"
+              }
+            ]
+          ],
+          "tags": []
+        },
+        {
+          "alias": "Stage 1 (85-89)",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "garmin_influxdb"
+          },
+          "groupBy": [],
+          "hide": false,
+          "measurement": "BloodPressure",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query": "SELECT \"Diastolic\" FROM \"BloodPressure\" WHERE $timeFilter AND \"Diastolic\" >= 85 AND \"Diastolic\" < 90",
+          "rawQuery": true,
+          "refId": "C",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "Diastolic"
+                ],
+                "type": "field"
+              }
+            ]
+          ],
+          "tags": []
+        },
+        {
+          "alias": "Stage 2 (>=90)",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "garmin_influxdb"
+          },
+          "groupBy": [],
+          "hide": false,
+          "measurement": "BloodPressure",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query": "SELECT \"Diastolic\" FROM \"BloodPressure\" WHERE $timeFilter AND \"Diastolic\" >= 90",
+          "rawQuery": true,
+          "refId": "D",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "Diastolic"
+                ],
+                "type": "field"
+              }
+            ]
+          ],
+          "tags": []
+        }
+      ],
+      "title": "Diastolic Distribution",
+      "transparent": true,
+      "type": "histogram"
     }
   ],
+  "preload": false,
   "refresh": "5m",
-  "schemaVersion": 41,
+  "schemaVersion": 42,
   "tags": [],
   "templating": {
     "list": [
@@ -15050,6 +15011,5 @@
   "timezone": "browser",
   "title": "Garmin Stats",
   "uid": "feiibsx498gsgb",
-  "version": 217,
-  "weekStart": ""
+  "version": 13
 }
