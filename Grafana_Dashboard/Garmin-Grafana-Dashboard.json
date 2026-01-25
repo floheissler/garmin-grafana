@@ -13861,6 +13861,894 @@
       "title": "Battery Level (Requires GarminHomeAssistant from ConnectIQ integration)",
       "transparent": true,
       "type": "timeseries"
+    },
+    {
+      "collapsed": true,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 260
+      },
+      "id": 70,
+      "panels": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "garmin_influxdb"
+          },
+          "description": "Systolic and diastolic blood pressure over time. Bar height shows pulse pressure (systolic - diastolic).",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisBorderShow": false,
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "fillOpacity": 80,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "lineWidth": 1,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green"
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              }
+            },
+            "overrides": [
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Systolic"
+                },
+                "properties": [
+                  {
+                    "id": "color",
+                    "value": {
+                      "fixedColor": "semi-dark-red",
+                      "mode": "fixed"
+                    }
+                  },
+                  {
+                    "id": "custom.hideFrom",
+                    "value": {
+                      "legend": false,
+                      "tooltip": false,
+                      "viz": true
+                    }
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Diastolic"
+                },
+                "properties": [
+                  {
+                    "id": "color",
+                    "value": {
+                      "fixedColor": "#181b1f",
+                      "mode": "fixed"
+                    }
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Pulse Pressure"
+                },
+                "properties": [
+                  {
+                    "id": "color",
+                    "value": {
+                      "fixedColor": "semi-dark-blue",
+                      "mode": "fixed"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "gridPos": {
+            "h": 10,
+            "w": 12,
+            "x": 0,
+            "y": 261
+          },
+          "id": 71,
+          "options": {
+            "barRadius": 0,
+            "barWidth": 0.6,
+            "fullHighlight": false,
+            "groupWidth": 0.7,
+            "legend": {
+              "calcs": [
+                "min",
+                "max",
+                "mean"
+              ],
+              "displayMode": "table",
+              "placement": "bottom",
+              "showLegend": true
+            },
+            "orientation": "auto",
+            "showValue": "never",
+            "stacking": "normal",
+            "tooltip": {
+              "hideZeros": false,
+              "mode": "multi",
+              "sort": "none"
+            },
+            "xTickLabelRotation": 0,
+            "xTickLabelSpacing": 100
+          },
+          "pluginVersion": "12.0.1",
+          "targets": [
+            {
+              "alias": "Systolic",
+              "datasource": {
+                "type": "influxdb",
+                "uid": "garmin_influxdb"
+              },
+              "groupBy": [],
+              "measurement": "BloodPressure",
+              "orderByTime": "ASC",
+              "policy": "default",
+              "refId": "A",
+              "resultFormat": "time_series",
+              "select": [
+                [
+                  {
+                    "params": [
+                      "Systolic"
+                    ],
+                    "type": "field"
+                  }
+                ]
+              ],
+              "tags": []
+            },
+            {
+              "alias": "Diastolic",
+              "datasource": {
+                "type": "influxdb",
+                "uid": "garmin_influxdb"
+              },
+              "groupBy": [],
+              "hide": false,
+              "measurement": "BloodPressure",
+              "orderByTime": "ASC",
+              "policy": "default",
+              "refId": "B",
+              "resultFormat": "time_series",
+              "select": [
+                [
+                  {
+                    "params": [
+                      "Diastolic"
+                    ],
+                    "type": "field"
+                  }
+                ]
+              ],
+              "tags": []
+            }
+          ],
+          "title": "Blood Pressure Trend",
+          "transformations": [
+            {
+              "id": "calculateField",
+              "options": {
+                "alias": "Pulse Pressure",
+                "binary": {
+                  "left": "Systolic",
+                  "operator": "-",
+                  "right": "Diastolic"
+                },
+                "mode": "binary",
+                "reduce": {
+                  "reducer": "sum"
+                }
+              }
+            }
+          ],
+          "transparent": true,
+          "type": "barchart"
+        },
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "garmin_influxdb"
+          },
+          "description": "Each dot represents a blood pressure reading. Colors indicate diastolic threshold zones.",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "custom": {
+                "axisBorderShow": false,
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "fillOpacity": 60,
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "pointShape": "circle",
+                "pointSize": {
+                  "fixed": 10
+                },
+                "pointStrokeWidth": 0,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "show": "points"
+              },
+              "decimals": 0,
+              "fieldMinMax": false,
+              "mappings": [],
+              "max": 100,
+              "min": 40,
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "semi-dark-green"
+                  },
+                  {
+                    "color": "semi-dark-yellow",
+                    "value": 80
+                  },
+                  {
+                    "color": "orange",
+                    "value": 85
+                  },
+                  {
+                    "color": "semi-dark-red",
+                    "value": 90
+                  }
+                ]
+              },
+              "unit": "pressurembar"
+            },
+            "overrides": [
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Systolic"
+                },
+                "properties": [
+                  {
+                    "id": "unit",
+                    "value": "pressurembar"
+                  },
+                  {
+                    "id": "min",
+                    "value": 90
+                  },
+                  {
+                    "id": "max",
+                    "value": 180
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Diastolic"
+                },
+                "properties": [
+                  {
+                    "id": "color",
+                    "value": {
+                      "mode": "thresholds"
+                    }
+                  },
+                  {
+                    "id": "thresholds",
+                    "value": {
+                      "mode": "absolute",
+                      "steps": [
+                        {
+                          "color": "semi-dark-green",
+                          "value": null
+                        },
+                        {
+                          "color": "semi-dark-yellow",
+                          "value": 80
+                        },
+                        {
+                          "color": "orange",
+                          "value": 85
+                        },
+                        {
+                          "color": "semi-dark-red",
+                          "value": 90
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "gridPos": {
+            "h": 10,
+            "w": 12,
+            "x": 12,
+            "y": 261
+          },
+          "id": 72,
+          "options": {
+            "legend": {
+              "calcs": [],
+              "displayMode": "list",
+              "placement": "bottom",
+              "showLegend": false
+            },
+            "mapping": "auto",
+            "series": [
+              {
+                "frame": {
+                  "matcher": {
+                    "id": "byIndex",
+                    "options": 0
+                  }
+                },
+                "x": {
+                  "matcher": {
+                    "id": "byName",
+                    "options": "Systolic"
+                  }
+                },
+                "y": {
+                  "matcher": {
+                    "id": "byName",
+                    "options": "Diastolic"
+                  }
+                }
+              }
+            ],
+            "tooltip": {
+              "hideZeros": false,
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "pluginVersion": "12.0.1",
+          "targets": [
+            {
+              "alias": "Systolic",
+              "datasource": {
+                "type": "influxdb",
+                "uid": "garmin_influxdb"
+              },
+              "groupBy": [],
+              "measurement": "BloodPressure",
+              "orderByTime": "ASC",
+              "policy": "default",
+              "refId": "A",
+              "resultFormat": "time_series",
+              "select": [
+                [
+                  {
+                    "params": [
+                      "Systolic"
+                    ],
+                    "type": "field"
+                  }
+                ]
+              ],
+              "tags": []
+            },
+            {
+              "alias": "Diastolic",
+              "datasource": {
+                "type": "influxdb",
+                "uid": "garmin_influxdb"
+              },
+              "groupBy": [],
+              "hide": false,
+              "measurement": "BloodPressure",
+              "orderByTime": "ASC",
+              "policy": "default",
+              "refId": "B",
+              "resultFormat": "time_series",
+              "select": [
+                [
+                  {
+                    "params": [
+                      "Diastolic"
+                    ],
+                    "type": "field"
+                  }
+                ]
+              ],
+              "tags": []
+            }
+          ],
+          "title": "Systolic vs Diastolic",
+          "transformations": [
+            {
+              "id": "joinByField",
+              "options": {}
+            }
+          ],
+          "transparent": true,
+          "type": "xychart"
+        },
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "garmin_influxdb"
+          },
+          "description": "Distribution of systolic blood pressure readings by clinical zone",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "fillOpacity": 70,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "lineWidth": 1,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                }
+              },
+              "mappings": [],
+              "unit": "pressurembar"
+            },
+            "overrides": [
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Normal (<120)"
+                },
+                "properties": [
+                  {
+                    "id": "color",
+                    "value": {
+                      "fixedColor": "semi-dark-green",
+                      "mode": "fixed"
+                    }
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Elevated (120-129)"
+                },
+                "properties": [
+                  {
+                    "id": "color",
+                    "value": {
+                      "fixedColor": "semi-dark-yellow",
+                      "mode": "fixed"
+                    }
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Stage 1 (130-139)"
+                },
+                "properties": [
+                  {
+                    "id": "color",
+                    "value": {
+                      "fixedColor": "orange",
+                      "mode": "fixed"
+                    }
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Stage 2 (>=140)"
+                },
+                "properties": [
+                  {
+                    "id": "color",
+                    "value": {
+                      "fixedColor": "semi-dark-red",
+                      "mode": "fixed"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "gridPos": {
+            "h": 6,
+            "w": 12,
+            "x": 0,
+            "y": 271
+          },
+          "id": 73,
+          "options": {
+            "bucketOffset": 0,
+            "bucketSize": 5,
+            "combine": false,
+            "legend": {
+              "calcs": [],
+              "displayMode": "list",
+              "placement": "bottom",
+              "showLegend": true
+            },
+            "tooltip": {
+              "hideZeros": false,
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "pluginVersion": "12.0.1",
+          "targets": [
+            {
+              "alias": "Normal (<120)",
+              "datasource": {
+                "type": "influxdb",
+                "uid": "garmin_influxdb"
+              },
+              "groupBy": [],
+              "measurement": "BloodPressure",
+              "orderByTime": "ASC",
+              "policy": "default",
+              "query": "SELECT \"Systolic\" FROM \"BloodPressure\" WHERE $timeFilter AND \"Systolic\" < 120",
+              "rawQuery": true,
+              "refId": "A",
+              "resultFormat": "time_series",
+              "select": [
+                [
+                  {
+                    "params": ["Systolic"],
+                    "type": "field"
+                  }
+                ]
+              ],
+              "tags": []
+            },
+            {
+              "alias": "Elevated (120-129)",
+              "datasource": {
+                "type": "influxdb",
+                "uid": "garmin_influxdb"
+              },
+              "groupBy": [],
+              "hide": false,
+              "measurement": "BloodPressure",
+              "orderByTime": "ASC",
+              "policy": "default",
+              "query": "SELECT \"Systolic\" FROM \"BloodPressure\" WHERE $timeFilter AND \"Systolic\" >= 120 AND \"Systolic\" < 130",
+              "rawQuery": true,
+              "refId": "B",
+              "resultFormat": "time_series",
+              "select": [
+                [
+                  {
+                    "params": ["Systolic"],
+                    "type": "field"
+                  }
+                ]
+              ],
+              "tags": []
+            },
+            {
+              "alias": "Stage 1 (130-139)",
+              "datasource": {
+                "type": "influxdb",
+                "uid": "garmin_influxdb"
+              },
+              "groupBy": [],
+              "hide": false,
+              "measurement": "BloodPressure",
+              "orderByTime": "ASC",
+              "policy": "default",
+              "query": "SELECT \"Systolic\" FROM \"BloodPressure\" WHERE $timeFilter AND \"Systolic\" >= 130 AND \"Systolic\" < 140",
+              "rawQuery": true,
+              "refId": "C",
+              "resultFormat": "time_series",
+              "select": [
+                [
+                  {
+                    "params": ["Systolic"],
+                    "type": "field"
+                  }
+                ]
+              ],
+              "tags": []
+            },
+            {
+              "alias": "Stage 2 (>=140)",
+              "datasource": {
+                "type": "influxdb",
+                "uid": "garmin_influxdb"
+              },
+              "groupBy": [],
+              "hide": false,
+              "measurement": "BloodPressure",
+              "orderByTime": "ASC",
+              "policy": "default",
+              "query": "SELECT \"Systolic\" FROM \"BloodPressure\" WHERE $timeFilter AND \"Systolic\" >= 140",
+              "rawQuery": true,
+              "refId": "D",
+              "resultFormat": "time_series",
+              "select": [
+                [
+                  {
+                    "params": ["Systolic"],
+                    "type": "field"
+                  }
+                ]
+              ],
+              "tags": []
+            }
+          ],
+          "title": "Systolic Distribution",
+          "transparent": true,
+          "type": "histogram"
+        },
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "garmin_influxdb"
+          },
+          "description": "Distribution of diastolic blood pressure readings by clinical zone",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "fillOpacity": 70,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "lineWidth": 1,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                }
+              },
+              "mappings": [],
+              "unit": "pressurembar"
+            },
+            "overrides": [
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Normal (<80)"
+                },
+                "properties": [
+                  {
+                    "id": "color",
+                    "value": {
+                      "fixedColor": "semi-dark-green",
+                      "mode": "fixed"
+                    }
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Elevated (80-84)"
+                },
+                "properties": [
+                  {
+                    "id": "color",
+                    "value": {
+                      "fixedColor": "semi-dark-yellow",
+                      "mode": "fixed"
+                    }
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Stage 1 (85-89)"
+                },
+                "properties": [
+                  {
+                    "id": "color",
+                    "value": {
+                      "fixedColor": "orange",
+                      "mode": "fixed"
+                    }
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Stage 2 (>=90)"
+                },
+                "properties": [
+                  {
+                    "id": "color",
+                    "value": {
+                      "fixedColor": "semi-dark-red",
+                      "mode": "fixed"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "gridPos": {
+            "h": 6,
+            "w": 12,
+            "x": 12,
+            "y": 271
+          },
+          "id": 74,
+          "options": {
+            "bucketOffset": 0,
+            "bucketSize": 5,
+            "combine": false,
+            "legend": {
+              "calcs": [],
+              "displayMode": "list",
+              "placement": "bottom",
+              "showLegend": true
+            },
+            "tooltip": {
+              "hideZeros": false,
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "pluginVersion": "12.0.1",
+          "targets": [
+            {
+              "alias": "Normal (<80)",
+              "datasource": {
+                "type": "influxdb",
+                "uid": "garmin_influxdb"
+              },
+              "groupBy": [],
+              "measurement": "BloodPressure",
+              "orderByTime": "ASC",
+              "policy": "default",
+              "query": "SELECT \"Diastolic\" FROM \"BloodPressure\" WHERE $timeFilter AND \"Diastolic\" < 80",
+              "rawQuery": true,
+              "refId": "A",
+              "resultFormat": "time_series",
+              "select": [
+                [
+                  {
+                    "params": ["Diastolic"],
+                    "type": "field"
+                  }
+                ]
+              ],
+              "tags": []
+            },
+            {
+              "alias": "Elevated (80-84)",
+              "datasource": {
+                "type": "influxdb",
+                "uid": "garmin_influxdb"
+              },
+              "groupBy": [],
+              "hide": false,
+              "measurement": "BloodPressure",
+              "orderByTime": "ASC",
+              "policy": "default",
+              "query": "SELECT \"Diastolic\" FROM \"BloodPressure\" WHERE $timeFilter AND \"Diastolic\" >= 80 AND \"Diastolic\" < 85",
+              "rawQuery": true,
+              "refId": "B",
+              "resultFormat": "time_series",
+              "select": [
+                [
+                  {
+                    "params": ["Diastolic"],
+                    "type": "field"
+                  }
+                ]
+              ],
+              "tags": []
+            },
+            {
+              "alias": "Stage 1 (85-89)",
+              "datasource": {
+                "type": "influxdb",
+                "uid": "garmin_influxdb"
+              },
+              "groupBy": [],
+              "hide": false,
+              "measurement": "BloodPressure",
+              "orderByTime": "ASC",
+              "policy": "default",
+              "query": "SELECT \"Diastolic\" FROM \"BloodPressure\" WHERE $timeFilter AND \"Diastolic\" >= 85 AND \"Diastolic\" < 90",
+              "rawQuery": true,
+              "refId": "C",
+              "resultFormat": "time_series",
+              "select": [
+                [
+                  {
+                    "params": ["Diastolic"],
+                    "type": "field"
+                  }
+                ]
+              ],
+              "tags": []
+            },
+            {
+              "alias": "Stage 2 (>=90)",
+              "datasource": {
+                "type": "influxdb",
+                "uid": "garmin_influxdb"
+              },
+              "groupBy": [],
+              "hide": false,
+              "measurement": "BloodPressure",
+              "orderByTime": "ASC",
+              "policy": "default",
+              "query": "SELECT \"Diastolic\" FROM \"BloodPressure\" WHERE $timeFilter AND \"Diastolic\" >= 90",
+              "rawQuery": true,
+              "refId": "D",
+              "resultFormat": "time_series",
+              "select": [
+                [
+                  {
+                    "params": ["Diastolic"],
+                    "type": "field"
+                  }
+                ]
+              ],
+              "tags": []
+            }
+          ],
+          "title": "Diastolic Distribution",
+          "transparent": true,
+          "type": "histogram"
+        }
+      ],
+      "title": "Blood Pressure",
+      "type": "row"
     }
   ],
   "refresh": "5m",
