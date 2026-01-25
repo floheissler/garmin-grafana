@@ -16,10 +16,12 @@ from .queries import (
 )
 from .formatters import (
     format_activities_list,
+    format_activity_details,
     format_body_composition,
     format_daily_summary,
     format_fitness_metrics,
     format_heart_rate_data,
+    format_hrv_data,
     format_sleep_data,
     format_stress_body_battery,
 )
@@ -210,6 +212,136 @@ def get_activities(
     query = build_activities_query(start, end, activity_type, limit)
     data = db.query(query)
     result = format_activities_list(data)
+    return json.dumps(result, indent=2, default=str)
+
+
+@mcp.tool()
+def get_activity_details(activity_id: int) -> str:
+    """
+    Get comprehensive details for a specific activity including laps, cadence, and training effect.
+
+    Args:
+        activity_id: The activity ID (get this from get_activities)
+
+    Returns:
+        Full activity details including:
+        - Basic info (name, type, date, location)
+        - Distance and duration (elapsed vs moving time)
+        - Speed/pace (average and max)
+        - Heart rate (avg, max, and time in zones)
+        - Calories (total and BMR)
+        - Training effect (aerobic and anaerobic)
+        - Laps breakdown (distance, time, pace, HR, cadence per lap)
+        - Cadence statistics (for running/cycling)
+
+    Examples:
+        - get_activity_details(activity_id=21651251107)
+    """
+    # Query ActivitySummary for main data (exclude "END" marker records)
+    summary_query = f'''
+        SELECT * FROM "ActivitySummary"
+        WHERE "Activity_ID" = {activity_id} AND "activityType" != 'No Activity'
+        ORDER BY time ASC LIMIT 1
+    '''
+    summary_data = db.query(summary_query)
+
+    # Fallback: if no non-END record, try without filter
+    if not summary_data:
+        summary_query = f'''
+            SELECT * FROM "ActivitySummary"
+            WHERE "Activity_ID" = {activity_id}
+            ORDER BY time ASC LIMIT 1
+        '''
+        summary_data = db.query(summary_query)
+
+    if not summary_data:
+        return json.dumps({"error": f"Activity {activity_id} not found"})
+
+    summary = summary_data[0]
+
+    # Query ActivityLap for lap details
+    lap_query = f'''
+        SELECT * FROM "ActivityLap"
+        WHERE "Activity_ID" = {activity_id}
+        ORDER BY time ASC
+    '''
+    laps_data = db.query(lap_query)
+
+    # Query ActivitySession for training effect
+    session_query = f'''
+        SELECT * FROM "ActivitySession"
+        WHERE "Activity_ID" = {activity_id}
+        LIMIT 1
+    '''
+    session_data = db.query(session_query)
+    session = session_data[0] if session_data else None
+
+    result = format_activity_details(summary, laps_data, session)
+    return json.dumps(result, indent=2, default=str)
+
+
+@mcp.tool()
+def get_hrv(
+    date: str | None = None,
+    start_date: str | None = None,
+    end_date: str | None = None,
+    duration: str | None = None,
+    include_intraday: bool = False,
+) -> str:
+    """
+    Get Heart Rate Variability (HRV) data - a key recovery and readiness metric.
+
+    Args:
+        date: Single date in YYYY-MM-DD format
+        start_date: Start of date range in YYYY-MM-DD format
+        end_date: End of date range in YYYY-MM-DD format
+        duration: Relative duration like "7d", "30d", "90d" (from now)
+        include_intraday: If True, include per-minute HRV readings during sleep (default False)
+
+    Returns:
+        HRV data including:
+        - Overnight average HRV (from sleep)
+        - Trend analysis over time
+        - Correlation with resting HR and sleep score
+        - Optionally: intraday HRV readings during sleep
+
+    HRV interpretation:
+        - Higher HRV generally indicates better recovery and readiness
+        - Look for consistent values; large drops may indicate stress/fatigue
+        - Personal baseline matters more than absolute numbers
+
+    Examples:
+        - get_hrv(date="2026-01-24") - Last night's HRV
+        - get_hrv(duration="30d") - 30-day HRV trend
+        - get_hrv(duration="7d", include_intraday=True) - Week with detailed readings
+    """
+    from .queries import build_time_clause
+
+    start, end = get_time_range(date, start_date, end_date, duration or "7d")
+    time_clause = build_time_clause(start, end)
+
+    # Get nightly HRV from SleepSummary
+    daily_query = f'''
+        SELECT "avgOvernightHrv", "restingHeartRate", "sleepScore"
+        FROM "SleepSummary"
+        WHERE {time_clause}
+        ORDER BY time ASC
+    '''
+    daily_data = db.query(daily_query)
+
+    # Optionally get intraday HRV
+    intraday_data = None
+    if include_intraday:
+        intraday_query = f'''
+            SELECT "hrvValue"
+            FROM "HRV_Intraday"
+            WHERE {time_clause}
+            ORDER BY time ASC
+            LIMIT 2000
+        '''
+        intraday_data = db.query(intraday_query)
+
+    result = format_hrv_data(daily_data, intraday_data)
     return json.dumps(result, indent=2, default=str)
 
 

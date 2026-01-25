@@ -55,7 +55,7 @@ Query Garmin health data directly from Claude using the MCP (Model Context Proto
 
 **Location**: `mcp-server/`
 
-### Available Tools
+### Available Tools (11)
 
 | Tool | Description |
 |------|-------------|
@@ -64,6 +64,8 @@ Query Garmin health data directly from Claude using the MCP (Model Context Proto
 | `get_heart_rate` | HR data with smart aggregation |
 | `get_stress_body_battery` | Stress levels and body battery |
 | `get_activities` | List workouts with distance, pace, HR |
+| `get_activity_details` | Full activity data: laps, pace, cadence, power, HR zones, training effect |
+| `get_hrv` | Heart rate variability trends (key recovery metric) |
 | `get_trends` | Long-term trend analysis (steps, HR, weight, etc.) |
 | `get_fitness_metrics` | VO2 max, fitness age, race predictions |
 | `get_body_composition` | Weight tracking |
@@ -108,6 +110,8 @@ cd mcp-server
 - "What was my sleep score last night?" → `get_sleep(date="2026-01-24")`
 - "Show my step trend over 3 months" → `get_trends(metric="steps", duration="90d")`
 - "List my runs this month" → `get_activities(activity_type="running", duration="30d")`
+- "Tell me about yesterday's run" → `get_activity_details(activity_id=12345)`
+- "How's my HRV trending?" → `get_hrv(duration="30d")`
 - "What's my current VO2 max?" → `get_fitness_metrics()`
 
 ### Environment Variables

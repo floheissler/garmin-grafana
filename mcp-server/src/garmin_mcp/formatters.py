@@ -361,6 +361,180 @@ def format_fitness_metrics(
     return result
 
 
+def format_hrv_data(
+    daily_data: list[dict[str, Any]],
+    intraday_data: list[dict[str, Any]] | None = None,
+) -> dict[str, Any]:
+    """Format HRV data for LLM consumption."""
+    if not daily_data and not intraday_data:
+        return {"error": "No HRV data available"}
+
+    result = {}
+
+    # Daily/nightly HRV from sleep
+    if daily_data:
+        hrvs = [d.get("avgOvernightHrv") for d in daily_data if d.get("avgOvernightHrv")]
+
+        if len(daily_data) == 1:
+            result["overnight"] = {
+                "date": format_timestamp(daily_data[0].get("time", ""))[:10],
+                "avg_hrv": daily_data[0].get("avgOvernightHrv"),
+                "resting_hr": daily_data[0].get("restingHeartRate"),
+                "sleep_score": daily_data[0].get("sleepScore"),
+            }
+        else:
+            result["overnight"] = {
+                "period": {
+                    "start": format_timestamp(daily_data[0].get("time", ""))[:10],
+                    "end": format_timestamp(daily_data[-1].get("time", ""))[:10],
+                    "nights": len(daily_data),
+                },
+                "statistics": calculate_stats(hrvs),
+                "trend": calculate_trend(hrvs),
+                "nightly_values": [
+                    {
+                        "date": format_timestamp(d.get("time", ""))[:10],
+                        "hrv": d.get("avgOvernightHrv"),
+                        "resting_hr": d.get("restingHeartRate"),
+                    }
+                    for d in daily_data
+                ],
+            }
+
+    # Intraday HRV readings (during sleep)
+    if intraday_data:
+        hrv_values = [d.get("hrvValue") for d in intraday_data if d.get("hrvValue")]
+        result["intraday"] = {
+            "readings": len(intraday_data),
+            "statistics": calculate_stats(hrv_values),
+        }
+        # Include readings if not too many
+        if len(intraday_data) <= 100:
+            result["intraday"]["values"] = [
+                {
+                    "time": format_timestamp(d.get("time", "")),
+                    "hrv": d.get("hrvValue"),
+                }
+                for d in intraday_data if d.get("hrvValue")
+            ]
+
+    return result
+
+
+def format_activity_details(
+    summary: dict[str, Any],
+    laps: list[dict[str, Any]] | None = None,
+    session: dict[str, Any] | None = None,
+) -> dict[str, Any]:
+    """Format comprehensive activity details for LLM consumption."""
+    if not summary:
+        return {"error": "Activity not found"}
+
+    # Basic info
+    result = {
+        "id": summary.get("Activity_ID"),
+        "name": summary.get("activityName"),
+        "type": summary.get("activityType"),
+        "date": format_timestamp(summary.get("time", "")),
+        "location": summary.get("locationName"),
+    }
+
+    # Distance and duration
+    result["distance"] = {
+        "value": format_distance_meters(summary.get("distance")),
+        "meters": summary.get("distance"),
+    }
+    result["duration"] = {
+        "elapsed": format_duration_seconds(summary.get("elapsedDuration")),
+        "moving": format_duration_seconds(summary.get("movingDuration")),
+        "elapsed_seconds": summary.get("elapsedDuration"),
+        "moving_seconds": summary.get("movingDuration"),
+    }
+
+    # Speed and pace
+    avg_speed = summary.get("averageSpeed")
+    max_speed = summary.get("maxSpeed")
+    result["speed"] = {
+        "avg_mps": round(avg_speed, 2) if avg_speed else None,
+        "max_mps": round(max_speed, 2) if max_speed else None,
+        "avg_pace": format_pace_mps(avg_speed),
+        "max_pace": format_pace_mps(max_speed),
+    }
+
+    # Heart rate
+    result["heart_rate"] = {
+        "avg": summary.get("averageHR"),
+        "max": summary.get("maxHR"),
+    }
+
+    # HR zones (if available)
+    hr_zones = {}
+    for i in range(1, 6):
+        zone_time = summary.get(f"hrTimeInZone_{i}")
+        if zone_time:
+            hr_zones[f"zone_{i}"] = format_duration_seconds(zone_time)
+    if hr_zones:
+        result["heart_rate"]["zones"] = hr_zones
+
+    # Calories
+    result["calories"] = {
+        "total": round(summary.get("calories", 0) or 0),
+        "bmr": round(summary.get("bmrCalories", 0) or 0),
+    }
+
+    # Training effect from session
+    if session:
+        result["training_effect"] = {
+            "aerobic": session.get("Aerobic_Training"),
+            "anaerobic": session.get("Anaerobic_Training"),
+        }
+        if session.get("Sport"):
+            result["sport"] = session.get("Sport")
+        if session.get("Sub_Sport"):
+            result["sub_sport"] = session.get("Sub_Sport")
+
+    # Laps breakdown
+    if laps:
+        lap_details = []
+        for i, lap in enumerate(laps):
+            # Calculate pace from distance and time if Avg_Speed not available
+            distance = lap.get("Distance")
+            elapsed_time = lap.get("Elapsed_Time")
+            avg_speed = lap.get("Avg_Speed")
+
+            if not avg_speed and distance and elapsed_time and elapsed_time > 0:
+                avg_speed = distance / elapsed_time  # m/s
+
+            lap_details.append({
+                "lap": lap.get("Index", i + 1),
+                "distance": format_distance_meters(distance),
+                "time": format_duration_seconds(elapsed_time),
+                "pace": format_pace_mps(avg_speed),
+                "avg_hr": lap.get("Avg_HR"),
+                "max_hr": lap.get("Max_HR"),
+                "cadence": lap.get("Avg_Cadence"),
+                "power": lap.get("Avg_Power"),
+                "calories": lap.get("Calories"),
+            })
+
+        result["laps"] = {
+            "count": len(laps),
+            "details": lap_details,
+        }
+
+        # Calculate lap statistics
+        lap_hrs = [lap.get("Avg_HR") for lap in laps if lap.get("Avg_HR")]
+        lap_cadences = [lap.get("Avg_Cadence") for lap in laps if lap.get("Avg_Cadence")]
+        lap_powers = [lap.get("Avg_Power") for lap in laps if lap.get("Avg_Power")]
+
+        if lap_cadences:
+            result["cadence"] = calculate_stats(lap_cadences)
+        if lap_powers:
+            result["power"] = calculate_stats(lap_powers)
+
+    return result
+
+
 def format_body_composition(data: list[dict[str, Any]]) -> dict[str, Any]:
     """Format body composition data for LLM consumption."""
     if not data:
