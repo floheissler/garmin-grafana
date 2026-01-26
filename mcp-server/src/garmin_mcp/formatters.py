@@ -425,6 +425,7 @@ def format_activity_details(
     summary: dict[str, Any],
     laps: list[dict[str, Any]] | None = None,
     session: dict[str, Any] | None = None,
+    gps_agg: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Format comprehensive activity details for LLM consumption."""
     if not summary:
@@ -493,6 +494,26 @@ def format_activity_details(
         if session.get("Sub_Sport"):
             result["sub_sport"] = session.get("Sub_Sport")
 
+    # Running dynamics summary from lap-level averages
+    if laps:
+        dynamics_fields = {
+            "vertical_oscillation_mm": "Avg_VerticalOscillation",
+            "stance_time_ms": "Avg_StanceTime",
+            "stance_time_percent": "Avg_StanceTimePercent",
+            "stance_time_balance_pct": "Avg_StanceTimeBalance",
+            "step_length_mm": "Avg_StepLength",
+            "vertical_ratio_pct": "Avg_VerticalRatio",
+        }
+        dynamics_data = {}
+        for key, field in dynamics_fields.items():
+            values = [lap.get(field) for lap in laps if lap.get(field) is not None]
+            if values:
+                dynamics_data[key] = calculate_stats(values)
+        if dynamics_data:
+            if gps_agg and gps_agg.get("mean_running_efficiency") is not None:
+                dynamics_data["running_efficiency"] = round(gps_agg["mean_running_efficiency"], 3)
+            result["running_dynamics"] = dynamics_data
+
     # Laps breakdown
     if laps:
         lap_details = []
@@ -505,7 +526,7 @@ def format_activity_details(
             if not avg_speed and distance and elapsed_time and elapsed_time > 0:
                 avg_speed = distance / elapsed_time  # m/s
 
-            lap_details.append({
+            lap_entry = {
                 "lap": lap.get("Index", i + 1),
                 "distance": format_distance_meters(distance),
                 "time": format_duration_seconds(elapsed_time),
@@ -515,7 +536,20 @@ def format_activity_details(
                 "cadence": lap.get("Avg_Cadence"),
                 "power": lap.get("Avg_Power"),
                 "calories": lap.get("Calories"),
-            })
+            }
+            if lap.get("Avg_VerticalOscillation") is not None:
+                lap_entry["vertical_oscillation_mm"] = lap["Avg_VerticalOscillation"]
+            if lap.get("Avg_StanceTime") is not None:
+                lap_entry["stance_time_ms"] = lap["Avg_StanceTime"]
+            if lap.get("Avg_StanceTimePercent") is not None:
+                lap_entry["stance_time_percent"] = lap["Avg_StanceTimePercent"]
+            if lap.get("Avg_StanceTimeBalance") is not None:
+                lap_entry["stance_time_balance_pct"] = lap["Avg_StanceTimeBalance"]
+            if lap.get("Avg_StepLength") is not None:
+                lap_entry["step_length_mm"] = lap["Avg_StepLength"]
+            if lap.get("Avg_VerticalRatio") is not None:
+                lap_entry["vertical_ratio_pct"] = lap["Avg_VerticalRatio"]
+            lap_details.append(lap_entry)
 
         result["laps"] = {
             "count": len(laps),

@@ -240,6 +240,12 @@ Per-point GPS and metrics during activities.
 | `Temperature` | integer | Temperature (°C) |
 | `DurationSeconds` | float | Duration at point |
 | `RunningEfficiency` | float | Running efficiency score |
+| `VerticalOscillation` | float | Vertical oscillation (mm) |
+| `StanceTime` | float | Ground contact time (ms) |
+| `StanceTimePercent` | float | Ground contact time as % of stride |
+| `StanceTimeBalance` | float | L/R ground contact balance (%) |
+| `StepLength` | float | Step length (mm) |
+| `VerticalRatio` | float | Vertical ratio (%) |
 
 ### ActivityLap
 Per-lap metrics for activities.
@@ -260,6 +266,12 @@ Per-lap metrics for activities.
 | `Avg_Cadence` | integer | Average cadence |
 | `Avg_Power` | integer | Average power |
 | `Avg_Temperature` | integer | Average temperature |
+| `Avg_VerticalOscillation` | float | Average vertical oscillation (mm) |
+| `Avg_StanceTime` | float | Average ground contact time (ms) |
+| `Avg_StanceTimePercent` | float | Average GCT as % of stride |
+| `Avg_StanceTimeBalance` | float | Average L/R ground contact balance (%) |
+| `Avg_StepLength` | float | Average step length (mm) |
+| `Avg_VerticalRatio` | float | Average vertical ratio (%) |
 | `Cycles` | integer | Cycles/steps in lap |
 
 ### ActivitySession

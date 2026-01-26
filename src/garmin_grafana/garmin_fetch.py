@@ -744,7 +744,13 @@ def fetch_activity_GPS(activityIDdict): # Uses FIT file by default, falls back t
                                     "Fractional_Cadence": parsed_record.get('fractional_cadence', None),
                                     "Temperature": parsed_record.get('temperature', None),
                                     "Accumulated_Power": parsed_record.get('accumulated_power', None),
-                                    "Power": parsed_record.get('power', None)
+                                    "Power": parsed_record.get('power', None),
+                                    "VerticalOscillation": parsed_record.get('vertical_oscillation', None),
+                                    "StanceTime": parsed_record.get('stance_time', None),
+                                    "StanceTimePercent": parsed_record.get('stance_time_percent', None),
+                                    "StanceTimeBalance": parsed_record.get('stance_time_balance', None),
+                                    "StepLength": parsed_record.get('step_length', None),
+                                    "VerticalRatio": parsed_record.get('vertical_ratio', None)
                                 }
                             }
                             points_list.append(point)
@@ -831,7 +837,13 @@ def fetch_activity_GPS(activityIDdict): # Uses FIT file by default, falls back t
                                     "Avg_HR": lap_record.get('avg_heart_rate', None),
                                     "Max_HR": lap_record.get('max_heart_rate', None),
                                     "Avg_Cadence": lap_record.get('avg_cadence', None),
-                                    "Avg_Temperature": lap_record.get('avg_temperature', None)
+                                    "Avg_Temperature": lap_record.get('avg_temperature', None),
+                                    "Avg_VerticalOscillation": lap_record.get('avg_vertical_oscillation', None),
+                                    "Avg_StanceTime": lap_record.get('avg_stance_time', None),
+                                    "Avg_StanceTimePercent": lap_record.get('avg_stance_time_percent', None),
+                                    "Avg_StanceTimeBalance": lap_record.get('avg_stance_time_balance', None),
+                                    "Avg_StepLength": lap_record.get('avg_step_length', None),
+                                    "Avg_VerticalRatio": lap_record.get('avg_vertical_ratio', None)
                                 }
                             }
                             points_list.append(point)

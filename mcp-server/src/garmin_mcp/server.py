@@ -220,7 +220,7 @@ def get_activities(
 @mcp.tool()
 def get_activity_details(activity_id: int) -> str:
     """
-    Get comprehensive details for a specific activity including laps, cadence, and training effect.
+    Get comprehensive details for a specific activity including laps, cadence, training effect, and running dynamics.
 
     Args:
         activity_id: The activity ID (get this from get_activities)
@@ -233,7 +233,8 @@ def get_activity_details(activity_id: int) -> str:
         - Heart rate (avg, max, and time in zones)
         - Calories (total and BMR)
         - Training effect (aerobic and anaerobic)
-        - Laps breakdown (distance, time, pace, HR, cadence per lap)
+        - Running dynamics (vertical oscillation, ground contact time, step length, vertical ratio, running efficiency) — running activities only
+        - Laps breakdown (distance, time, pace, HR, cadence, dynamics per lap)
         - Cadence statistics (for running/cycling)
 
     Examples:
@@ -278,7 +279,17 @@ def get_activity_details(activity_id: int) -> str:
     session_data = db.query(session_query)
     session = session_data[0] if session_data else None
 
-    result = format_activity_details(summary, laps_data, session)
+    # Query ActivityGPS for aggregate running dynamics (running efficiency, cadence)
+    gps_agg_query = f'''
+        SELECT MEAN("RunningEfficiency") AS "mean_running_efficiency",
+               MEAN("Cadence") AS "mean_cadence"
+        FROM "ActivityGPS"
+        WHERE "Activity_ID" = '{activity_id}'
+    '''
+    gps_agg_data = db.query(gps_agg_query)
+    gps_agg = gps_agg_data[0] if gps_agg_data else None
+
+    result = format_activity_details(summary, laps_data, session, gps_agg)
     return json.dumps(result, indent=2, default=str)
 
 

@@ -21,8 +21,8 @@ docker compose run --rm garmin-fetch-data
 # Import more historical data
 docker compose run --rm -e MANUAL_START_DATE=YYYY-MM-DD -e MANUAL_END_DATE=YYYY-MM-DD garmin-fetch-data
 
-# Update stack
-docker compose pull && docker compose down && docker compose up -d
+# Update stack (rebuild from local source)
+docker compose up -d --build
 
 # Export to CSV
 docker exec garmin-fetch-data uv run /app/garmin_grafana/influxdb_exporter.py --last-n-days 30
@@ -39,12 +39,15 @@ This is a fork of the upstream project with local customizations.
 | `origin` | [floheissler/garmin-grafana](https://github.com/floheissler/garmin-grafana) | Our fork (push here) |
 | `upstream` | [arpanghosh8453/garmin-grafana](https://github.com/arpanghosh8453/garmin-grafana) | Original project (pull updates) |
 
+The Docker image is built locally from our fork (not pulled from a registry), so after merging upstream changes or making local edits, rebuild with `docker compose up -d --build`.
+
 ```bash
 # Push changes to our fork
 git push origin main
 
-# Pull upstream updates
+# Pull upstream updates, rebuild
 git fetch upstream && git merge upstream/main && git push origin main
+docker compose up -d --build
 ```
 
 ---
@@ -64,7 +67,7 @@ Query Garmin health data directly from Claude using the MCP (Model Context Proto
 | `get_heart_rate` | HR data with smart aggregation |
 | `get_stress_body_battery` | Stress levels and body battery |
 | `get_activities` | List workouts with distance, pace, HR |
-| `get_activity_details` | Full activity data: laps, pace, cadence, power, HR zones, training effect |
+| `get_activity_details` | Full activity data: laps, pace, cadence, power, HR zones, training effect, running dynamics |
 | `get_hrv` | Heart rate variability trends (key recovery metric) |
 | `get_trends` | Long-term trend analysis (steps, HR, weight, etc.) |
 | `get_fitness_metrics` | VO2 max, fitness age, race predictions |
