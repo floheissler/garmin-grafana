@@ -14353,8 +14353,7 @@
       "fieldConfig": {
         "defaults": {
           "color": {
-            "fixedColor": "dark-blue",
-            "mode": "fixed"
+            "mode": "palette-classic"
           },
           "custom": {
             "fillOpacity": 70,
@@ -14374,26 +14373,70 @@
           "mappings": [],
           "max": 180,
           "min": 0,
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
+          "unit": "mmHg"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Normal (<120)"
+            },
+            "properties": [
               {
-                "color": "green",
-                "value": 0
-              },
-              {
-                "color": "#EAB839",
-                "value": 120
-              },
-              {
-                "color": "semi-dark-orange",
-                "value": 130
+                "id": "color",
+                "value": {
+                  "fixedColor": "dark-green",
+                  "mode": "fixed"
+                }
               }
             ]
           },
-          "unit": "mmHg"
-        },
-        "overrides": []
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Elevated (120-129)"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "#EAB839",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Stage 1 (130-139)"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "semi-dark-orange",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Stage 2 (≥140)"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "semi-dark-red",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          }
+        ]
       },
       "gridPos": {
         "h": 6,
@@ -14424,42 +14467,100 @@
       "pluginVersion": "12.3.1",
       "targets": [
         {
-          "alias": "Systolic",
+          "alias": "Normal (<120)",
           "datasource": {
             "type": "influxdb",
             "uid": "garmin_influxdb"
           },
-          "groupBy": [
-            {
-              "params": [
-                "$__interval"
-              ],
-              "type": "time"
-            },
-            {
-              "params": [
-                "null"
-              ],
-              "type": "fill"
-            }
-          ],
+          "groupBy": [],
           "hide": false,
           "measurement": "BloodPressure",
           "orderByTime": "ASC",
           "policy": "default",
+          "query": "SELECT \"Systolic\" FROM \"BloodPressure\" WHERE $timeFilter AND \"Systolic\" < 120",
+          "rawQuery": true,
           "refId": "A",
           "resultFormat": "time_series",
           "select": [
             [
               {
-                "params": [
-                  "Systolic"
-                ],
+                "params": ["Systolic"],
                 "type": "field"
-              },
+              }
+            ]
+          ],
+          "tags": []
+        },
+        {
+          "alias": "Elevated (120-129)",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "garmin_influxdb"
+          },
+          "groupBy": [],
+          "hide": false,
+          "measurement": "BloodPressure",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query": "SELECT \"Systolic\" FROM \"BloodPressure\" WHERE $timeFilter AND \"Systolic\" >= 120 AND \"Systolic\" < 130",
+          "rawQuery": true,
+          "refId": "B",
+          "resultFormat": "time_series",
+          "select": [
+            [
               {
-                "params": [],
-                "type": "mean"
+                "params": ["Systolic"],
+                "type": "field"
+              }
+            ]
+          ],
+          "tags": []
+        },
+        {
+          "alias": "Stage 1 (130-139)",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "garmin_influxdb"
+          },
+          "groupBy": [],
+          "hide": false,
+          "measurement": "BloodPressure",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query": "SELECT \"Systolic\" FROM \"BloodPressure\" WHERE $timeFilter AND \"Systolic\" >= 130 AND \"Systolic\" < 140",
+          "rawQuery": true,
+          "refId": "C",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": ["Systolic"],
+                "type": "field"
+              }
+            ]
+          ],
+          "tags": []
+        },
+        {
+          "alias": "Stage 2 (≥140)",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "garmin_influxdb"
+          },
+          "groupBy": [],
+          "hide": false,
+          "measurement": "BloodPressure",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query": "SELECT \"Systolic\" FROM \"BloodPressure\" WHERE $timeFilter AND \"Systolic\" >= 140",
+          "rawQuery": true,
+          "refId": "D",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": ["Systolic"],
+                "type": "field"
               }
             ]
           ],
@@ -14479,8 +14580,7 @@
       "fieldConfig": {
         "defaults": {
           "color": {
-            "fixedColor": "dark-blue",
-            "mode": "fixed"
+            "mode": "palette-classic"
           },
           "custom": {
             "fillOpacity": 70,
@@ -14500,18 +14600,70 @@
           "mappings": [],
           "max": 120,
           "min": 0,
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
+          "unit": "mmHg"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Normal (<80)"
+            },
+            "properties": [
               {
-                "color": "green",
-                "value": 0
+                "id": "color",
+                "value": {
+                  "fixedColor": "dark-green",
+                  "mode": "fixed"
+                }
               }
             ]
           },
-          "unit": "mmHg"
-        },
-        "overrides": []
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Elevated (80-84)"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "#EAB839",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Stage 1 (85-89)"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "semi-dark-orange",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Stage 2 (≥90)"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "semi-dark-red",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          }
+        ]
       },
       "gridPos": {
         "h": 6,
@@ -14521,7 +14673,6 @@
       },
       "id": 74,
       "options": {
-        "bucketOffset": 0,
         "bucketSize": 10,
         "combine": false,
         "legend": {
@@ -14543,42 +14694,100 @@
       "pluginVersion": "12.3.1",
       "targets": [
         {
-          "alias": "Diastolic",
+          "alias": "Normal (<80)",
           "datasource": {
             "type": "influxdb",
             "uid": "garmin_influxdb"
           },
-          "groupBy": [
-            {
-              "params": [
-                "$__interval"
-              ],
-              "type": "time"
-            },
-            {
-              "params": [
-                "null"
-              ],
-              "type": "fill"
-            }
-          ],
+          "groupBy": [],
           "hide": false,
           "measurement": "BloodPressure",
           "orderByTime": "ASC",
           "policy": "default",
+          "query": "SELECT \"Diastolic\" FROM \"BloodPressure\" WHERE $timeFilter AND \"Diastolic\" < 80",
+          "rawQuery": true,
           "refId": "A",
           "resultFormat": "time_series",
           "select": [
             [
               {
-                "params": [
-                  "Diastolic"
-                ],
+                "params": ["Diastolic"],
                 "type": "field"
-              },
+              }
+            ]
+          ],
+          "tags": []
+        },
+        {
+          "alias": "Elevated (80-84)",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "garmin_influxdb"
+          },
+          "groupBy": [],
+          "hide": false,
+          "measurement": "BloodPressure",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query": "SELECT \"Diastolic\" FROM \"BloodPressure\" WHERE $timeFilter AND \"Diastolic\" >= 80 AND \"Diastolic\" < 85",
+          "rawQuery": true,
+          "refId": "B",
+          "resultFormat": "time_series",
+          "select": [
+            [
               {
-                "params": [],
-                "type": "mean"
+                "params": ["Diastolic"],
+                "type": "field"
+              }
+            ]
+          ],
+          "tags": []
+        },
+        {
+          "alias": "Stage 1 (85-89)",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "garmin_influxdb"
+          },
+          "groupBy": [],
+          "hide": false,
+          "measurement": "BloodPressure",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query": "SELECT \"Diastolic\" FROM \"BloodPressure\" WHERE $timeFilter AND \"Diastolic\" >= 85 AND \"Diastolic\" < 90",
+          "rawQuery": true,
+          "refId": "C",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": ["Diastolic"],
+                "type": "field"
+              }
+            ]
+          ],
+          "tags": []
+        },
+        {
+          "alias": "Stage 2 (≥90)",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "garmin_influxdb"
+          },
+          "groupBy": [],
+          "hide": false,
+          "measurement": "BloodPressure",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query": "SELECT \"Diastolic\" FROM \"BloodPressure\" WHERE $timeFilter AND \"Diastolic\" >= 90",
+          "rawQuery": true,
+          "refId": "D",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": ["Diastolic"],
+                "type": "field"
               }
             ]
           ],
