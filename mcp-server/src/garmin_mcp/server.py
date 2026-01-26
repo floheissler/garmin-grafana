@@ -284,7 +284,7 @@ def get_activity_details(activity_id: int) -> str:
         SELECT MEAN("RunningEfficiency") AS "mean_running_efficiency",
                MEAN("Cadence") AS "mean_cadence"
         FROM "ActivityGPS"
-        WHERE "Activity_ID" = '{activity_id}'
+        WHERE "Activity_ID" = {activity_id}
     '''
     gps_agg_data = db.query(gps_agg_query)
     gps_agg = gps_agg_data[0] if gps_agg_data else None
