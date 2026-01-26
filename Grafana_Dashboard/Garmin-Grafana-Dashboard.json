@@ -18,7 +18,7 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 2,
+  "id": 3,
   "links": [],
   "panels": [
     {
@@ -14373,6 +14373,19 @@
           "mappings": [],
           "max": 180,
           "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
           "unit": "mmHg"
         },
         "overrides": [
@@ -14456,7 +14469,7 @@
           ],
           "displayMode": "table",
           "placement": "bottom",
-          "showLegend": true
+          "showLegend": false
         },
         "tooltip": {
           "hideZeros": false,
@@ -14484,7 +14497,9 @@
           "select": [
             [
               {
-                "params": ["Systolic"],
+                "params": [
+                  "Systolic"
+                ],
                 "type": "field"
               }
             ]
@@ -14509,7 +14524,9 @@
           "select": [
             [
               {
-                "params": ["Systolic"],
+                "params": [
+                  "Systolic"
+                ],
                 "type": "field"
               }
             ]
@@ -14534,7 +14551,9 @@
           "select": [
             [
               {
-                "params": ["Systolic"],
+                "params": [
+                  "Systolic"
+                ],
                 "type": "field"
               }
             ]
@@ -14559,7 +14578,9 @@
           "select": [
             [
               {
-                "params": ["Systolic"],
+                "params": [
+                  "Systolic"
+                ],
                 "type": "field"
               }
             ]
@@ -14600,6 +14621,19 @@
           "mappings": [],
           "max": 120,
           "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
           "unit": "mmHg"
         },
         "overrides": [
@@ -14683,7 +14717,7 @@
           ],
           "displayMode": "table",
           "placement": "bottom",
-          "showLegend": true
+          "showLegend": false
         },
         "tooltip": {
           "hideZeros": false,
@@ -14711,7 +14745,9 @@
           "select": [
             [
               {
-                "params": ["Diastolic"],
+                "params": [
+                  "Diastolic"
+                ],
                 "type": "field"
               }
             ]
@@ -14736,7 +14772,9 @@
           "select": [
             [
               {
-                "params": ["Diastolic"],
+                "params": [
+                  "Diastolic"
+                ],
                 "type": "field"
               }
             ]
@@ -14761,7 +14799,9 @@
           "select": [
             [
               {
-                "params": ["Diastolic"],
+                "params": [
+                  "Diastolic"
+                ],
                 "type": "field"
               }
             ]
@@ -14786,7 +14826,9 @@
           "select": [
             [
               {
-                "params": ["Diastolic"],
+                "params": [
+                  "Diastolic"
+                ],
                 "type": "field"
               }
             ]
@@ -15099,5 +15141,5 @@
   "timezone": "browser",
   "title": "Garmin Stats",
   "uid": "feiibsx498gsgb",
-  "version": 1
+  "version": 6
 }
