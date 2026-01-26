@@ -18,7 +18,7 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 3,
+  "id": 4,
   "links": [],
   "panels": [
     {
@@ -6975,10 +6975,6 @@
                 "value": "time:YYYY-MM-DD"
               },
               {
-                "id": "custom.width",
-                "value": 128
-              },
-              {
                 "id": "custom.cellOptions",
                 "value": {
                   "type": "color-text"
@@ -7000,10 +6996,6 @@
             },
             "properties": [
               {
-                "id": "custom.width",
-                "value": 131
-              },
-              {
                 "id": "unit",
                 "value": "percent"
               },
@@ -7022,10 +7014,6 @@
             },
             "properties": [
               {
-                "id": "custom.width",
-                "value": 179
-              },
-              {
                 "id": "color",
                 "value": {
                   "fixedColor": "semi-dark-green",
@@ -7040,10 +7028,6 @@
               "options": "Resting Heart Rate"
             },
             "properties": [
-              {
-                "id": "custom.width",
-                "value": 139
-              },
               {
                 "id": "unit",
                 "value": "BPM"
@@ -7073,10 +7057,6 @@
                 "value": "lengthm"
               },
               {
-                "id": "custom.width",
-                "value": 186
-              },
-              {
                 "id": "color",
                 "value": {
                   "fixedColor": "purple",
@@ -7094,10 +7074,6 @@
               {
                 "id": "unit",
                 "value": "s"
-              },
-              {
-                "id": "custom.width",
-                "value": 199
               },
               {
                 "id": "color",
@@ -7136,10 +7112,6 @@
                 ]
               },
               {
-                "id": "custom.width",
-                "value": 174
-              },
-              {
                 "id": "color",
                 "value": {
                   "mode": "continuous-BlPu"
@@ -7174,10 +7146,6 @@
               {
                 "id": "unit",
                 "value": "s"
-              },
-              {
-                "id": "custom.width",
-                "value": 183
               },
               {
                 "id": "unit",
@@ -12650,6 +12618,52 @@
                 }
               }
             ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Training Readiness"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "mode": "continuous-RdYlGr"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Recovery Time"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "mode": "continuous-GrYlRd"
+                }
+              },
+              {
+                "id": "unit",
+                "value": "m"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Acute Load"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "mode": "continuous-GrYlRd"
+                }
+              }
+            ]
           }
         ]
       },
@@ -13058,6 +13072,135 @@
               {
                 "params": [],
                 "type": "mean"
+              }
+            ]
+          ],
+          "tags": [],
+          "tz": "$TimeZone"
+        },
+        {
+          "alias": "Recovery Time",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "garmin_influxdb"
+          },
+          "groupBy": [
+            {
+              "params": [
+                "1d"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "hide": false,
+          "measurement": "TrainingReadiness",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "K",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "recoveryTime"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "min"
+              }
+            ]
+          ],
+          "tags": [],
+          "tz": "$TimeZone"
+        },
+        {
+          "alias": "Acute Load",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "garmin_influxdb"
+          },
+          "groupBy": [
+            {
+              "params": [
+                "1d"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "hide": false,
+          "measurement": "TrainingReadiness",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "J",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "acuteLoad"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": [],
+          "tz": "$TimeZone"
+        },
+        {
+          "alias": "Training Readiness",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "garmin_influxdb"
+          },
+          "groupBy": [
+            {
+              "params": [
+                "1d"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "hide": false,
+          "measurement": "TrainingReadiness",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "L",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "score"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "min"
               }
             ]
           ],
@@ -15141,5 +15284,5 @@
   "timezone": "browser",
   "title": "Garmin Stats",
   "uid": "feiibsx498gsgb",
-  "version": 6
+  "version": 1
 }
