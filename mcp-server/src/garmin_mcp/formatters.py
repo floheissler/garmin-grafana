@@ -535,6 +535,151 @@ def format_activity_details(
     return result
 
 
+def format_blood_pressure(data: list[dict[str, Any]]) -> dict[str, Any]:
+    """Format blood pressure data for LLM consumption."""
+    if not data:
+        return {"error": "No blood pressure data available"}
+
+    def _reading(d: dict) -> dict:
+        return {
+            "date": format_timestamp(d.get("time", ""))[:10],
+            "time": format_timestamp(d.get("time", "")),
+            "systolic": d.get("Systolic"),
+            "diastolic": d.get("Diastolic"),
+            "pulse": d.get("Pulse"),
+        }
+
+    if len(data) == 1:
+        return _reading(data[0])
+
+    # Check if all readings are on the same day
+    dates = {format_timestamp(d.get("time", ""))[:10] for d in data}
+    is_single_day = len(dates) == 1
+
+    if is_single_day:
+        return {
+            "date": next(iter(dates)),
+            "readings": [_reading(d) for d in data],
+        }
+
+    # Multi-day: include stats and all readings (capped at 100)
+    systolic_vals = [d.get("Systolic") for d in data if d.get("Systolic") is not None]
+    diastolic_vals = [d.get("Diastolic") for d in data if d.get("Diastolic") is not None]
+
+    return {
+        "period": {
+            "start": format_timestamp(data[0].get("time", ""))[:10],
+            "end": format_timestamp(data[-1].get("time", ""))[:10],
+            "count": len(data),
+        },
+        "systolic": {
+            **calculate_stats(systolic_vals),
+            "trend": calculate_trend(systolic_vals),
+        },
+        "diastolic": {
+            **calculate_stats(diastolic_vals),
+            "trend": calculate_trend(diastolic_vals),
+        },
+        "readings": [_reading(d) for d in data][:100],
+    }
+
+
+def format_training_status(
+    status_data: list[dict[str, Any]],
+    readiness_data: list[dict[str, Any]],
+) -> dict[str, Any]:
+    """Format training status and readiness data for LLM consumption."""
+    if not status_data and not readiness_data:
+        return {"error": "No training status or readiness data available"}
+
+    # Build lookup dicts keyed by date
+    status_by_date: dict[str, dict] = {}
+    for d in (status_data or []):
+        date_key = format_timestamp(d.get("time", ""))[:10]
+        status_by_date[date_key] = d
+
+    readiness_by_date: dict[str, dict] = {}
+    for d in (readiness_data or []):
+        date_key = format_timestamp(d.get("time", ""))[:10]
+        readiness_by_date[date_key] = d
+
+    all_dates = sorted(set(list(status_by_date.keys()) + list(readiness_by_date.keys())))
+
+    if len(all_dates) == 1:
+        date = all_dates[0]
+        s = status_by_date.get(date, {})
+        r = readiness_by_date.get(date, {})
+
+        result: dict[str, Any] = {"date": date}
+
+        if s:
+            result["status"] = {
+                "status": s.get("trainingStatus"),
+                "feedback": s.get("trainingStatusFeedbackPhrase"),
+                "fitness_trend": s.get("fitnessTrend"),
+            }
+            result["training_load"] = {
+                "weekly": s.get("weeklyTrainingLoad"),
+                "acute": s.get("dailyTrainingLoadAcute"),
+                "chronic": s.get("dailyTrainingLoadChronic"),
+                "acwr": s.get("dailyAcuteChronicWorkloadRatio"),
+                "acwr_pct": s.get("acwrPercent"),
+            }
+
+        if r:
+            result["readiness"] = {
+                "score": r.get("score"),
+                "level": r.get("level"),
+                "recovery_time_hours": r.get("recoveryTime"),
+                "acute_load": r.get("acuteLoad"),
+                "factors": {
+                    "sleep": {
+                        "score": r.get("sleepScore"),
+                        "contribution_pct": r.get("sleepScoreFactorPercent"),
+                    },
+                    "hrv": {"contribution_pct": r.get("hrvFactorPercent")},
+                    "recovery_time": {"contribution_pct": r.get("recoveryTimeFactorPercent")},
+                    "stress_history": {"contribution_pct": r.get("stressHistoryFactorPercent")},
+                    "acwr": {"contribution_pct": r.get("acwrFactorPercent")},
+                },
+            }
+
+        return result
+
+    # Multi-day
+    readiness_scores = [readiness_by_date[d].get("score") for d in all_dates if d in readiness_by_date and readiness_by_date[d].get("score") is not None]
+    acute_loads = [status_by_date[d].get("dailyTrainingLoadAcute") for d in all_dates if d in status_by_date and status_by_date[d].get("dailyTrainingLoadAcute") is not None]
+    chronic_loads = [status_by_date[d].get("dailyTrainingLoadChronic") for d in all_dates if d in status_by_date and status_by_date[d].get("dailyTrainingLoadChronic") is not None]
+
+    result = {
+        "period": {
+            "start": all_dates[0],
+            "end": all_dates[-1],
+            "days": len(all_dates),
+        },
+        "readiness_score": {
+            **calculate_stats(readiness_scores),
+            "trend": calculate_trend(readiness_scores),
+        },
+        "training_load": {
+            "acute": calculate_stats(acute_loads),
+            "chronic": calculate_stats(chronic_loads),
+        },
+        "daily_breakdown": [
+            {
+                "date": date,
+                "status": status_by_date.get(date, {}).get("trainingStatus"),
+                "readiness_score": readiness_by_date.get(date, {}).get("score"),
+                "recovery_time": readiness_by_date.get(date, {}).get("recoveryTime"),
+                "weekly_load": status_by_date.get(date, {}).get("weeklyTrainingLoad"),
+            }
+            for date in all_dates
+        ],
+    }
+
+    return result
+
+
 def format_body_composition(data: list[dict[str, Any]]) -> dict[str, Any]:
     """Format body composition data for LLM consumption."""
     if not data:

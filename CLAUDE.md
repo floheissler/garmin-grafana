@@ -55,7 +55,7 @@ Query Garmin health data directly from Claude using the MCP (Model Context Proto
 
 **Location**: `mcp-server/`
 
-### Available Tools (11)
+### Available Tools (13)
 
 | Tool | Description |
 |------|-------------|
@@ -69,6 +69,8 @@ Query Garmin health data directly from Claude using the MCP (Model Context Proto
 | `get_trends` | Long-term trend analysis (steps, HR, weight, etc.) |
 | `get_fitness_metrics` | VO2 max, fitness age, race predictions |
 | `get_body_composition` | Weight tracking |
+| `get_blood_pressure` | Blood pressure readings (systolic, diastolic, pulse) |
+| `get_training_status` | Training status, readiness, load, and recovery |
 | `query_measurement` | Advanced: direct InfluxQL queries |
 
 ### Smart Aggregation

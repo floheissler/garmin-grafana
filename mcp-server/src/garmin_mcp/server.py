@@ -17,6 +17,7 @@ from .queries import (
 from .formatters import (
     format_activities_list,
     format_activity_details,
+    format_blood_pressure,
     format_body_composition,
     format_daily_summary,
     format_fitness_metrics,
@@ -24,6 +25,7 @@ from .formatters import (
     format_hrv_data,
     format_sleep_data,
     format_stress_body_battery,
+    format_training_status,
 )
 
 # Initialize MCP server
@@ -505,6 +507,106 @@ def get_body_composition(
 
 
 @mcp.tool()
+def get_blood_pressure(
+    date: str | None = None,
+    start_date: str | None = None,
+    end_date: str | None = None,
+    duration: str | None = None,
+) -> str:
+    """
+    Get blood pressure readings (systolic, diastolic, pulse).
+
+    Args:
+        date: Single date in YYYY-MM-DD format
+        start_date: Start of date range in YYYY-MM-DD format
+        end_date: End of date range in YYYY-MM-DD format
+        duration: Relative duration like "7d", "30d", "3m" (from now)
+
+    Returns:
+        Blood pressure readings with systolic, diastolic, and pulse values.
+        For multi-day queries, includes statistics and trends.
+
+    Examples:
+        - get_blood_pressure(date="2026-01-24") - Today's readings
+        - get_blood_pressure(duration="30d") - Last month
+        - get_blood_pressure(duration="6m") - 6-month trend
+    """
+    from .queries import build_time_clause
+
+    start, end = get_time_range(date, start_date, end_date, duration or "30d")
+    time_clause = build_time_clause(start, end)
+
+    query = f'''
+        SELECT "Systolic", "Diastolic", "Pulse"
+        FROM "BloodPressure"
+        WHERE {time_clause}
+        ORDER BY time ASC
+    '''
+    data = db.query(query)
+    result = format_blood_pressure(data)
+    return json.dumps(result, indent=2, default=str)
+
+
+@mcp.tool()
+def get_training_status(
+    date: str | None = None,
+    start_date: str | None = None,
+    end_date: str | None = None,
+    duration: str | None = None,
+) -> str:
+    """
+    Get training status and training readiness data (combined).
+
+    Args:
+        date: Single date in YYYY-MM-DD format
+        start_date: Start of date range in YYYY-MM-DD format
+        end_date: End of date range in YYYY-MM-DD format
+        duration: Relative duration like "7d", "30d", "3m" (from now)
+
+    Returns:
+        Combined training data including:
+        - Training status (productive/detraining/peaking/etc.)
+        - Training load (weekly, acute, chronic, ACWR)
+        - Training readiness score with factor breakdowns (sleep, HRV, recovery, stress, ACWR)
+        - Recovery time
+
+    Examples:
+        - get_training_status(date="2026-01-24") - Today's training status
+        - get_training_status(duration="7d") - Last week
+        - get_training_status(duration="30d") - Monthly trend
+    """
+    from .queries import build_time_clause
+
+    start, end = get_time_range(date, start_date, end_date, duration or "7d")
+    time_clause = build_time_clause(start, end)
+
+    status_query = f'''
+        SELECT "trainingStatus", "trainingStatusFeedbackPhrase",
+               "weeklyTrainingLoad", "fitnessTrend",
+               "dailyTrainingLoadAcute", "dailyTrainingLoadChronic",
+               "acwrPercent", "dailyAcuteChronicWorkloadRatio"
+        FROM "TrainingStatus"
+        WHERE {time_clause}
+        ORDER BY time ASC
+    '''
+
+    readiness_query = f'''
+        SELECT "score", "level", "recoveryTime", "acuteLoad",
+               "sleepScore", "sleepScoreFactorPercent",
+               "recoveryTimeFactorPercent", "acwrFactorPercent",
+               "stressHistoryFactorPercent", "hrvFactorPercent"
+        FROM "TrainingReadiness"
+        WHERE {time_clause}
+        ORDER BY time ASC
+    '''
+
+    status_data = db.query(status_query)
+    readiness_data = db.query(readiness_query)
+    result = format_training_status(status_data, readiness_data)
+    return json.dumps(result, indent=2, default=str)
+
+
+@mcp.tool()
 def query_measurement(
     measurement: str,
     fields: str = "*",
@@ -533,6 +635,7 @@ def query_measurement(
         - BodyBatteryIntraday, BreathingRateIntraday, HRV_Intraday
         - ActivitySummary, ActivityGPS, ActivityLap
         - BodyComposition, VO2_Max, FitnessAge, RacePredictions
+        - BloodPressure, TrainingStatus, TrainingReadiness
 
     Examples:
         - query_measurement(measurement="StepsIntraday", duration="1d")
