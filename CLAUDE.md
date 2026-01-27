@@ -28,6 +28,23 @@ docker compose up -d --build
 docker exec garmin-fetch-data uv run /app/garmin_grafana/influxdb_exporter.py --last-n-days 30
 ```
 
+### InfluxDB Backups
+
+Automated monthly backups via crontab (`0 4 1 * *` — 1st of each month at 4 AM).
+
+- **Script**: `./backup-influxdb.sh`
+- **Backup location**: `./influxdb_backups/<YYYY-MM-DD_HH-MM>/`
+- **Retention**: Backups older than 30 days are automatically deleted
+- **Format**: InfluxDB portable backup (`.tar.gz` shards + `.manifest` + `.meta`)
+
+```bash
+# Manual backup
+./backup-influxdb.sh
+
+# Restore from backup
+docker exec influxdb influxd restore -portable -db GarminStats /tmp/influxdb_backup
+```
+
 ### Database Schema
 See [DATABASE_SCHEMA.md](./DATABASE_SCHEMA.md) for complete InfluxDB schema documentation including all measurements, fields, and example queries.
 
