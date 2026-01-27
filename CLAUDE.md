@@ -33,9 +33,11 @@ docker exec garmin-fetch-data uv run /app/garmin_grafana/influxdb_exporter.py --
 Automated monthly backups via crontab (`0 4 1 * *` — 1st of each month at 4 AM).
 
 - **Script**: `./backup-influxdb.sh`
-- **Backup location**: `./influxdb_backups/<YYYY-MM-DD_HH-MM>/`
-- **Retention**: Backups older than 30 days are automatically deleted
+- **Local backup**: `./influxdb_backups/<YYYY-MM-DD_HH-MM>/`
+- **Off-site copy**: `/mnt/usb-backup/garmin-influxdb/` (if USB drive mounted)
+- **Retention**: Backups older than 30 days are automatically deleted (both local and USB)
 - **Format**: InfluxDB portable backup (`.tar.gz` shards + `.manifest` + `.meta`)
+- **USB setup**: Format drive as ext4, add to `/etc/fstab` with `nofail` option using its UUID
 
 ```bash
 # Manual backup
