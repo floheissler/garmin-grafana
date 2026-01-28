@@ -99,7 +99,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "12.3.1+security-01",
+      "pluginVersion": "12.3.2",
       "targets": [
         {
           "datasource": {
@@ -227,7 +227,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "12.3.1+security-01",
+      "pluginVersion": "12.3.2",
       "targets": [
         {
           "alias": "Heart Rate",
@@ -427,7 +427,7 @@
         "sizing": "auto",
         "valueMode": "color"
       },
-      "pluginVersion": "12.3.1+security-01",
+      "pluginVersion": "12.3.2",
       "targets": [
         {
           "alias": "Systolic",
@@ -610,7 +610,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "12.3.1+security-01",
+      "pluginVersion": "12.3.2",
       "targets": [
         {
           "alias": "Heart rate histogram",
@@ -857,7 +857,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "12.3.1+security-01",
+      "pluginVersion": "12.3.2",
       "targets": [
         {
           "alias": "Stress",
@@ -1027,7 +1027,7 @@
         "sizing": "auto",
         "text": {}
       },
-      "pluginVersion": "12.3.1+security-01",
+      "pluginVersion": "12.3.2",
       "targets": [
         {
           "datasource": {
@@ -1144,7 +1144,7 @@
         "sizing": "auto",
         "text": {}
       },
-      "pluginVersion": "12.3.1+security-01",
+      "pluginVersion": "12.3.2",
       "targets": [
         {
           "datasource": {
@@ -1296,7 +1296,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "12.3.1+security-01",
+      "pluginVersion": "12.3.2",
       "targets": [
         {
           "alias": "Intraday Steps",
@@ -1454,7 +1454,7 @@
         "sizing": "auto",
         "text": {}
       },
-      "pluginVersion": "12.3.1+security-01",
+      "pluginVersion": "12.3.2",
       "targets": [
         {
           "datasource": {
@@ -1568,7 +1568,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "12.3.1+security-01",
+      "pluginVersion": "12.3.2",
       "targets": [
         {
           "alias": "Hourly Steps",
@@ -1689,7 +1689,7 @@
         "showThresholdMarkers": true,
         "sizing": "auto"
       },
-      "pluginVersion": "12.3.1+security-01",
+      "pluginVersion": "12.3.2",
       "targets": [
         {
           "alias": "Total Asleep",
@@ -1840,7 +1840,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "12.3.1+security-01",
+      "pluginVersion": "12.3.2",
       "targets": [
         {
           "alias": "BR",
@@ -2005,7 +2005,7 @@
         "showThresholdMarkers": true,
         "sizing": "auto"
       },
-      "pluginVersion": "12.3.1+security-01",
+      "pluginVersion": "12.3.2",
       "targets": [
         {
           "alias": "Stress",
@@ -2155,7 +2155,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "12.3.1+security-01",
+      "pluginVersion": "12.3.2",
       "targets": [
         {
           "alias": "Sleeping Movement Activity",
@@ -2305,7 +2305,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "12.3.1+security-01",
+      "pluginVersion": "12.3.2",
       "targets": [
         {
           "alias": "Deep",
@@ -2669,7 +2669,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "12.3.1+security-01",
+      "pluginVersion": "12.3.2",
       "targets": [
         {
           "alias": "Sleeping Heart Rate",
@@ -2934,7 +2934,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "12.3.1+security-01",
+      "pluginVersion": "12.3.2",
       "targets": [
         {
           "alias": "Sedentary",
@@ -3287,7 +3287,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "12.3.1+security-01",
+      "pluginVersion": "12.3.2",
       "targets": [
         {
           "alias": "Deep",
@@ -3454,7 +3454,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "12.3.1+security-01",
+      "pluginVersion": "12.3.2",
       "targets": [
         {
           "alias": "Zone 1",
@@ -3724,7 +3724,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "12.3.1+security-01",
+      "pluginVersion": "12.3.2",
       "targets": [
         {
           "alias": "calories",
@@ -3873,7 +3873,7 @@
         "xTickLabelRotation": 0,
         "xTickLabelSpacing": 100
       },
-      "pluginVersion": "12.3.1+security-01",
+      "pluginVersion": "12.3.2",
       "targets": [
         {
           "alias": "avgHR",
@@ -4106,7 +4106,7 @@
         "xTickLabelRotation": 0,
         "xTickLabelSpacing": 100
       },
-      "pluginVersion": "12.3.1+security-01",
+      "pluginVersion": "12.3.2",
       "targets": [
         {
           "alias": "Distance",
@@ -4288,7 +4288,7 @@
         "xTickLabelRotation": 0,
         "xTickLabelSpacing": 100
       },
-      "pluginVersion": "12.3.1+security-01",
+      "pluginVersion": "12.3.2",
       "targets": [
         {
           "alias": "Duration",
@@ -4503,7 +4503,7 @@
           "zoom": 16
         }
       },
-      "pluginVersion": "12.3.1+security-01",
+      "pluginVersion": "12.3.2",
       "targets": [
         {
           "alias": "lat",
@@ -4849,7 +4849,7 @@
           "zoom": 16
         }
       },
-      "pluginVersion": "12.3.1+security-01",
+      "pluginVersion": "12.3.2",
       "targets": [
         {
           "alias": "lat",
@@ -5115,7 +5115,7 @@
         "xTickLabelRotation": 0,
         "xTickLabelSpacing": 100
       },
-      "pluginVersion": "12.3.1+security-01",
+      "pluginVersion": "12.3.2",
       "targets": [
         {
           "alias": "HR",
@@ -5289,7 +5289,7 @@
         "xTickLabelRotation": 0,
         "xTickLabelSpacing": 100
       },
-      "pluginVersion": "12.3.1+security-01",
+      "pluginVersion": "12.3.2",
       "targets": [
         {
           "alias": "Cadence",
@@ -5488,7 +5488,7 @@
         },
         "xField": "Duration"
       },
-      "pluginVersion": "12.3.1+security-01",
+      "pluginVersion": "12.3.2",
       "targets": [
         {
           "alias": "Distance",
@@ -5775,7 +5775,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "12.3.1+security-01",
+      "pluginVersion": "12.3.2",
       "targets": [
         {
           "alias": "Speed (Km/h)",
@@ -5995,7 +5995,7 @@
         "xTickLabelRotation": 0,
         "xTickLabelSpacing": 100
       },
-      "pluginVersion": "12.3.1+security-01",
+      "pluginVersion": "12.3.2",
       "targets": [
         {
           "alias": "m/s",
@@ -6283,7 +6283,7 @@
         "xTickLabelRotation": 0,
         "xTickLabelSpacing": 100
       },
-      "pluginVersion": "12.3.1+security-01",
+      "pluginVersion": "12.3.2",
       "targets": [
         {
           "alias": "Altitude",
@@ -6569,7 +6569,7 @@
           }
         ]
       },
-      "pluginVersion": "12.3.1+security-01",
+      "pluginVersion": "12.3.2",
       "targets": [
         {
           "alias": "Activity Type",
@@ -6878,7 +6878,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "12.3.1+security-01",
+      "pluginVersion": "12.3.2",
       "targets": [
         {
           "alias": "Activity Timeline",
@@ -7174,7 +7174,7 @@
           }
         ]
       },
-      "pluginVersion": "12.3.1+security-01",
+      "pluginVersion": "12.3.2",
       "targets": [
         {
           "alias": "Distance Covered",
@@ -7614,7 +7614,7 @@
         "xTickLabelRotation": 0,
         "xTickLabelSpacing": 100
       },
-      "pluginVersion": "12.3.1+security-01",
+      "pluginVersion": "12.3.2",
       "targets": [
         {
           "alias": "Steps",
@@ -7747,7 +7747,7 @@
         "xTickLabelRotation": 0,
         "xTickLabelSpacing": 100
       },
-      "pluginVersion": "12.3.1+security-01",
+      "pluginVersion": "12.3.2",
       "targets": [
         {
           "alias": "Distance Covered",
@@ -7910,7 +7910,7 @@
         "xTickLabelRotation": 0,
         "xTickLabelSpacing": 100
       },
-      "pluginVersion": "12.3.1+security-01",
+      "pluginVersion": "12.3.2",
       "targets": [
         {
           "alias": "BMR Calories",
@@ -8180,7 +8180,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "12.3.1+security-01",
+      "pluginVersion": "12.3.2",
       "targets": [
         {
           "alias": "Avg SpO2",
@@ -8492,7 +8492,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "12.3.1+security-01",
+      "pluginVersion": "12.3.2",
       "targets": [
         {
           "alias": "Avg Breathing Rate",
@@ -8774,7 +8774,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "12.3.1+security-01",
+      "pluginVersion": "12.3.2",
       "targets": [
         {
           "alias": "Time 5K",
@@ -9102,7 +9102,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "12.3.1+security-01",
+      "pluginVersion": "12.3.2",
       "targets": [
         {
           "alias": "VO2 Max",
@@ -9298,7 +9298,7 @@
           "zoom": 16
         }
       },
-      "pluginVersion": "12.3.1+security-01",
+      "pluginVersion": "12.3.2",
       "targets": [
         {
           "alias": "lat",
@@ -9516,7 +9516,7 @@
         "xTickLabelRotation": 0,
         "xTickLabelSpacing": 100
       },
-      "pluginVersion": "12.3.1+security-01",
+      "pluginVersion": "12.3.2",
       "targets": [
         {
           "alias": "Deep Sleep",
@@ -9833,7 +9833,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "12.3.1+security-01",
+      "pluginVersion": "12.3.2",
       "targets": [
         {
           "alias": "Sedentary",
@@ -10095,7 +10095,7 @@
         "xTickLabelRotation": 0,
         "xTickLabelSpacing": 100
       },
-      "pluginVersion": "12.3.1+security-01",
+      "pluginVersion": "12.3.2",
       "targets": [
         {
           "alias": "Sleep Score",
@@ -10338,7 +10338,7 @@
         "xTickLabelRotation": 0,
         "xTickLabelSpacing": 100
       },
-      "pluginVersion": "12.3.1+security-01",
+      "pluginVersion": "12.3.2",
       "targets": [
         {
           "alias": "Sleeping",
@@ -10627,7 +10627,7 @@
         "xTickLabelRotation": 0,
         "xTickLabelSpacing": 100
       },
-      "pluginVersion": "12.3.1+security-01",
+      "pluginVersion": "12.3.2",
       "targets": [
         {
           "alias": "Charged",
@@ -10841,7 +10841,7 @@
         "xTickLabelRotation": 0,
         "xTickLabelSpacing": 100
       },
-      "pluginVersion": "12.3.1+security-01",
+      "pluginVersion": "12.3.2",
       "targets": [
         {
           "alias": "Moderate Intensity",
@@ -11195,7 +11195,7 @@
         "xTickLabelRotation": 0,
         "xTickLabelSpacing": 100
       },
-      "pluginVersion": "12.3.1+security-01",
+      "pluginVersion": "12.3.2",
       "targets": [
         {
           "alias": "Low Stress duration",
@@ -11531,7 +11531,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "12.3.1+security-01",
+      "pluginVersion": "12.3.2",
       "targets": [
         {
           "alias": "Deep",
@@ -11825,7 +11825,7 @@
         "xTickLabelRotation": 0,
         "xTickLabelSpacing": 100
       },
-      "pluginVersion": "12.3.1+security-01",
+      "pluginVersion": "12.3.2",
       "targets": [
         {
           "alias": "bb_low",
@@ -12079,7 +12079,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "12.3.1+security-01",
+      "pluginVersion": "12.3.2",
       "targets": [
         {
           "alias": "Weight in KG",
@@ -12236,7 +12236,7 @@
         "xTickLabelRotation": 0,
         "xTickLabelSpacing": 100
       },
-      "pluginVersion": "12.3.1+security-01",
+      "pluginVersion": "12.3.2",
       "targets": [
         {
           "alias": "hr_low",
@@ -12451,6 +12451,10 @@
                 "value": {
                   "mode": "continuous-GrYlRd"
                 }
+              },
+              {
+                "id": "unit",
+                "value": "bpm"
               }
             ]
           },
@@ -12475,7 +12479,7 @@
           {
             "matcher": {
               "id": "byName",
-              "options": "SpO2"
+              "options": "Sleep SpO2"
             },
             "properties": [
               {
@@ -12483,6 +12487,10 @@
                 "value": {
                   "mode": "continuous-RdYlGr"
                 }
+              },
+              {
+                "id": "unit",
+                "value": "percent"
               }
             ]
           },
@@ -12497,53 +12505,13 @@
                 "value": {
                   "mode": "continuous-greens"
                 }
-              },
-              {
-                "id": "thresholds",
-                "value": {
-                  "mode": "absolute",
-                  "steps": [
-                    {
-                      "color": "yellow",
-                      "value": 0
-                    },
-                    {
-                      "color": "light-yellow",
-                      "value": 1000
-                    },
-                    {
-                      "color": "super-light-yellow",
-                      "value": 5000
-                    },
-                    {
-                      "color": "super-light-green",
-                      "value": 8000
-                    },
-                    {
-                      "color": "super-light-green",
-                      "value": 10000
-                    },
-                    {
-                      "color": "semi-dark-green",
-                      "value": 15000
-                    },
-                    {
-                      "color": "light-blue",
-                      "value": 20000
-                    },
-                    {
-                      "color": "semi-dark-blue",
-                      "value": 25000
-                    }
-                  ]
-                }
               }
             ]
           },
           {
             "matcher": {
               "id": "byName",
-              "options": "Total Sleep"
+              "options": "Sleep Duration"
             },
             "properties": [
               {
@@ -12616,6 +12584,10 @@
                 "value": {
                   "mode": "continuous-RdYlGr"
                 }
+              },
+              {
+                "id": "unit",
+                "value": "ms"
               }
             ]
           },
@@ -12664,11 +12636,115 @@
                 }
               }
             ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Rest Duration"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "dthms"
+              },
+              {
+                "id": "color",
+                "value": {
+                  "mode": "continuous-greens"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Sedentary Duration"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "dthms"
+              },
+              {
+                "id": "color",
+                "value": {
+                  "mode": "continuous-reds"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Sleep Stress"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "none"
+              },
+              {
+                "id": "color",
+                "value": {
+                  "mode": "continuous-GrYlRd"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Sleep HR"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "bpm"
+              },
+              {
+                "id": "color",
+                "value": {
+                  "mode": "continuous-GrYlRd"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Sleep Resp"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "brpm"
+              },
+              {
+                "id": "color",
+                "value": {
+                  "mode": "continuous-GrYlRd"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Recovery Time"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "mode": "continuous-reds"
+                }
+              }
+            ]
           }
         ]
       },
       "gridPos": {
-        "h": 11,
+        "h": 14,
         "w": 24,
         "x": 0,
         "y": 215
@@ -12690,7 +12766,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "12.3.1+security-01",
+      "pluginVersion": "12.3.2",
       "targets": [
         {
           "alias": "Active time",
@@ -12779,6 +12855,92 @@
           "tz": "$TimeZone"
         },
         {
+          "alias": "Rest Duration",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "garmin_influxdb"
+          },
+          "groupBy": [
+            {
+              "params": [
+                "1d"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "hide": false,
+          "measurement": "DailyStats",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "M",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "restStressDuration"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": [],
+          "tz": "$TimeZone"
+        },
+        {
+          "alias": "Sedentary Duration",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "garmin_influxdb"
+          },
+          "groupBy": [
+            {
+              "params": [
+                "1d"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "hide": false,
+          "measurement": "DailyStats",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "N",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "sedentarySeconds"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": [],
+          "tz": "$TimeZone"
+        },
+        {
           "alias": "Acute Load",
           "datasource": {
             "type": "influxdb",
@@ -12822,6 +12984,49 @@
           "tz": "$TimeZone"
         },
         {
+          "alias": "Recovery Time",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "garmin_influxdb"
+          },
+          "groupBy": [
+            {
+              "params": [
+                "1d"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "hide": false,
+          "measurement": "TrainingReadiness",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "K",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "recoveryTime"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "min"
+              }
+            ]
+          ],
+          "tags": [],
+          "tz": "$TimeZone"
+        },
+        {
           "alias": "High Stress Duration",
           "datasource": {
             "type": "influxdb",
@@ -12852,6 +13057,264 @@
               {
                 "params": [
                   "highStressDuration"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": [],
+          "tz": "$TimeZone"
+        },
+        {
+          "alias": "Sleep Duration",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "garmin_influxdb"
+          },
+          "groupBy": [
+            {
+              "params": [
+                "1d"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "hide": false,
+          "measurement": "DailyStats",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "F",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "sleepingSeconds"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": [],
+          "tz": "$TimeZone"
+        },
+        {
+          "alias": "Sleep Resp",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "garmin_influxdb"
+          },
+          "groupBy": [
+            {
+              "params": [
+                "1d"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "hide": false,
+          "measurement": "SleepSummary",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "Q",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "averageRespirationValue"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": [],
+          "tz": "$TimeZone"
+        },
+        {
+          "alias": "Sleep SpO2",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "garmin_influxdb"
+          },
+          "groupBy": [
+            {
+              "params": [
+                "1d"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "hide": false,
+          "measurement": "SleepSummary",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "D",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "averageSpO2Value"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": [],
+          "tz": "$TimeZone"
+        },
+        {
+          "alias": "Sleep Stress",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "garmin_influxdb"
+          },
+          "groupBy": [
+            {
+              "params": [
+                "1d"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "hide": false,
+          "measurement": "SleepSummary",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "O",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "avgSleepStress"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": [],
+          "tz": "$TimeZone"
+        },
+        {
+          "alias": "Sleep HR",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "garmin_influxdb"
+          },
+          "groupBy": [
+            {
+              "params": [
+                "1d"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "hide": false,
+          "measurement": "SleepSummary",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "P",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "restingHeartRate"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": [],
+          "tz": "$TimeZone"
+        },
+        {
+          "alias": "Sleep Score",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "garmin_influxdb"
+          },
+          "groupBy": [
+            {
+              "params": [
+                "1d"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "hide": false,
+          "measurement": "SleepSummary",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "H",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "sleepScore"
                 ],
                 "type": "field"
               },
@@ -12950,135 +13413,6 @@
           "tz": "$TimeZone"
         },
         {
-          "alias": "SpO2",
-          "datasource": {
-            "type": "influxdb",
-            "uid": "garmin_influxdb"
-          },
-          "groupBy": [
-            {
-              "params": [
-                "1d"
-              ],
-              "type": "time"
-            },
-            {
-              "params": [
-                "null"
-              ],
-              "type": "fill"
-            }
-          ],
-          "hide": false,
-          "measurement": "DailyStats",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "refId": "D",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "averageSpo2"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "mean"
-              }
-            ]
-          ],
-          "tags": [],
-          "tz": "$TimeZone"
-        },
-        {
-          "alias": "Total Sleep",
-          "datasource": {
-            "type": "influxdb",
-            "uid": "garmin_influxdb"
-          },
-          "groupBy": [
-            {
-              "params": [
-                "1d"
-              ],
-              "type": "time"
-            },
-            {
-              "params": [
-                "null"
-              ],
-              "type": "fill"
-            }
-          ],
-          "hide": false,
-          "measurement": "DailyStats",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "refId": "F",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "sleepingSeconds"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "mean"
-              }
-            ]
-          ],
-          "tags": [],
-          "tz": "$TimeZone"
-        },
-        {
-          "alias": "Sleep Score",
-          "datasource": {
-            "type": "influxdb",
-            "uid": "garmin_influxdb"
-          },
-          "groupBy": [
-            {
-              "params": [
-                "1d"
-              ],
-              "type": "time"
-            },
-            {
-              "params": [
-                "null"
-              ],
-              "type": "fill"
-            }
-          ],
-          "hide": false,
-          "measurement": "SleepSummary",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "refId": "H",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "sleepScore"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "mean"
-              }
-            ]
-          ],
-          "tags": [],
-          "tz": "$TimeZone"
-        },
-        {
           "alias": "Body Battery (Highest)",
           "datasource": {
             "type": "influxdb",
@@ -13115,49 +13449,6 @@
               {
                 "params": [],
                 "type": "mean"
-              }
-            ]
-          ],
-          "tags": [],
-          "tz": "$TimeZone"
-        },
-        {
-          "alias": "Recovery Time",
-          "datasource": {
-            "type": "influxdb",
-            "uid": "garmin_influxdb"
-          },
-          "groupBy": [
-            {
-              "params": [
-                "1d"
-              ],
-              "type": "time"
-            },
-            {
-              "params": [
-                "null"
-              ],
-              "type": "fill"
-            }
-          ],
-          "hide": false,
-          "measurement": "TrainingReadiness",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "refId": "K",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "recoveryTime"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "min"
               }
             ]
           ],
@@ -13386,7 +13677,7 @@
         "h": 8,
         "w": 24,
         "x": 0,
-        "y": 226
+        "y": 229
       },
       "id": 67,
       "options": {
@@ -13405,7 +13696,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "12.3.1+security-01",
+      "pluginVersion": "12.3.2",
       "targets": [
         {
           "alias": "Steps Taken",
@@ -13646,7 +13937,7 @@
         "h": 8,
         "w": 24,
         "x": 0,
-        "y": 234
+        "y": 237
       },
       "id": 65,
       "options": {
@@ -13697,7 +13988,7 @@
           "unit": "BPM"
         }
       },
-      "pluginVersion": "12.3.1+security-01",
+      "pluginVersion": "12.3.2",
       "targets": [
         {
           "alias": "Heart Rate",
@@ -13788,7 +14079,7 @@
         "h": 10,
         "w": 12,
         "x": 0,
-        "y": 242
+        "y": 245
       },
       "id": 20,
       "options": {
@@ -13915,7 +14206,7 @@
         "h": 10,
         "w": 12,
         "x": 12,
-        "y": 242
+        "y": 245
       },
       "id": 27,
       "options": {
@@ -14016,7 +14307,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 252
+        "y": 255
       },
       "id": 70,
       "panels": [],
@@ -14040,7 +14331,7 @@
             "axisColorMode": "text",
             "axisLabel": "",
             "axisPlacement": "auto",
-            "fillOpacity": 80,
+            "fillOpacity": 70,
             "gradientMode": "none",
             "hideFrom": {
               "legend": false,
@@ -14052,7 +14343,7 @@
               "type": "linear"
             },
             "thresholdsStyle": {
-              "mode": "area"
+              "mode": "dashed"
             }
           },
           "decimals": 0,
@@ -14070,7 +14361,7 @@
                 "value": 50
               },
               {
-                "color": "transparent",
+                "color": "dark-green",
                 "value": 130
               }
             ]
@@ -14091,6 +14382,13 @@
                   "tooltip": false,
                   "viz": true
                 }
+              },
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "dark-green",
+                  "mode": "fixed"
+                }
               }
             ]
           },
@@ -14103,6 +14401,13 @@
               {
                 "id": "custom.fillOpacity",
                 "value": 0
+              },
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "dark-green",
+                  "mode": "fixed"
+                }
               }
             ]
           },
@@ -14115,7 +14420,7 @@
               {
                 "id": "color",
                 "value": {
-                  "fixedColor": "dark-green",
+                  "fixedColor": "dark-blue",
                   "mode": "fixed"
                 }
               }
@@ -14127,12 +14432,12 @@
         "h": 10,
         "w": 24,
         "x": 0,
-        "y": 253
+        "y": 256
       },
       "id": 71,
       "options": {
         "barRadius": 0,
-        "barWidth": 0.6,
+        "barWidth": 0.3,
         "fullHighlight": false,
         "groupWidth": 0.7,
         "legend": {
@@ -14156,7 +14461,7 @@
         "xTickLabelRotation": 0,
         "xTickLabelSpacing": 100
       },
-      "pluginVersion": "12.3.1+security-01",
+      "pluginVersion": "12.3.2",
       "targets": [
         {
           "alias": "Systolic",
@@ -14348,10 +14653,10 @@
         ]
       },
       "gridPos": {
-        "h": 8,
-        "w": 7,
+        "h": 11,
+        "w": 8,
         "x": 0,
-        "y": 263
+        "y": 266
       },
       "id": 73,
       "options": {
@@ -14373,7 +14678,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "12.3.1+security-01",
+      "pluginVersion": "12.3.2",
       "targets": [
         {
           "alias": "Normal (<120)",
@@ -14597,10 +14902,10 @@
         ]
       },
       "gridPos": {
-        "h": 8,
-        "w": 9,
-        "x": 7,
-        "y": 263
+        "h": 11,
+        "w": 8,
+        "x": 8,
+        "y": 266
       },
       "id": 74,
       "options": {
@@ -14622,7 +14927,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "12.3.1+security-01",
+      "pluginVersion": "12.3.2",
       "targets": [
         {
           "alias": "Normal (<80)",
@@ -14747,11 +15052,11 @@
       "fieldConfig": {
         "defaults": {
           "color": {
-            "mode": "continuous-greens",
+            "mode": "continuous-blues",
             "seriesBy": "max"
           },
           "custom": {
-            "axisBorderShow": false,
+            "axisBorderShow": true,
             "axisCenteredZero": false,
             "axisColorMode": "text",
             "axisLabel": "",
@@ -14858,10 +15163,10 @@
         ]
       },
       "gridPos": {
-        "h": 8,
+        "h": 11,
         "w": 8,
         "x": 16,
-        "y": 263
+        "y": 266
       },
       "id": 72,
       "options": {
@@ -14912,7 +15217,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "12.3.1+security-01",
+      "pluginVersion": "12.3.2",
       "targets": [
         {
           "alias": "Systolic",
@@ -15287,5 +15592,5 @@
   "timezone": "browser",
   "title": "Garmin Stats",
   "uid": "feiibsx498gsgb",
-  "version": 1
+  "version": 2
 }
