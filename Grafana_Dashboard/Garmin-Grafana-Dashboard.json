@@ -5824,12 +5824,312 @@
       "type": "table"
     },
     {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "garmin_influxdb"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "fixed"
+          },
+          "custom": {
+            "calculation": "mean",
+            "colorPalette": "interpolateOranges",
+            "colorSpace": "rgb",
+            "groupBy": 60,
+            "invertPalette": false,
+            "nullValueColor": "super-light-red"
+          },
+          "mappings": [],
+          "max": 100,
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 12,
+        "w": 8,
+        "x": 0,
+        "y": 85
+      },
+      "id": 95,
+      "options": {
+        "from": "0",
+        "legendGradientQuality": "high",
+        "showCellBorder": false,
+        "showLegend": false,
+        "showTooltip": true,
+        "showValueIndicator": false,
+        "to": "0"
+      },
+      "pluginVersion": "2.0.1",
+      "targets": [
+        {
+          "alias": "Stress Level",
+          "groupBy": [
+            {
+              "params": [
+                "1h"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "measurement": "StressIntraday",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "stressLevel"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [
+                  "90"
+                ],
+                "type": "percentile"
+              }
+            ]
+          ],
+          "tags": []
+        }
+      ],
+      "timeFrom": "7d",
+      "title": "Stress Level Distribution (90th Percentile)",
+      "transparent": true,
+      "type": "marcusolsson-hourly-heatmap-panel"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "garmin_influxdb"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "fixed"
+          },
+          "custom": {
+            "calculation": "mean",
+            "colorPalette": "interpolateReds",
+            "colorSpace": "rgb",
+            "groupBy": 60,
+            "invertPalette": false,
+            "nullValueColor": "super-light-red"
+          },
+          "fieldMinMax": false,
+          "mappings": [],
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 12,
+        "w": 8,
+        "x": 8,
+        "y": 85
+      },
+      "id": 96,
+      "options": {
+        "from": "0",
+        "legendGradientQuality": "high",
+        "showCellBorder": false,
+        "showLegend": false,
+        "showTooltip": true,
+        "showValueIndicator": false,
+        "to": "0"
+      },
+      "pluginVersion": "2.0.1",
+      "targets": [
+        {
+          "alias": "Heart Rate",
+          "groupBy": [
+            {
+              "params": [
+                "1h"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "measurement": "HeartRateIntraday",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "HeartRate"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [
+                  "90"
+                ],
+                "type": "percentile"
+              }
+            ]
+          ],
+          "tags": []
+        }
+      ],
+      "timeFrom": "7d",
+      "title": "Hourly Heart Rate (90th Percentile)",
+      "transparent": true,
+      "type": "marcusolsson-hourly-heatmap-panel"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "garmin_influxdb"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "fixed"
+          },
+          "custom": {
+            "calculation": "mean",
+            "colorPalette": "interpolateGreens",
+            "colorSpace": "rgb",
+            "groupBy": 60,
+            "invertPalette": false,
+            "nullValueColor": "super-light-red"
+          },
+          "fieldMinMax": false,
+          "mappings": [],
+          "max": 100,
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "percent"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 12,
+        "w": 8,
+        "x": 16,
+        "y": 85
+      },
+      "id": 97,
+      "options": {
+        "from": "0",
+        "legendGradientQuality": "high",
+        "showCellBorder": false,
+        "showLegend": false,
+        "showTooltip": true,
+        "showValueIndicator": false,
+        "to": "0"
+      },
+      "pluginVersion": "2.0.1",
+      "targets": [
+        {
+          "alias": "Heart Rate",
+          "groupBy": [
+            {
+              "params": [
+                "1h"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "measurement": "BodyBatteryIntraday",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "BodyBatteryLevel"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "max"
+              }
+            ]
+          ],
+          "tags": []
+        }
+      ],
+      "timeFrom": "7d",
+      "title": "Hourly Heart Rate (90th Percentile)",
+      "transparent": true,
+      "type": "marcusolsson-hourly-heatmap-panel"
+    },
+    {
       "collapsed": false,
       "gridPos": {
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 85
+        "y": 97
       },
       "id": 9,
       "panels": [],
@@ -6011,7 +6311,7 @@
         "h": 8,
         "w": 24,
         "x": 0,
-        "y": 86
+        "y": 98
       },
       "id": 67,
       "options": {
@@ -6629,7 +6929,7 @@
         "h": 14,
         "w": 24,
         "x": 0,
-        "y": 94
+        "y": 106
       },
       "id": 66,
       "options": {
@@ -7527,7 +7827,7 @@
         "h": 8,
         "w": 24,
         "x": 0,
-        "y": 108
+        "y": 120
       },
       "id": 11,
       "options": {
@@ -7689,6 +7989,123 @@
       },
       "fieldConfig": {
         "defaults": {
+          "custom": {
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "scaleDistribution": {
+              "type": "linear"
+            }
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 24,
+        "x": 0,
+        "y": 128
+      },
+      "id": 98,
+      "options": {
+        "calculate": true,
+        "calculation": {
+          "yBuckets": {
+            "scale": {
+              "type": "linear"
+            },
+            "value": "5"
+          }
+        },
+        "cellGap": 5,
+        "cellValues": {
+          "unit": "bpm"
+        },
+        "color": {
+          "exponent": 0.5,
+          "fill": "dark-red",
+          "mode": "opacity",
+          "reverse": false,
+          "scale": "exponential",
+          "scheme": "Reds",
+          "steps": 128
+        },
+        "exemplars": {
+          "color": "rgba(255,0,255,0.7)"
+        },
+        "filterValues": {
+          "le": 1e-9
+        },
+        "legend": {
+          "show": false
+        },
+        "rowsFrame": {
+          "layout": "auto"
+        },
+        "tooltip": {
+          "mode": "single",
+          "showColorScale": true,
+          "yHistogram": true
+        },
+        "yAxis": {
+          "axisPlacement": "left",
+          "axisWidth": 80,
+          "min": 40,
+          "reverse": false,
+          "unit": "bpm"
+        }
+      },
+      "pluginVersion": "12.3.2",
+      "targets": [
+        {
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "measurement": "HeartRateIntraday",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "HeartRate"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": []
+        }
+      ],
+      "title": "Heart Rate Distribution",
+      "type": "heatmap"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "garmin_influxdb"
+      },
+      "fieldConfig": {
+        "defaults": {
           "color": {
             "mode": "palette-classic"
           },
@@ -7839,7 +8256,7 @@
         "h": 9,
         "w": 24,
         "x": 0,
-        "y": 116
+        "y": 136
       },
       "id": 51,
       "options": {
@@ -8151,7 +8568,7 @@
         "h": 9,
         "w": 24,
         "x": 0,
-        "y": 125
+        "y": 145
       },
       "id": 94,
       "options": {
@@ -8359,7 +8776,7 @@
         "h": 9,
         "w": 8,
         "x": 0,
-        "y": 134
+        "y": 154
       },
       "id": 1,
       "options": {
@@ -8492,7 +8909,7 @@
         "h": 9,
         "w": 8,
         "x": 8,
-        "y": 134
+        "y": 154
       },
       "id": 3,
       "options": {
@@ -8656,7 +9073,7 @@
         "h": 9,
         "w": 8,
         "x": 16,
-        "y": 134
+        "y": 154
       },
       "id": 10,
       "options": {
@@ -8921,7 +9338,7 @@
         "h": 10,
         "w": 8,
         "x": 0,
-        "y": 143
+        "y": 163
       },
       "id": 63,
       "options": {
@@ -9250,7 +9667,7 @@
         "h": 10,
         "w": 8,
         "x": 8,
-        "y": 143
+        "y": 163
       },
       "id": 64,
       "options": {
@@ -9360,7 +9777,7 @@
         "h": 10,
         "w": 8,
         "x": 16,
-        "y": 143
+        "y": 163
       },
       "id": 69,
       "options": {
@@ -9656,7 +10073,7 @@
         "h": 11,
         "w": 9,
         "x": 0,
-        "y": 153
+        "y": 173
       },
       "id": 13,
       "options": {
@@ -9970,7 +10387,7 @@
         "h": 11,
         "w": 7,
         "x": 9,
-        "y": 153
+        "y": 173
       },
       "id": 23,
       "options": {
@@ -10233,7 +10650,7 @@
         "h": 11,
         "w": 8,
         "x": 16,
-        "y": 153
+        "y": 173
       },
       "id": 12,
       "options": {
@@ -10475,7 +10892,7 @@
         "h": 11,
         "w": 9,
         "x": 0,
-        "y": 164
+        "y": 184
       },
       "id": 17,
       "options": {
@@ -10764,7 +11181,7 @@
         "h": 11,
         "w": 8,
         "x": 9,
-        "y": 164
+        "y": 184
       },
       "id": 19,
       "options": {
@@ -10978,7 +11395,7 @@
         "h": 11,
         "w": 7,
         "x": 17,
-        "y": 164
+        "y": 184
       },
       "id": 4,
       "options": {
@@ -11332,7 +11749,7 @@
         "h": 14,
         "w": 10,
         "x": 0,
-        "y": 175
+        "y": 195
       },
       "id": 18,
       "options": {
@@ -11670,7 +12087,7 @@
         "h": 6,
         "w": 7,
         "x": 10,
-        "y": 175
+        "y": 195
       },
       "id": 22,
       "options": {
@@ -11968,7 +12385,7 @@
         "h": 7,
         "w": 7,
         "x": 17,
-        "y": 175
+        "y": 195
       },
       "id": 37,
       "options": {
@@ -12227,7 +12644,7 @@
         "h": 8,
         "w": 7,
         "x": 10,
-        "y": 181
+        "y": 201
       },
       "id": 34,
       "options": {
@@ -12379,7 +12796,7 @@
         "h": 7,
         "w": 7,
         "x": 17,
-        "y": 182
+        "y": 202
       },
       "id": 58,
       "options": {
@@ -12558,7 +12975,7 @@
         "h": 8,
         "w": 24,
         "x": 0,
-        "y": 189
+        "y": 209
       },
       "id": 65,
       "options": {
@@ -12700,7 +13117,7 @@
         "h": 10,
         "w": 12,
         "x": 0,
-        "y": 197
+        "y": 217
       },
       "id": 20,
       "options": {
@@ -12827,7 +13244,7 @@
         "h": 10,
         "w": 12,
         "x": 12,
-        "y": 197
+        "y": 217
       },
       "id": 27,
       "options": {
@@ -12928,7 +13345,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 207
+        "y": 227
       },
       "id": 42,
       "panels": [],
@@ -12961,7 +13378,7 @@
         "h": 9,
         "w": 5,
         "x": 4,
-        "y": 208
+        "y": 228
       },
       "id": 43,
       "options": {
@@ -13277,7 +13694,7 @@
         "h": 9,
         "w": 5,
         "x": 9,
-        "y": 208
+        "y": 228
       },
       "id": 53,
       "options": {
@@ -13388,7 +13805,7 @@
         "h": 9,
         "w": 5,
         "x": 14,
-        "y": 208
+        "y": 228
       },
       "id": 90,
       "options": {
@@ -13524,7 +13941,7 @@
         "h": 11,
         "w": 12,
         "x": 0,
-        "y": 217
+        "y": 237
       },
       "id": 50,
       "options": {
@@ -13823,7 +14240,7 @@
         "h": 11,
         "w": 12,
         "x": 12,
-        "y": 217
+        "y": 237
       },
       "id": 49,
       "options": {
@@ -14196,7 +14613,7 @@
         "h": 8,
         "w": 24,
         "x": 0,
-        "y": 228
+        "y": 248
       },
       "id": 45,
       "options": {
@@ -14367,7 +14784,7 @@
         "h": 8,
         "w": 24,
         "x": 0,
-        "y": 236
+        "y": 256
       },
       "id": 61,
       "options": {
@@ -14582,7 +14999,7 @@
         "h": 8,
         "w": 24,
         "x": 0,
-        "y": 244
+        "y": 264
       },
       "id": 57,
       "options": {
@@ -14847,7 +15264,7 @@
         "h": 8,
         "w": 24,
         "x": 0,
-        "y": 252
+        "y": 272
       },
       "id": 55,
       "options": {
@@ -15077,7 +15494,7 @@
         "h": 7,
         "w": 24,
         "x": 0,
-        "y": 260
+        "y": 280
       },
       "id": 47,
       "options": {
@@ -15365,7 +15782,7 @@
         "h": 8,
         "w": 24,
         "x": 0,
-        "y": 267
+        "y": 287
       },
       "id": 46,
       "options": {
@@ -15665,7 +16082,7 @@
         "h": 8,
         "w": 24,
         "x": 0,
-        "y": 275
+        "y": 295
       },
       "id": 38,
       "options": {
@@ -15912,7 +16329,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 283
+        "y": 303
       },
       "id": 70,
       "panels": [],
@@ -16033,7 +16450,7 @@
         "h": 11,
         "w": 4,
         "x": 0,
-        "y": 284
+        "y": 304
       },
       "id": 76,
       "options": {
@@ -16260,7 +16677,7 @@
         "h": 11,
         "w": 20,
         "x": 4,
-        "y": 284
+        "y": 304
       },
       "id": 71,
       "options": {
@@ -16484,7 +16901,7 @@
         "h": 11,
         "w": 8,
         "x": 0,
-        "y": 295
+        "y": 315
       },
       "id": 73,
       "options": {
@@ -16733,7 +17150,7 @@
         "h": 11,
         "w": 8,
         "x": 8,
-        "y": 295
+        "y": 315
       },
       "id": 74,
       "options": {
@@ -16994,7 +17411,7 @@
         "h": 11,
         "w": 8,
         "x": 16,
-        "y": 295
+        "y": 315
       },
       "id": 72,
       "options": {
@@ -17420,5 +17837,5 @@
   "timezone": "browser",
   "title": "Garmin Stats",
   "uid": "feiibsx498gsgb",
-  "version": 6
+  "version": 7
 }
