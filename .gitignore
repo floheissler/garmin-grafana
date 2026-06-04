@@ -3,3 +3,5 @@ override-default-vars.env
 kubernetes-spec.yaml
 influxdb_backups/
 backup.log
+__pycache__/
+*.pyc
