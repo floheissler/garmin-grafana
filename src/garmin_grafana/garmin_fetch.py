@@ -663,6 +663,11 @@ def get_activity_summary(date_str):
                     'hrTimeInZone_3': activity.get('hrTimeInZone_3'),
                     'hrTimeInZone_4': activity.get('hrTimeInZone_4'),
                     'hrTimeInZone_5': activity.get('hrTimeInZone_5'),
+                    'avgStepSpeedLoss': activity.get('avgStepSpeedLoss'),
+                    'avgStepSpeedLossPercent': activity.get('avgStepSpeedLossPercent'),
+                    'minRespirationRate': activity.get('minRespirationRate'),
+                    'maxRespirationRate': activity.get('maxRespirationRate'),
+                    'avgRespirationRate': activity.get('avgRespirationRate'),
                 }
             })
             points_list.append({
@@ -750,7 +755,11 @@ def fetch_activity_GPS(activityIDdict): # Uses FIT file by default, falls back t
                                     "StanceTimePercent": parsed_record.get('stance_time_percent', None),
                                     "StanceTimeBalance": parsed_record.get('stance_time_balance', None),
                                     "StepLength": parsed_record.get('step_length', None),
-                                    "VerticalRatio": parsed_record.get('vertical_ratio', None)
+                                    "VerticalRatio": parsed_record.get('vertical_ratio', None),
+                                    # HRM 600 fields (FIT mapping verified 2026-05-28, see SSL_RR_IMPLEMENTATION_PLAN.md). Mirrors the unknown_140 pattern.
+                                    "RespirationRate": (parsed_record.get("unknown_108") / 100.0) if parsed_record.get("unknown_108") else None,
+                                    "StepSpeedLoss": (parsed_record.get("unknown_146") / 100.0) if parsed_record.get("unknown_146") else None,
+                                    "StepSpeedLossPercent": (parsed_record.get("unknown_147") / 100.0) if parsed_record.get("unknown_147") else None,
                                 }
                             }
                             points_list.append(point)
@@ -843,7 +852,13 @@ def fetch_activity_GPS(activityIDdict): # Uses FIT file by default, falls back t
                                     "Avg_StanceTimePercent": lap_record.get('avg_stance_time_percent', None),
                                     "Avg_StanceTimeBalance": lap_record.get('avg_stance_time_balance', None),
                                     "Avg_StepLength": lap_record.get('avg_step_length', None),
-                                    "Avg_VerticalRatio": lap_record.get('avg_vertical_ratio', None)
+                                    "Avg_VerticalRatio": lap_record.get('avg_vertical_ratio', None),
+                                    # HRM 600 lap fields (FIT mapping verified 2026-05-28, see SSL_RR_IMPLEMENTATION_PLAN.md).
+                                    "Avg_RespirationRate": (lap_record.get("unknown_136") / 100.0) if lap_record.get("unknown_136") else None,
+                                    "Max_RespirationRate": (lap_record.get("unknown_137") / 100.0) if lap_record.get("unknown_137") else None,
+                                    "Avg_GradeAdjustedSpeed": (lap_record.get("unknown_161") / 1000.0) if lap_record.get("unknown_161") else None,
+                                    "Avg_StepSpeedLoss": (lap_record.get("unknown_164") / 100.0) if lap_record.get("unknown_164") else None,
+                                    "Avg_StepSpeedLossPercent": (lap_record.get("unknown_165") / 100.0) if lap_record.get("unknown_165") else None,
                                 }
                             }
                             points_list.append(point)

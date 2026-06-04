@@ -477,6 +477,15 @@ def format_activity_details(
     if hr_zones:
         result["heart_rate"]["zones"] = hr_zones
 
+    # Respiration rate (HRM 600 chest strap, from March 2026)
+    avg_rr = summary.get("avgRespirationRate")
+    if avg_rr is not None:
+        result["respiration_rate_bpm"] = {
+            "avg": round(avg_rr, 1),
+            "min": round(summary["minRespirationRate"], 1) if summary.get("minRespirationRate") is not None else None,
+            "max": round(summary["maxRespirationRate"], 1) if summary.get("maxRespirationRate") is not None else None,
+        }
+
     # Calories
     result["calories"] = {
         "total": round(summary.get("calories", 0) or 0),
@@ -503,6 +512,8 @@ def format_activity_details(
             "stance_time_balance_pct": "Avg_StanceTimeBalance",
             "step_length_mm": "Avg_StepLength",
             "vertical_ratio_pct": "Avg_VerticalRatio",
+            "step_speed_loss_cm_s": "Avg_StepSpeedLoss",
+            "step_speed_loss_pct": "Avg_StepSpeedLossPercent",
         }
         dynamics_data = {}
         for key, field in dynamics_fields.items():
@@ -549,6 +560,14 @@ def format_activity_details(
                 lap_entry["step_length_mm"] = lap["Avg_StepLength"]
             if lap.get("Avg_VerticalRatio") is not None:
                 lap_entry["vertical_ratio_pct"] = lap["Avg_VerticalRatio"]
+            if lap.get("Avg_StepSpeedLoss") is not None:
+                lap_entry["step_speed_loss_cm_s"] = lap["Avg_StepSpeedLoss"]
+            if lap.get("Avg_StepSpeedLossPercent") is not None:
+                lap_entry["step_speed_loss_pct"] = lap["Avg_StepSpeedLossPercent"]
+            if lap.get("Avg_RespirationRate") is not None:
+                lap_entry["respiration_rate_avg_bpm"] = lap["Avg_RespirationRate"]
+            if lap.get("Max_RespirationRate") is not None:
+                lap_entry["respiration_rate_max_bpm"] = lap["Max_RespirationRate"]
             lap_details.append(lap_entry)
 
         result["laps"] = {

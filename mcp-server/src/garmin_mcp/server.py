@@ -233,8 +233,9 @@ def get_activity_details(activity_id: int) -> str:
         - Heart rate (avg, max, and time in zones)
         - Calories (total and BMR)
         - Training effect (aerobic and anaerobic)
-        - Running dynamics (vertical oscillation, ground contact time, step length, vertical ratio, running efficiency) — running activities only
-        - Laps breakdown (distance, time, pace, HR, cadence, dynamics per lap)
+        - Running dynamics (vertical oscillation, ground contact time, step length, vertical ratio, running efficiency, step speed loss, step speed loss %) — running activities only
+        - Respiration rate (min, avg, max — requires HRM 600 chest strap; only present from March 2026 onward)
+        - Laps breakdown (distance, time, pace, HR, cadence, dynamics per lap, respiration rate per lap)
         - Cadence statistics (for running/cycling)
 
     Examples:
