@@ -28,6 +28,19 @@ docker compose up -d --build
 docker exec garmin-fetch-data uv run /app/garmin_grafana/influxdb_exporter.py --last-n-days 30
 ```
 
+### Multi-Device Setup
+
+This account has three devices (fenix 8 watch, Index™ BPM cuff, HRM 600 strap). The upstream code's "auto-detect" mode (`GARMIN_DEVICENAME=Unknown`) rewrites the `Device` tag from `lastUsedDeviceName` on every 5-min cycle, mis-tagging watch-derived metrics whenever the cuff or strap synced last. To prevent this we pin three env vars in `compose.yml`:
+
+- `GARMIN_DEVICENAME` / `GARMIN_DEVICEID` — the watch, used as the default `Device` tag for all watch-owned measurements (DailyStats, Sleep*, *Intraday, Training*, Activity*, etc.)
+- `GARMIN_BPM_DEVICENAME` — **local addition, not in upstream** — the BP cuff name used for `BloodPressure` rows (Garmin's API only returns `sourceType="DEVICE"` for cuff readings, not a usable device name)
+
+**Don't unset these on upstream merges.** The pin is what keeps the `Device` tag stable. If you add a new device that owns its own measurement (e.g. a smart scale for BodyComposition), extend the pattern: add `GARMIN_<X>_DEVICENAME` env var + use it in the relevant write path. `DeviceSync` legitimately keeps all device names — that's the only measurement that should ever vary.
+
+### Recovery Time Unit
+
+`TrainingReadiness.recoveryTime` from Garmin's API is in **minutes**, not hours. Stored raw in InfluxDB. MCP labels it `recovery_time_minutes`. Grafana panels should divide by 60 for hours display. (The FIT-file path at `garmin_fetch.py:792` writes `ActivitySession.Recovery_Time` from a different field — FIT spec convention is seconds, possibly disagrees with this; only relevant if you actually query it.)
+
 ### InfluxDB Backups
 
 Automated monthly backups via crontab (`0 4 1 * *` — 1st of each month at 4 AM).
