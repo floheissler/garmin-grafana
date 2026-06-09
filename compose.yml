@@ -17,6 +17,11 @@ services:
       - INFLUXDB_PASSWORD=influxdb_secret_password # (Required for influxdb 1.x, ignore for influxdb 3.x - set the 3.x specific variables)
       - INFLUXDB_DATABASE=GarminStats
       - GARMINCONNECT_IS_CN=False # Set this to True if you are in mainland China or use Garmin-cn (Default False)
+      # Pin the watch so multi-device users (e.g. + BP cuff + chest strap) don't get
+      # daily/sleep/HRV/intraday writes mis-tagged with whichever device synced last.
+      - GARMIN_DEVICENAME=fenix 8 - 51mm, AMOLED
+      - GARMIN_DEVICEID=3601410872
+      - GARMIN_BPM_DEVICENAME=Index™ BPM
       #####################################################################################
       # - GARMINCONNECT_EMAIL=your_garminconnect_email # optional, read the setup docs. (remove or comment out this line altogether if not used)
       # - GARMINCONNECT_BASE64_PASSWORD=your_base64_encoded_garminconnect_password # optional, must be Base64 encoded, read setup docs. (remove or comment out this line altogether if not used)

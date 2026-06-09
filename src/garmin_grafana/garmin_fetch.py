@@ -46,6 +46,7 @@ GARMINCONNECT_PASSWORD = base64.b64decode(os.getenv("GARMINCONNECT_BASE64_PASSWO
 GARMINCONNECT_IS_CN = True if os.getenv("GARMINCONNECT_IS_CN") in ['True', 'true', 'TRUE','t', 'T', 'yes', 'Yes', 'YES', '1'] else False # optional if you are using a Chinese account
 GARMIN_DEVICENAME = os.getenv("GARMIN_DEVICENAME", "Unknown")  # optional, attempts to set the name automatically if not given
 GARMIN_DEVICEID = os.getenv("GARMIN_DEVICEID", None)  # optional, attempts to set the id automatically if not given
+GARMIN_BPM_DEVICENAME = os.getenv("GARMIN_BPM_DEVICENAME", None)  # optional, friendly name for the blood-pressure cuff (Garmin's API only returns sourceType="DEVICE", not a usable name)
 AUTO_DATE_RANGE = False if os.getenv("AUTO_DATE_RANGE") in ['False','false','FALSE','f','F','no','No','NO','0'] else True # optional
 MANUAL_START_DATE = os.getenv("MANUAL_START_DATE", None) # optional, in YYYY-MM-DD format, if you want to bulk update only from specific date
 MANUAL_END_DATE = os.getenv("MANUAL_END_DATE", datetime.today().strftime('%Y-%m-%d')) # optional, in YYYY-MM-DD format, if you want to bulk update until a specific date
@@ -264,19 +265,20 @@ def get_last_sync():
     global GARMIN_DEVICEID
     points_list = []
     sync_data = garmin_obj.get_device_last_used()
+    synced_device_name = sync_data.get('lastUsedDeviceName') or "Unknown"
     if GARMIN_DEVICENAME_AUTOMATIC:
-        GARMIN_DEVICENAME = sync_data.get('lastUsedDeviceName') or "Unknown"
+        GARMIN_DEVICENAME = synced_device_name
         GARMIN_DEVICEID = sync_data.get('userDeviceId') or None
     points_list.append({
         "measurement":  "DeviceSync",
         "time": datetime.fromtimestamp(sync_data['lastUsedDeviceUploadTime']/1000, tz=pytz.timezone("UTC")).isoformat(),
         "tags": {
-            "Device": GARMIN_DEVICENAME,
+            "Device": synced_device_name,
             "Database_Name": INFLUXDB_DATABASE
         },
         "fields": {
             "imageUrl": sync_data.get('imageUrl'),
-            "Device_Name": GARMIN_DEVICENAME
+            "Device_Name": synced_device_name
         }
     })
     if points_list:
@@ -1169,7 +1171,7 @@ def get_blood_pressure(date_str):
                     "measurement":  "BloodPressure",
                     "time": pytz.UTC.localize(datetime.strptime(bp_measurement['measurementTimestampGMT'], '%Y-%m-%dT%H:%M:%S.%f')),
                     "tags": {
-                        "Device": GARMIN_DEVICENAME,
+                        "Device": GARMIN_BPM_DEVICENAME or bp_measurement.get('sourceType') or GARMIN_DEVICENAME,
                         "Database_Name": INFLUXDB_DATABASE,
                         "Source": bp_measurement.get('sourceType', None)
                     },
