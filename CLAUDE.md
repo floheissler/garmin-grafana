@@ -30,12 +30,11 @@ docker exec garmin-fetch-data uv run /app/garmin_grafana/influxdb_exporter.py --
 
 ### Multi-Device Setup
 
-This account has three devices (fenix 8 watch, Index™ BPM cuff, HRM 600 strap). The upstream code's "auto-detect" mode (`GARMIN_DEVICENAME=Unknown`) rewrites the `Device` tag from `lastUsedDeviceName` on every 5-min cycle, mis-tagging watch-derived metrics whenever the cuff or strap synced last. To prevent this we pin three env vars in `compose.yml`:
+This account has three syncing devices (fenix 8 watch, Index™ BPM cuff, HRM 600 strap). User-facing setup guidance lives in the [README's "Additional configuration" section](./README.md#additional-configuration-and-environment-variables) (multi-device ✅ entry).
 
-- `GARMIN_DEVICENAME` / `GARMIN_DEVICEID` — the watch, used as the default `Device` tag for all watch-owned measurements (DailyStats, Sleep*, *Intraday, Training*, Activity*, etc.)
-- `GARMIN_BPM_DEVICENAME` — **local addition, not in upstream** — the BP cuff name used for `BloodPressure` rows (Garmin's API only returns `sourceType="DEVICE"` for cuff readings, not a usable device name)
-
-**Don't unset these on upstream merges.** The pin is what keeps the `Device` tag stable. If you add a new device that owns its own measurement (e.g. a smart scale for BodyComposition), extend the pattern: add `GARMIN_<X>_DEVICENAME` env var + use it in the relevant write path. `DeviceSync` legitimately keeps all device names — that's the only measurement that should ever vary.
+**Notes for future maintainers:**
+- `GARMIN_BPM_DEVICENAME` is a local addition (not in upstream). The code change is `garmin_fetch.py:1172`. If you pull from upstream, make sure both the env var pin in `compose.yml` and that code line survive the merge.
+- The `Device` tag pin is what keeps non-DeviceSync measurements stable. If a new device that owns its own measurement gets added (e.g. a smart scale for BodyComposition), extend the pattern: a new `GARMIN_<X>_DEVICENAME` env var + a tag override in the relevant write path. `DeviceSync` is the only measurement that legitimately varies — leave that alone.
 
 ### Recovery Time Unit
 
