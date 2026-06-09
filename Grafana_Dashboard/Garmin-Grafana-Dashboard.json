@@ -29,8 +29,8 @@
         "x": 0,
         "y": 0
       },
-      "id": 116,
-      "title": "Daily Glance",
+      "id": 118,
+      "title": "Morning Snapshot",
       "type": "row"
     },
     {
@@ -550,11 +550,61 @@
                 }
               }
             ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Training Status",
+              "scope": "series"
+            },
+            "properties": [
+              {
+                "id": "mappings",
+                "value": [
+                  {
+                    "options": {
+                      "4": {
+                        "color": "dark-yellow",
+                        "index": 0,
+                        "text": "Maintaining"
+                      },
+                      "5": {
+                        "color": "dark-blue",
+                        "index": 1,
+                        "text": "Recovery"
+                      },
+                      "6": {
+                        "color": "dark-purple",
+                        "index": 2,
+                        "text": "Peaking"
+                      },
+                      "7": {
+                        "color": "dark-green",
+                        "index": 3,
+                        "text": "Productive"
+                      },
+                      "8": {
+                        "color": "dark-red",
+                        "index": 4,
+                        "text": "Strained"
+                      }
+                    },
+                    "type": "value"
+                  }
+                ]
+              },
+              {
+                "id": "color",
+                "value": {
+                  "mode": "fixed"
+                }
+              }
+            ]
           }
         ]
       },
       "gridPos": {
-        "h": 9,
+        "h": 7,
         "w": 24,
         "x": 0,
         "y": 1
@@ -562,7 +612,7 @@
       "id": 88,
       "options": {
         "barShape": "flat",
-        "barWidthFactor": 0.75,
+        "barWidthFactor": 0.8,
         "effects": {
           "barGlow": false,
           "centerGlow": true,
@@ -592,7 +642,7 @@
         },
         "textMode": "value_and_name"
       },
-      "pluginVersion": "13.0.1",
+      "pluginVersion": "13.0.2",
       "targets": [
         {
           "alias": "Resting HR",
@@ -803,7 +853,627 @@
           ],
           "tags": [],
           "tz": "$TimeZone"
+        }
+      ],
+      "title": "Biomarkers",
+      "transparent": true,
+      "type": "gauge"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "garmin_influxdb"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "thresholds": {
+            "mode": "percentage",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              }
+            ]
+          }
         },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Resting HR"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "bpm"
+              },
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "dark-green",
+                      "value": 0
+                    },
+                    {
+                      "color": "semi-dark-green",
+                      "value": 45
+                    },
+                    {
+                      "color": "yellow",
+                      "value": 50
+                    },
+                    {
+                      "color": "dark-orange",
+                      "value": 55
+                    },
+                    {
+                      "color": "dark-red",
+                      "value": 60
+                    }
+                  ]
+                }
+              },
+              {
+                "id": "min",
+                "value": 40
+              },
+              {
+                "id": "max",
+                "value": 65
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "HR Variability"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "ms"
+              },
+              {
+                "id": "min",
+                "value": 50
+              },
+              {
+                "id": "max",
+                "value": 135
+              },
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "dark-red",
+                      "value": 0
+                    },
+                    {
+                      "color": "dark-orange",
+                      "value": 60
+                    },
+                    {
+                      "color": "dark-yellow",
+                      "value": 70
+                    },
+                    {
+                      "color": "dark-green",
+                      "value": 80
+                    },
+                    {
+                      "color": "dark-yellow",
+                      "value": 105
+                    },
+                    {
+                      "color": "dark-orange",
+                      "value": 115
+                    },
+                    {
+                      "color": "dark-red",
+                      "value": 125
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Sleep Stress"
+            },
+            "properties": [
+              {
+                "id": "min",
+                "value": 0
+              },
+              {
+                "id": "max",
+                "value": 35
+              },
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "dark-green",
+                      "value": 0
+                    },
+                    {
+                      "color": "semi-dark-green",
+                      "value": 10
+                    },
+                    {
+                      "color": "yellow",
+                      "value": 15
+                    },
+                    {
+                      "color": "dark-yellow",
+                      "value": 20
+                    },
+                    {
+                      "color": "dark-orange",
+                      "value": 25
+                    },
+                    {
+                      "color": "dark-red",
+                      "value": 30
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Respiration"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "brpm"
+              },
+              {
+                "id": "min",
+                "value": 5
+              },
+              {
+                "id": "max",
+                "value": 18
+              },
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "dark-red",
+                      "value": 0
+                    },
+                    {
+                      "color": "dark-orange",
+                      "value": 6
+                    },
+                    {
+                      "color": "dark-yellow",
+                      "value": 8
+                    },
+                    {
+                      "color": "dark-green",
+                      "value": 10
+                    },
+                    {
+                      "color": "dark-yellow",
+                      "value": 13
+                    },
+                    {
+                      "color": "dark-orange",
+                      "value": 15
+                    },
+                    {
+                      "color": "dark-red",
+                      "value": 17
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Blood Oxygen"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "percent"
+              },
+              {
+                "id": "min",
+                "value": 40
+              },
+              {
+                "id": "max",
+                "value": 100
+              },
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "dark-red",
+                      "value": 0
+                    },
+                    {
+                      "color": "dark-orange",
+                      "value": 85
+                    },
+                    {
+                      "color": "dark-yellow",
+                      "value": 90
+                    },
+                    {
+                      "color": "dark-green",
+                      "value": 95
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Sleep Duration"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "s"
+              },
+              {
+                "id": "min",
+                "value": 0
+              },
+              {
+                "id": "max",
+                "value": 43200
+              },
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "dark-red",
+                      "value": 0
+                    },
+                    {
+                      "color": "dark-orange",
+                      "value": 10800
+                    },
+                    {
+                      "color": "orange",
+                      "value": 14400
+                    },
+                    {
+                      "color": "dark-yellow",
+                      "value": 18000
+                    },
+                    {
+                      "color": "green",
+                      "value": 21600
+                    },
+                    {
+                      "color": "dark-green",
+                      "value": 25200
+                    },
+                    {
+                      "color": "green",
+                      "value": 28800
+                    },
+                    {
+                      "color": "yellow",
+                      "value": 32400
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Sleep Score"
+            },
+            "properties": [
+              {
+                "id": "min",
+                "value": 0
+              },
+              {
+                "id": "max",
+                "value": 100
+              },
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "dark-red",
+                      "value": 0
+                    },
+                    {
+                      "color": "dark-orange",
+                      "value": 40
+                    },
+                    {
+                      "color": "orange",
+                      "value": 50
+                    },
+                    {
+                      "color": "dark-yellow",
+                      "value": 60
+                    },
+                    {
+                      "color": "green",
+                      "value": 70
+                    },
+                    {
+                      "color": "semi-dark-green",
+                      "value": 80
+                    },
+                    {
+                      "color": "dark-green",
+                      "value": 90
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Body Battery"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "percent"
+              },
+              {
+                "id": "min",
+                "value": 0
+              },
+              {
+                "id": "max",
+                "value": 100
+              },
+              {
+                "id": "displayName",
+                "value": "Max Body Battery"
+              },
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "dark-red",
+                      "value": 0
+                    },
+                    {
+                      "color": "semi-dark-red",
+                      "value": 40
+                    },
+                    {
+                      "color": "red",
+                      "value": 45
+                    },
+                    {
+                      "color": "dark-orange",
+                      "value": 50
+                    },
+                    {
+                      "color": "semi-dark-orange",
+                      "value": 55
+                    },
+                    {
+                      "color": "orange",
+                      "value": 60
+                    },
+                    {
+                      "color": "dark-yellow",
+                      "value": 65
+                    },
+                    {
+                      "color": "semi-dark-yellow",
+                      "value": 70
+                    },
+                    {
+                      "color": "yellow",
+                      "value": 75
+                    },
+                    {
+                      "color": "green",
+                      "value": 80
+                    },
+                    {
+                      "color": "semi-dark-green",
+                      "value": 85
+                    },
+                    {
+                      "color": "dark-green",
+                      "value": 90
+                    },
+                    {
+                      "color": "dark-purple",
+                      "value": 95
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Training Readiness"
+            },
+            "properties": [
+              {
+                "id": "min",
+                "value": 0
+              },
+              {
+                "id": "max",
+                "value": 100
+              },
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "dark-red",
+                      "value": 0
+                    },
+                    {
+                      "color": "dark-orange",
+                      "value": 30
+                    },
+                    {
+                      "color": "dark-yellow",
+                      "value": 40
+                    },
+                    {
+                      "color": "green",
+                      "value": 50
+                    },
+                    {
+                      "color": "semi-dark-green",
+                      "value": 70
+                    },
+                    {
+                      "color": "dark-green",
+                      "value": 90
+                    },
+                    {
+                      "color": "dark-purple",
+                      "value": 95
+                    }
+                  ]
+                }
+              },
+              {
+                "id": "unit",
+                "value": "percent"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Training Status",
+              "scope": "series"
+            },
+            "properties": [
+              {
+                "id": "mappings",
+                "value": [
+                  {
+                    "options": {
+                      "4": {
+                        "color": "dark-yellow",
+                        "index": 0,
+                        "text": "Maintaining"
+                      },
+                      "5": {
+                        "color": "dark-blue",
+                        "index": 1,
+                        "text": "Recovery"
+                      },
+                      "6": {
+                        "color": "dark-purple",
+                        "index": 2,
+                        "text": "Peaking"
+                      },
+                      "7": {
+                        "color": "dark-green",
+                        "index": 3,
+                        "text": "Productive"
+                      },
+                      "8": {
+                        "color": "dark-red",
+                        "index": 4,
+                        "text": "Strained"
+                      }
+                    },
+                    "type": "value"
+                  }
+                ]
+              },
+              {
+                "id": "color",
+                "value": {
+                  "mode": "fixed"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 24,
+        "x": 0,
+        "y": 8
+      },
+      "id": 117,
+      "options": {
+        "barShape": "flat",
+        "barWidthFactor": 0.8,
+        "effects": {
+          "barGlow": false,
+          "centerGlow": true,
+          "gradient": false
+        },
+        "endpointMarker": "point",
+        "minVizHeight": 75,
+        "minVizWidth": 75,
+        "orientation": "vertical",
+        "reduceOptions": {
+          "calcs": [
+            "last"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "segmentCount": 1,
+        "segmentSpacing": 0.3,
+        "shape": "gauge",
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true,
+        "sizing": "auto",
+        "sparkline": false,
+        "text": {
+          "titleSize": 10,
+          "valueSize": 25
+        },
+        "textMode": "value_and_name"
+      },
+      "pluginVersion": "13.0.2",
+      "targets": [
         {
           "alias": "Sleep Duration",
           "datasource": {
@@ -971,9 +1641,51 @@
           ],
           "tags": [],
           "tz": "$TimeZone"
+        },
+        {
+          "alias": "Training Status",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "garmin_influxdb"
+          },
+          "groupBy": [
+            {
+              "params": [
+                "1d"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "measurement": "TrainingStatus",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "trainingStatus"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "last"
+              }
+            ]
+          ],
+          "tags": [],
+          "tz": "$TimeZone"
         }
       ],
-      "title": "Morning Snapshot",
+      "title": "Derivatives",
       "transparent": true,
       "type": "gauge"
     },
@@ -983,9 +1695,9 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 10
+        "y": 15
       },
-      "id": 117,
+      "id": 119,
       "title": "Intraday Health Stats (Last 24 hours)",
       "type": "row"
     },
@@ -1037,7 +1749,7 @@
         "h": 3,
         "w": 19,
         "x": 0,
-        "y": 11
+        "y": 16
       },
       "id": 68,
       "options": {
@@ -1060,7 +1772,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "13.0.1",
+      "pluginVersion": "13.0.2",
       "targets": [
         {
           "alias": "Intervals",
@@ -1151,7 +1863,7 @@
         "h": 3,
         "w": 5,
         "x": 19,
-        "y": 11
+        "y": 16
       },
       "hideTimeOverride": true,
       "id": 26,
@@ -1176,7 +1888,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "13.0.1",
+      "pluginVersion": "13.0.2",
       "targets": [
         {
           "datasource": {
@@ -1300,7 +2012,7 @@
         "h": 9,
         "w": 19,
         "x": 0,
-        "y": 14
+        "y": 19
       },
       "id": 16,
       "options": {
@@ -1324,7 +2036,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "13.0.1",
+      "pluginVersion": "13.0.2",
       "targets": [
         {
           "alias": "Intraday Steps",
@@ -1505,7 +2217,7 @@
         "h": 9,
         "w": 5,
         "x": 19,
-        "y": 14
+        "y": 19
       },
       "id": 35,
       "options": {
@@ -1538,7 +2250,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "13.0.1",
+      "pluginVersion": "13.0.2",
       "targets": [
         {
           "alias": "Sleeping",
@@ -1791,7 +2503,7 @@
         "h": 3,
         "w": 19,
         "x": 0,
-        "y": 23
+        "y": 28
       },
       "id": 41,
       "options": {
@@ -1814,7 +2526,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "13.0.1",
+      "pluginVersion": "13.0.2",
       "targets": [
         {
           "alias": "Timeline",
@@ -1950,7 +2662,7 @@
         "h": 3,
         "w": 5,
         "x": 19,
-        "y": 23
+        "y": 28
       },
       "id": 92,
       "options": {
@@ -1970,7 +2682,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "13.0.1",
+      "pluginVersion": "13.0.2",
       "targets": [
         {
           "alias": "Zone 1",
@@ -2185,7 +2897,7 @@
         "h": 9,
         "w": 19,
         "x": 0,
-        "y": 26
+        "y": 31
       },
       "id": 15,
       "options": {
@@ -2210,7 +2922,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "13.0.1",
+      "pluginVersion": "13.0.2",
       "targets": [
         {
           "alias": "Heart Rate",
@@ -2400,7 +3112,7 @@
         "h": 9,
         "w": 5,
         "x": 19,
-        "y": 26
+        "y": 31
       },
       "id": 21,
       "options": {
@@ -2419,7 +3131,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "13.0.1",
+      "pluginVersion": "13.0.2",
       "targets": [
         {
           "alias": "Rest",
@@ -2673,7 +3385,7 @@
         "h": 9,
         "w": 19,
         "x": 0,
-        "y": 35
+        "y": 40
       },
       "id": 29,
       "options": {
@@ -2698,7 +3410,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "13.0.1",
+      "pluginVersion": "13.0.2",
       "targets": [
         {
           "alias": "Stress",
@@ -2911,7 +3623,7 @@
         "h": 9,
         "w": 5,
         "x": 19,
-        "y": 35
+        "y": 40
       },
       "id": 86,
       "options": {
@@ -2930,7 +3642,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "13.0.1",
+      "pluginVersion": "13.0.2",
       "targets": [
         {
           "alias": "Rest",
@@ -3235,7 +3947,7 @@
         "h": 9,
         "w": 19,
         "x": 0,
-        "y": 44
+        "y": 49
       },
       "id": 62,
       "options": {
@@ -3260,7 +3972,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "13.0.1",
+      "pluginVersion": "13.0.2",
       "targets": [
         {
           "alias": "BR",
@@ -3477,7 +4189,7 @@
         "h": 9,
         "w": 5,
         "x": 19,
-        "y": 44
+        "y": 49
       },
       "id": 89,
       "options": {
@@ -3496,7 +4208,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "13.0.1",
+      "pluginVersion": "13.0.2",
       "targets": [
         {
           "alias": "Very Low",
@@ -4010,7 +4722,7 @@
         "h": 9,
         "w": 19,
         "x": 0,
-        "y": 53
+        "y": 58
       },
       "id": 6,
       "options": {
@@ -4030,7 +4742,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "13.0.1",
+      "pluginVersion": "13.0.2",
       "targets": [
         {
           "alias": "Deep",
@@ -4228,7 +4940,7 @@
         "h": 9,
         "w": 5,
         "x": 19,
-        "y": 53
+        "y": 58
       },
       "id": 36,
       "options": {
@@ -4256,7 +4968,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "13.0.1",
+      "pluginVersion": "13.0.2",
       "targets": [
         {
           "alias": "Deep",
@@ -4584,7 +5296,7 @@
         "h": 9,
         "w": 19,
         "x": 0,
-        "y": 62
+        "y": 67
       },
       "id": 7,
       "options": {
@@ -4607,7 +5319,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "13.0.1",
+      "pluginVersion": "13.0.2",
       "targets": [
         {
           "alias": "Sleep Movement",
@@ -4947,7 +5659,7 @@
         "h": 9,
         "w": 5,
         "x": 19,
-        "y": 62
+        "y": 67
       },
       "id": 91,
       "options": {
@@ -4978,7 +5690,7 @@
         "sizing": "auto",
         "valueMode": "color"
       },
-      "pluginVersion": "13.0.1",
+      "pluginVersion": "13.0.2",
       "targets": [
         {
           "alias": "Systolic",
@@ -5073,9 +5785,9 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 71
+        "y": 76
       },
-      "id": 118,
+      "id": 120,
       "title": "Medium-Term Health Stats (Last Week)",
       "type": "row"
     },
@@ -5185,7 +5897,7 @@
         "h": 7,
         "w": 24,
         "x": 0,
-        "y": 72
+        "y": 77
       },
       "id": 111,
       "options": {
@@ -5207,7 +5919,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "13.0.1",
+      "pluginVersion": "13.0.2",
       "targets": [
         {
           "alias": "Sleep Duration",
@@ -5306,6 +6018,7 @@
           "custom": {
             "align": "center",
             "cellOptions": {
+              "mode": "gradient",
               "type": "gauge"
             },
             "filterable": false,
@@ -5317,6 +6030,7 @@
             },
             "inspect": false
           },
+          "noValue": "0",
           "thresholds": {
             "mode": "absolute",
             "steps": [
@@ -5356,30 +6070,6 @@
           {
             "matcher": {
               "id": "byName",
-              "options": "Sleep SpO2"
-            },
-            "properties": [
-              {
-                "id": "unit",
-                "value": "percent"
-              },
-              {
-                "id": "custom.cellOptions",
-                "value": {
-                  "type": "color-text"
-                }
-              },
-              {
-                "id": "color",
-                "value": {
-                  "mode": "continuous-RdYlGr"
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
               "options": "Steps"
             },
             "properties": [
@@ -5393,6 +6083,10 @@
               {
                 "id": "min",
                 "value": 0
+              },
+              {
+                "id": "max",
+                "value": 15000
               }
             ]
           },
@@ -5423,25 +6117,6 @@
           {
             "matcher": {
               "id": "byName",
-              "options": "Distance Covered"
-            },
-            "properties": [
-              {
-                "id": "unit",
-                "value": "lengthm"
-              },
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "dark-yellow",
-                  "mode": "fixed"
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
               "options": "High Stress Duration"
             },
             "properties": [
@@ -5463,6 +6138,10 @@
               {
                 "id": "min",
                 "value": 0
+              },
+              {
+                "id": "max",
+                "value": 7200
               }
             ]
           },
@@ -5504,6 +6183,10 @@
               {
                 "id": "min",
                 "value": 0
+              },
+              {
+                "id": "max",
+                "value": 36000
               }
             ]
           },
@@ -5566,6 +6249,25 @@
               {
                 "id": "min",
                 "value": 0
+              },
+              {
+                "id": "max",
+                "value": 7200
+              },
+              {
+                "id": "mappings",
+                "value": [
+                  {
+                    "options": {
+                      "match": "null",
+                      "result": {
+                        "index": 0,
+                        "text": "rest day"
+                      }
+                    },
+                    "type": "special"
+                  }
+                ]
               }
             ]
           },
@@ -5592,6 +6294,107 @@
                 }
               }
             ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Training Readiness",
+              "scope": "series"
+            },
+            "properties": [
+              {
+                "id": "min",
+                "value": 0
+              },
+              {
+                "id": "max",
+                "value": 100
+              },
+              {
+                "id": "unit",
+                "value": "percent"
+              },
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "mode": "lcd",
+                  "type": "gauge",
+                  "valueDisplayMode": "color"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Sleep Stress",
+              "scope": "series"
+            },
+            "properties": [
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "type": "color-text"
+                }
+              },
+              {
+                "id": "color",
+                "value": {
+                  "mode": "continuous-GrYlRd"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Training Status",
+              "scope": "series"
+            },
+            "properties": [
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "mode": "gradient",
+                  "type": "color-background"
+                }
+              },
+              {
+                "id": "mappings",
+                "value": [
+                  {
+                    "options": {
+                      "4": {
+                        "color": "dark-yellow",
+                        "index": 0,
+                        "text": "Maintaining"
+                      },
+                      "5": {
+                        "color": "dark-blue",
+                        "index": 1,
+                        "text": "Recovery"
+                      },
+                      "6": {
+                        "color": "dark-purple",
+                        "index": 2,
+                        "text": "Peaking"
+                      },
+                      "7": {
+                        "color": "dark-green",
+                        "index": 3,
+                        "text": "Productive"
+                      },
+                      "8": {
+                        "color": "dark-red",
+                        "index": 4,
+                        "text": "Strained"
+                      }
+                    },
+                    "type": "value"
+                  }
+                ]
+              }
+            ]
           }
         ]
       },
@@ -5599,7 +6402,7 @@
         "h": 13,
         "w": 24,
         "x": 0,
-        "y": 79
+        "y": 84
       },
       "id": 59,
       "options": {
@@ -5613,7 +6416,7 @@
           }
         ]
       },
-      "pluginVersion": "13.0.1",
+      "pluginVersion": "13.0.2",
       "targets": [
         {
           "alias": "Workout Time",
@@ -5700,48 +6503,6 @@
           "tz": "$TimeZone"
         },
         {
-          "alias": "Distance Covered",
-          "datasource": {
-            "type": "influxdb",
-            "uid": "garmin_influxdb"
-          },
-          "groupBy": [
-            {
-              "params": [
-                "1d"
-              ],
-              "type": "time"
-            },
-            {
-              "params": [
-                "null"
-              ],
-              "type": "fill"
-            }
-          ],
-          "measurement": "DailyStats",
-          "orderByTime": "DESC",
-          "policy": "default",
-          "refId": "B",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "totalDistanceMeters"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "max"
-              }
-            ]
-          ],
-          "tags": [],
-          "tz": "$TimeZone"
-        },
-        {
           "alias": "High Stress Duration",
           "datasource": {
             "type": "influxdb",
@@ -5803,7 +6564,7 @@
               "type": "fill"
             }
           ],
-          "measurement": "DailyStats",
+          "measurement": "SleepSummary",
           "orderByTime": "DESC",
           "policy": "default",
           "refId": "E",
@@ -5812,13 +6573,55 @@
             [
               {
                 "params": [
-                  "sleepingSeconds"
+                  "sleepTimeSeconds"
                 ],
                 "type": "field"
               },
               {
                 "params": [],
                 "type": "max"
+              }
+            ]
+          ],
+          "tags": [],
+          "tz": "$TimeZone"
+        },
+        {
+          "alias": "Sleep Stress",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "garmin_influxdb"
+          },
+          "groupBy": [
+            {
+              "params": [
+                "1d"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "measurement": "SleepSummary",
+          "orderByTime": "DESC",
+          "policy": "default",
+          "refId": "J",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "avgSleepStress"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
               }
             ]
           ],
@@ -5910,48 +6713,6 @@
           "tz": "$TimeZone"
         },
         {
-          "alias": "Sleep SpO2",
-          "datasource": {
-            "type": "influxdb",
-            "uid": "garmin_influxdb"
-          },
-          "groupBy": [
-            {
-              "params": [
-                "1d"
-              ],
-              "type": "time"
-            },
-            {
-              "params": [
-                "null"
-              ],
-              "type": "fill"
-            }
-          ],
-          "measurement": "SleepSummary",
-          "orderByTime": "DESC",
-          "policy": "default",
-          "refId": "F",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "averageSpO2Value"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "max"
-              }
-            ]
-          ],
-          "tags": [],
-          "tz": "$TimeZone"
-        },
-        {
           "alias": "Max Body Battery",
           "datasource": {
             "type": "influxdb",
@@ -5992,6 +6753,84 @@
           ],
           "tags": [],
           "tz": "$TimeZone"
+        },
+        {
+          "alias": "Training Readiness",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "garmin_influxdb"
+          },
+          "groupBy": [
+            {
+              "params": [
+                "1d"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "measurement": "TrainingReadiness",
+          "orderByTime": "DESC",
+          "policy": "default",
+          "refId": "B",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "score"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "max"
+              }
+            ]
+          ],
+          "tags": [],
+          "tz": "$TimeZone"
+        },
+        {
+          "alias": "Training Status",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "garmin_influxdb"
+          },
+          "groupBy": [
+            {
+              "params": [
+                "1d"
+              ],
+              "type": "time"
+            }
+          ],
+          "measurement": "TrainingStatus",
+          "orderByTime": "DESC",
+          "policy": "default",
+          "refId": "F",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "trainingStatus"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "first"
+              }
+            ]
+          ],
+          "tags": [],
+          "tz": "$TimeZone"
         }
       ],
       "timeFrom": "1w",
@@ -6010,9 +6849,9 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 92
+        "y": 97
       },
-      "id": 119,
+      "id": 121,
       "title": "Long-term Health Status (Filter Period)",
       "type": "row"
     },
@@ -6074,20 +6913,6 @@
           {
             "matcher": {
               "id": "byName",
-              "options": "HR Zones"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "mode": "continuous-GrYlRd"
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
               "options": "Body Battery"
             },
             "properties": [
@@ -6137,7 +6962,7 @@
               {
                 "id": "color",
                 "value": {
-                  "mode": "continuous-reds"
+                  "mode": "continuous-GrYlRd"
                 }
               }
             ]
@@ -6160,7 +6985,7 @@
                   {
                     "options": {
                       "0": {
-                        "color": "transparent",
+                        "color": "dark-yellow",
                         "index": 0,
                         "text": "Off hand"
                       }
@@ -6171,7 +6996,7 @@
                     "options": {
                       "from": 1,
                       "result": {
-                        "color": "semi-dark-green",
+                        "color": "dark-green",
                         "index": 1,
                         "text": "On Hand"
                       },
@@ -6182,6 +7007,36 @@
                 ]
               }
             ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Steps",
+              "scope": "series"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "mode": "continuous-greens"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Heart Rate",
+              "scope": "series"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "mode": "continuous-reds"
+                }
+              }
+            ]
           }
         ]
       },
@@ -6189,7 +7044,7 @@
         "h": 8,
         "w": 24,
         "x": 0,
-        "y": 93
+        "y": 98
       },
       "id": 67,
       "options": {
@@ -6204,7 +7059,7 @@
           "showLegend": false
         },
         "mergeValues": true,
-        "rowHeight": 0.71,
+        "rowHeight": 0.85,
         "showValue": "never",
         "tooltip": {
           "hideZeros": false,
@@ -6212,10 +7067,51 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "13.0.1",
+      "pluginVersion": "13.0.2",
       "targets": [
         {
-          "alias": "Steps Taken",
+          "alias": "Band Wearing",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "garmin_influxdb"
+          },
+          "groupBy": [
+            {
+              "params": [
+                "2m"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "0"
+              ],
+              "type": "fill"
+            }
+          ],
+          "measurement": "HeartRateIntraday",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "D",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "HeartRate"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "count"
+              }
+            ]
+          ],
+          "tags": []
+        },
+        {
+          "alias": "Steps",
           "datasource": {
             "type": "influxdb",
             "uid": "garmin_influxdb"
@@ -6256,6 +7152,47 @@
           "tags": []
         },
         {
+          "alias": "Heart Rate",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "garmin_influxdb"
+          },
+          "groupBy": [
+            {
+              "params": [
+                "1h"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "measurement": "HeartRateIntraday",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "E",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "HeartRate"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": []
+        },
+        {
           "alias": "Stress Level",
           "datasource": {
             "type": "influxdb",
@@ -6290,48 +7227,7 @@
               },
               {
                 "params": [],
-                "type": "median"
-              }
-            ]
-          ],
-          "tags": []
-        },
-        {
-          "alias": "HR Zones",
-          "datasource": {
-            "type": "influxdb",
-            "uid": "garmin_influxdb"
-          },
-          "groupBy": [
-            {
-              "params": [
-                "1h"
-              ],
-              "type": "time"
-            },
-            {
-              "params": [
-                "null"
-              ],
-              "type": "fill"
-            }
-          ],
-          "measurement": "HeartRateIntraday",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "refId": "E",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "HeartRate"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "median"
+                "type": "mean"
               }
             ]
           ],
@@ -6372,48 +7268,7 @@
               },
               {
                 "params": [],
-                "type": "median"
-              }
-            ]
-          ],
-          "tags": []
-        },
-        {
-          "alias": "Band Wearing",
-          "datasource": {
-            "type": "influxdb",
-            "uid": "garmin_influxdb"
-          },
-          "groupBy": [
-            {
-              "params": [
-                "2m"
-              ],
-              "type": "time"
-            },
-            {
-              "params": [
-                "0"
-              ],
-              "type": "fill"
-            }
-          ],
-          "measurement": "HeartRateIntraday",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "refId": "D",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "HeartRate"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "count"
+                "type": "mean"
               }
             ]
           ],
@@ -6804,7 +7659,7 @@
         "h": 14,
         "w": 24,
         "x": 0,
-        "y": 101
+        "y": 106
       },
       "id": 66,
       "options": {
@@ -6827,7 +7682,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "13.0.1",
+      "pluginVersion": "13.0.2",
       "targets": [
         {
           "alias": "Active time",
@@ -7556,6 +8411,172 @@
       "fieldConfig": {
         "defaults": {
           "color": {
+            "fixedColor": "light-green",
+            "mode": "thresholds"
+          },
+          "custom": {
+            "axisPlacement": "auto",
+            "axisWidth": 100,
+            "fillOpacity": 70,
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineWidth": 0,
+            "spanNulls": true
+          },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "super-light-blue",
+                "value": 0
+              },
+              {
+                "color": "dark-green",
+                "value": 40
+              },
+              {
+                "color": "super-light-yellow",
+                "value": 50
+              },
+              {
+                "color": "light-orange",
+                "value": 55
+              },
+              {
+                "color": "light-red",
+                "value": 60
+              },
+              {
+                "color": "semi-dark-red",
+                "value": 65
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Status",
+              "scope": "series"
+            },
+            "properties": [
+              {
+                "id": "mappings",
+                "value": [
+                  {
+                    "options": {
+                      "4": {
+                        "color": "dark-yellow",
+                        "index": 0,
+                        "text": "Maintaining"
+                      },
+                      "5": {
+                        "color": "dark-blue",
+                        "index": 1,
+                        "text": "Recovery"
+                      },
+                      "6": {
+                        "color": "dark-purple",
+                        "index": 2,
+                        "text": "Peaking"
+                      },
+                      "7": {
+                        "color": "dark-green",
+                        "index": 3,
+                        "text": "Productive"
+                      },
+                      "8": {
+                        "color": "dark-red",
+                        "index": 4,
+                        "text": "Strained"
+                      }
+                    },
+                    "type": "value"
+                  }
+                ]
+              },
+              {
+                "id": "color",
+                "value": {
+                  "mode": "fixed"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 24,
+        "x": 0,
+        "y": 120
+      },
+      "id": 116,
+      "options": {
+        "alignValue": "center",
+        "annotations": {
+          "clustering": -1,
+          "multiLane": false
+        },
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": false
+        },
+        "mergeValues": true,
+        "rowHeight": 0.78,
+        "showValue": "always",
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "13.0.2",
+      "targets": [
+        {
+          "alias": "Status",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "garmin_influxdb"
+          },
+          "groupBy": [],
+          "measurement": "TrainingStatus",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "R",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "trainingStatus"
+                ],
+                "type": "field"
+              }
+            ]
+          ],
+          "tags": [],
+          "tz": "$TimeZone"
+        }
+      ],
+      "title": "Training Status",
+      "transparent": true,
+      "type": "state-timeline"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "garmin_influxdb"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
             "fixedColor": "super-light-red",
             "mode": "shades"
           },
@@ -7735,7 +8756,7 @@
         "h": 10,
         "w": 18,
         "x": 0,
-        "y": 115
+        "y": 124
       },
       "id": 11,
       "options": {
@@ -7760,7 +8781,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "13.0.1",
+      "pluginVersion": "13.0.2",
       "targets": [
         {
           "alias": "Resting HR",
@@ -7940,7 +8961,7 @@
         "h": 10,
         "w": 6,
         "x": 18,
-        "y": 115
+        "y": 124
       },
       "id": 98,
       "options": {
@@ -7995,7 +9016,7 @@
           "unit": "bpm"
         }
       },
-      "pluginVersion": "13.0.1",
+      "pluginVersion": "13.0.2",
       "targets": [
         {
           "datasource": {
@@ -8248,7 +9269,7 @@
         "h": 10,
         "w": 18,
         "x": 0,
-        "y": 125
+        "y": 134
       },
       "id": 100,
       "options": {
@@ -8273,7 +9294,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "13.0.1",
+      "pluginVersion": "13.0.2",
       "targets": [
         {
           "alias": "Overnight HRV",
@@ -8451,7 +9472,7 @@
         "h": 10,
         "w": 6,
         "x": 18,
-        "y": 125
+        "y": 134
       },
       "id": 101,
       "options": {
@@ -8504,7 +9525,7 @@
           "unit": "ms"
         }
       },
-      "pluginVersion": "13.0.1",
+      "pluginVersion": "13.0.2",
       "targets": [
         {
           "alias": "HRV",
@@ -8757,7 +9778,7 @@
         "h": 10,
         "w": 18,
         "x": 0,
-        "y": 135
+        "y": 144
       },
       "id": 102,
       "options": {
@@ -8782,7 +9803,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "13.0.1",
+      "pluginVersion": "13.0.2",
       "targets": [
         {
           "alias": "Sleep Stress",
@@ -8960,7 +9981,7 @@
         "h": 10,
         "w": 6,
         "x": 18,
-        "y": 135
+        "y": 144
       },
       "id": 103,
       "options": {
@@ -9013,7 +10034,7 @@
           "unit": "none"
         }
       },
-      "pluginVersion": "13.0.1",
+      "pluginVersion": "13.0.2",
       "targets": [
         {
           "alias": "Stress Level",
@@ -9267,7 +10288,7 @@
         "h": 10,
         "w": 18,
         "x": 0,
-        "y": 145
+        "y": 154
       },
       "id": 104,
       "options": {
@@ -9292,7 +10313,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "13.0.1",
+      "pluginVersion": "13.0.2",
       "targets": [
         {
           "alias": "Sleep Respiration",
@@ -9470,7 +10491,7 @@
         "h": 10,
         "w": 6,
         "x": 18,
-        "y": 145
+        "y": 154
       },
       "id": 105,
       "options": {
@@ -9523,7 +10544,7 @@
           "unit": "none"
         }
       },
-      "pluginVersion": "13.0.1",
+      "pluginVersion": "13.0.2",
       "targets": [
         {
           "alias": "Breathing Rate",
@@ -9700,7 +10721,7 @@
         "h": 10,
         "w": 18,
         "x": 0,
-        "y": 155
+        "y": 164
       },
       "id": 34,
       "options": {
@@ -9725,7 +10746,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "13.0.1",
+      "pluginVersion": "13.0.2",
       "targets": [
         {
           "alias": "Daily Weight (kg)",
@@ -9856,7 +10877,7 @@
         "h": 10,
         "w": 6,
         "x": 18,
-        "y": 155
+        "y": 164
       },
       "id": 110,
       "options": {
@@ -9877,7 +10898,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "13.0.1",
+      "pluginVersion": "13.0.2",
       "targets": [
         {
           "alias": "Daily Weight (kg)",
@@ -9931,9 +10952,9 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 165
+        "y": 174
       },
-      "id": 120,
+      "id": 122,
       "title": "Sleep Patterns",
       "type": "row"
     },
@@ -10138,7 +11159,7 @@
         "h": 12,
         "w": 18,
         "x": 0,
-        "y": 166
+        "y": 175
       },
       "id": 106,
       "options": {
@@ -10161,7 +11182,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "13.0.1",
+      "pluginVersion": "13.0.2",
       "targets": [
         {
           "alias": "Deep Sleep",
@@ -10481,7 +11502,7 @@
         "h": 12,
         "w": 6,
         "x": 18,
-        "y": 166
+        "y": 175
       },
       "id": 109,
       "options": {
@@ -10512,7 +11533,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "13.0.1",
+      "pluginVersion": "13.0.2",
       "targets": [
         {
           "alias": "Deep",
@@ -10739,7 +11760,7 @@
         "h": 12,
         "w": 6,
         "x": 0,
-        "y": 178
+        "y": 187
       },
       "id": 112,
       "options": {
@@ -10772,7 +11793,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "13.0.1",
+      "pluginVersion": "13.0.2",
       "targets": [
         {
           "alias": "Deep Sleep",
@@ -10989,7 +12010,7 @@
         "h": 12,
         "w": 6,
         "x": 6,
-        "y": 178
+        "y": 187
       },
       "id": 114,
       "options": {
@@ -11022,7 +12043,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "13.0.1",
+      "pluginVersion": "13.0.2",
       "targets": [
         {
           "alias": "Light Sleep",
@@ -11238,7 +12259,7 @@
         "h": 12,
         "w": 6,
         "x": 12,
-        "y": 178
+        "y": 187
       },
       "id": 113,
       "options": {
@@ -11271,7 +12292,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "13.0.1",
+      "pluginVersion": "13.0.2",
       "targets": [
         {
           "alias": "REM Sleep",
@@ -11491,7 +12512,7 @@
         "h": 12,
         "w": 6,
         "x": 18,
-        "y": 178
+        "y": 187
       },
       "id": 115,
       "options": {
@@ -11524,7 +12545,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "13.0.1",
+      "pluginVersion": "13.0.2",
       "targets": [
         {
           "alias": "Sleep Score",
@@ -11633,9 +12654,9 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 190
+        "y": 199
       },
-      "id": 121,
+      "id": 123,
       "title": "Blood Pressure",
       "type": "row"
     },
@@ -11774,7 +12795,7 @@
         "h": 11,
         "w": 21,
         "x": 0,
-        "y": 191
+        "y": 200
       },
       "id": 71,
       "options": {
@@ -11803,7 +12824,7 @@
         "xTickLabelRotation": 0,
         "xTickLabelSpacing": 100
       },
-      "pluginVersion": "13.0.1",
+      "pluginVersion": "13.0.2",
       "targets": [
         {
           "alias": "Systolic",
@@ -12021,7 +13042,7 @@
         "h": 11,
         "w": 3,
         "x": 21,
-        "y": 191
+        "y": 200
       },
       "id": 76,
       "options": {
@@ -12052,7 +13073,7 @@
         "sparkline": false,
         "textMode": "auto"
       },
-      "pluginVersion": "13.0.1",
+      "pluginVersion": "13.0.2",
       "targets": [
         {
           "alias": "Systolic",
@@ -12251,7 +13272,7 @@
         "h": 11,
         "w": 8,
         "x": 0,
-        "y": 202
+        "y": 211
       },
       "id": 73,
       "options": {
@@ -12273,7 +13294,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "13.0.1",
+      "pluginVersion": "13.0.2",
       "targets": [
         {
           "alias": "Normal (<120)",
@@ -12495,7 +13516,7 @@
         "h": 11,
         "w": 8,
         "x": 8,
-        "y": 202
+        "y": 211
       },
       "id": 74,
       "options": {
@@ -12517,7 +13538,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "13.0.1",
+      "pluginVersion": "13.0.2",
       "targets": [
         {
           "alias": "Normal (<80)",
@@ -12750,7 +13771,7 @@
         "h": 11,
         "w": 8,
         "x": 16,
-        "y": 202
+        "y": 211
       },
       "id": 72,
       "options": {
@@ -12801,7 +13822,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "13.0.1",
+      "pluginVersion": "13.0.2",
       "targets": [
         {
           "alias": "Systolic",
@@ -12878,9 +13899,9 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 213
+        "y": 222
       },
-      "id": 122,
+      "id": 124,
       "panels": [
         {
           "datasource": {
@@ -12906,7 +13927,7 @@
             "h": 9,
             "w": 5,
             "x": 4,
-            "y": 214
+            "y": 223
           },
           "id": 43,
           "options": {
@@ -13217,7 +14238,7 @@
             "h": 9,
             "w": 5,
             "x": 9,
-            "y": 214
+            "y": 223
           },
           "id": 53,
           "options": {
@@ -13352,7 +14373,7 @@
             "h": 11,
             "w": 12,
             "x": 0,
-            "y": 223
+            "y": 232
           },
           "id": 50,
           "options": {
@@ -13645,7 +14666,7 @@
             "h": 11,
             "w": 12,
             "x": 12,
-            "y": 223
+            "y": 232
           },
           "id": 49,
           "options": {
@@ -14012,7 +15033,7 @@
             "h": 8,
             "w": 24,
             "x": 0,
-            "y": 234
+            "y": 243
           },
           "id": 45,
           "options": {
@@ -14180,7 +15201,7 @@
             "h": 8,
             "w": 24,
             "x": 0,
-            "y": 242
+            "y": 251
           },
           "id": 61,
           "options": {
@@ -14392,7 +15413,7 @@
             "h": 8,
             "w": 24,
             "x": 0,
-            "y": 250
+            "y": 259
           },
           "id": 57,
           "options": {
@@ -14651,7 +15672,7 @@
             "h": 8,
             "w": 24,
             "x": 0,
-            "y": 258
+            "y": 267
           },
           "id": 55,
           "options": {
@@ -14885,7 +15906,7 @@
             "h": 8,
             "w": 24,
             "x": 0,
-            "y": 266
+            "y": 275
           },
           "id": 46,
           "options": {
@@ -15076,7 +16097,7 @@
             "h": 7,
             "w": 24,
             "x": 0,
-            "y": 274
+            "y": 283
           },
           "id": 47,
           "options": {
@@ -15457,7 +16478,7 @@
             "h": 8,
             "w": 24,
             "x": 0,
-            "y": 281
+            "y": 290
           },
           "id": 38,
           "options": {
@@ -15703,9 +16724,9 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 214
+        "y": 223
       },
-      "id": 123,
+      "id": 125,
       "panels": [
         {
           "datasource": {
@@ -15745,7 +16766,7 @@
             "h": 10,
             "w": 8,
             "x": 10,
-            "y": 215
+            "y": 224
           },
           "id": 69,
           "options": {
@@ -15968,7 +16989,7 @@
             "h": 10,
             "w": 12,
             "x": 0,
-            "y": 225
+            "y": 234
           },
           "id": 1,
           "options": {
@@ -16197,7 +17218,7 @@
             "h": 10,
             "w": 12,
             "x": 12,
-            "y": 225
+            "y": 234
           },
           "id": 10,
           "options": {
@@ -16491,7 +17512,7 @@
             "h": 14,
             "w": 10,
             "x": 0,
-            "y": 235
+            "y": 244
           },
           "id": 18,
           "options": {
@@ -16817,7 +17838,7 @@
             "h": 11,
             "w": 8,
             "x": 10,
-            "y": 235
+            "y": 244
           },
           "id": 19,
           "options": {
@@ -17026,7 +18047,7 @@
             "h": 7,
             "w": 7,
             "x": 10,
-            "y": 246
+            "y": 255
           },
           "id": 37,
           "options": {
@@ -17309,7 +18330,7 @@
             "h": 10,
             "w": 8,
             "x": 2,
-            "y": 249
+            "y": 258
           },
           "id": 64,
           "options": {
@@ -17417,7 +18438,7 @@
             "h": 12,
             "w": 8,
             "x": 16,
-            "y": 253
+            "y": 262
           },
           "id": 97,
           "options": {
@@ -17517,7 +18538,7 @@
             "h": 12,
             "w": 8,
             "x": 0,
-            "y": 259
+            "y": 268
           },
           "id": 95,
           "options": {
@@ -17618,7 +18639,7 @@
             "h": 12,
             "w": 8,
             "x": 8,
-            "y": 259
+            "y": 268
           },
           "id": 96,
           "options": {
@@ -17761,5 +18782,5 @@
   "timezone": "browser",
   "title": "Garmin Stats",
   "uid": "feiibsx498gsgb",
-  "version": 9
+  "version": 36
 }
