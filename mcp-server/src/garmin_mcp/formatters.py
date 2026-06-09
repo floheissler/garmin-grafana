@@ -683,7 +683,7 @@ def format_training_status(
             result["readiness"] = {
                 "score": r.get("score"),
                 "level": r.get("level"),
-                "recovery_time_hours": r.get("recoveryTime"),
+                "recovery_time_minutes": r.get("recoveryTime"),
                 "acute_load": r.get("acuteLoad"),
                 "factors": {
                     "sleep": {
@@ -723,7 +723,7 @@ def format_training_status(
                 "date": date,
                 "status": status_by_date.get(date, {}).get("trainingStatus"),
                 "readiness_score": readiness_by_date.get(date, {}).get("score"),
-                "recovery_time": readiness_by_date.get(date, {}).get("recoveryTime"),
+                "recovery_time_minutes": readiness_by_date.get(date, {}).get("recoveryTime"),
                 "weekly_load": status_by_date.get(date, {}).get("weeklyTrainingLoad"),
             }
             for date in all_dates
