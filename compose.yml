@@ -4,7 +4,7 @@ services:
   garmin-fetch-data:
     restart: unless-stopped
     build: .  # Local build with running dynamics (upstream: thisisarpanghosh/garmin-fetch-data:latest)
-    container_name: garmin-fetch-data
+    container_name: ${GARMIN_CONTAINER_NAME:-garmin-fetch-data}
     # user: root # Runs the container as root user, uncomment this line if you are getting permission issues which can't be resolved otherwise. For this, you also need to change the below volume mount from './garminconnect-tokens:/home/appuser/.garminconnect' to './garminconnect-tokens:/root/.garminconnect' to ensure the token files persist during container rebuilding. 
     depends_on:
       - influxdb
@@ -19,9 +19,9 @@ services:
       - GARMINCONNECT_IS_CN=False # Set this to True if you are in mainland China or use Garmin-cn (Default False)
       # Pin the watch so multi-device users (e.g. + BP cuff + chest strap) don't get
       # daily/sleep/HRV/intraday writes mis-tagged with whichever device synced last.
-      - GARMIN_DEVICENAME=fenix 8 - 51mm, AMOLED
-      - GARMIN_DEVICEID=3601410872
-      - GARMIN_BPM_DEVICENAME=Index™ BPM
+      - GARMIN_DEVICENAME=${GARMIN_DEVICENAME:-fenix 8 - 51mm, AMOLED}
+      - GARMIN_DEVICEID=${GARMIN_DEVICEID:-3601410872}
+      - GARMIN_BPM_DEVICENAME=${GARMIN_BPM_DEVICENAME:-Index™ BPM}
       #####################################################################################
       # - GARMINCONNECT_EMAIL=your_garminconnect_email # optional, read the setup docs. (remove or comment out this line altogether if not used)
       # - GARMINCONNECT_BASE64_PASSWORD=your_base64_encoded_garminconnect_password # optional, must be Base64 encoded, read setup docs. (remove or comment out this line altogether if not used)
@@ -39,13 +39,13 @@ services:
       - FETCH_SELECTION=daily_avg,sleep,steps,heartrate,stress,breathing,hrv,fitness_age,vo2,activity,race_prediction,body_composition,blood_pressure,training_status,training_readiness
       # - KEEP_FIT_FILES=False # Stores the FIT files (downloads and saves them) when set to True - read docs for more details
       # - ALWAYS_PROCESS_FIT_FILES=False # Enables processing FIT files even if GPS data is not present in it when set to True, default False
-      - USER_TIMEZONE=Europe/Berlin # Can hardcode user's timezone - must be a valid TZ identifier like Europe/Budapest without quotes, fetches timezone automatically and dynamically on each run if set to empty (default) - Read docs
+      - USER_TIMEZONE=${USER_TIMEZONE:-Europe/Berlin} # Can hardcode user's timezone - must be a valid TZ identifier like Europe/Budapest without quotes, fetches timezone automatically and dynamically on each run if set to empty (default) - Read docs
       # - INFLUXDB_ENDPOINT_IS_HTTP=True # Set this to False if you are using HTTPS for your influxdb connection (over the internet)
       # - FORCE_REPROCESS_ACTIVITIES=True # Enables re-processing of FIT files on iterative updates when set to True (default), setting to False may save processing time but known for skipping activities
 
   influxdb:
     restart: unless-stopped
-    container_name: influxdb
+    container_name: ${INFLUXDB_CONTAINER_NAME:-influxdb}
     hostname: influxdb
     environment:
       - INFLUXDB_DB=GarminStats
@@ -64,14 +64,14 @@ services:
     expose:
       - '8086' # Influxdb V3 should expose "8181" (Change INFLUXDB_PORT on garmin-fetch-data appropriately for InfluxDB V3)
     ports:
-      - '8086:8086' # Expose to host for MCP server
+      - '${INFLUXDB_HOST_PORT:-8086}:8086' # Expose to host for MCP server
     volumes:
       - influxdb_data:/var/lib/influxdb # InfluxDB V3 bind mount should be set like - influxdb_data:/data if you set INFLUXDB3_DB_DIR=/data (instead of /var/lib/influxdb)
     image: 'influxdb:1.11' # You must change this to 'quay.io/influxdb/influxdb3-core:latest' for influxdb V3
 
   grafana:
     restart: unless-stopped
-    container_name: grafana
+    container_name: ${GRAFANA_CONTAINER_NAME:-grafana}
     hostname: grafana
     environment:
       - GF_SECURITY_ADMIN_USER=admin
@@ -89,7 +89,7 @@ services:
       - ./Grafana_Datasource:/etc/grafana/provisioning/datasources # (optional) Self provisioning influxdb datasource
       - ./Grafana_Dashboard:/etc/grafana/provisioning/dashboards # (optional) self provisioning grafana dashboard
     ports:
-      - '3001:3000'
+      - '${GRAFANA_HOST_PORT:-3001}:3000'
     image: 'grafana/grafana:latest'
 
 volumes:

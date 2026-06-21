@@ -4,6 +4,11 @@
 
 set -e
 
+# Load instance config (.env is also read by Docker Compose)
+if [[ -f .env ]]; then
+    set -a; source .env; set +a
+fi
+
 BACKUP_ROOT="./influxdb_backups"
 TIMESTAMP=$(date +%F_%H-%M)
 BACKUP_DIR="$BACKUP_ROOT/$TIMESTAMP"
@@ -12,13 +17,13 @@ echo "Creating backup directory: $BACKUP_DIR"
 mkdir -p "$BACKUP_DIR"
 
 echo "Backing up GarminStats database..."
-docker exec influxdb influxd backup -portable -db GarminStats /tmp/influxdb_backup
+docker exec "${INFLUXDB_CONTAINER_NAME:-influxdb}" influxd backup -portable -db GarminStats /tmp/influxdb_backup
 
 echo "Copying backup to host..."
-docker cp influxdb:/tmp/influxdb_backup/. "$BACKUP_DIR/"
+docker cp "${INFLUXDB_CONTAINER_NAME:-influxdb}:/tmp/influxdb_backup/." "$BACKUP_DIR/"
 
 echo "Cleaning up container temp files..."
-docker exec influxdb rm -r /tmp/influxdb_backup
+docker exec "${INFLUXDB_CONTAINER_NAME:-influxdb}" rm -r /tmp/influxdb_backup
 
 # Show backup size
 BACKUP_SIZE=$(du -sh "$BACKUP_DIR" | cut -f1)
@@ -29,7 +34,7 @@ echo "  Size: $BACKUP_SIZE"
 
 # Copy to USB backup if mounted
 USB_MOUNT="/mnt/usb-backup"
-USB_BACKUP="$USB_MOUNT/garmin-influxdb"
+USB_BACKUP="$USB_MOUNT/${USB_BACKUP_SUBDIR:-garmin-influxdb}"
 if mountpoint -q "$USB_MOUNT" 2>/dev/null; then
     mkdir -p "$USB_BACKUP"
     rsync -a "$BACKUP_DIR/" "$USB_BACKUP/$TIMESTAMP/"
