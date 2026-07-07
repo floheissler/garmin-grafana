@@ -12,5 +12,12 @@ export GARMIN_MCP_INFLUXDB_USERNAME="${GARMIN_MCP_INFLUXDB_USERNAME:-influxdb_us
 export GARMIN_MCP_INFLUXDB_PASSWORD="${GARMIN_MCP_INFLUXDB_PASSWORD:-influxdb_secret_password}"
 export GARMIN_MCP_TIMEZONE="${GARMIN_MCP_TIMEZONE:-Europe/Berlin}"
 
+# Transport: "stdio" (default, for SSH) or "streamable-http" (for remote/tunnel access)
+export GARMIN_MCP_TRANSPORT="${GARMIN_MCP_TRANSPORT:-stdio}"
+# HTTP port (only used when transport is streamable-http)
+export GARMIN_MCP_HTTP_PORT="${GARMIN_MCP_HTTP_PORT:-8090}"
+# Bearer token for HTTP auth (if unset, no auth is enforced)
+# export GARMIN_MCP_AUTH_TOKEN="your-secret-token-here"
+
 # Run the server
 exec ~/.local/bin/uv run python -m garmin_mcp.server
