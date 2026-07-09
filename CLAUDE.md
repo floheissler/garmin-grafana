@@ -149,21 +149,14 @@ This starts the MCP server on port 8090 with OAuth 2.1 authentication via Keyclo
 
 ### Client Configuration
 
-**Claude.ai / ChatGPT (remote, via Cloudflare Tunnel):**
-- URL: `https://garmin-mcp.batserver.dev/mcp`
-- Auth: OAuth — automatically discovered via protected resource metadata
-- Users log in via Keycloak (`auth.batserver.dev`, realm `batserver`)
+Register in Claude.ai or ChatGPT as a remote MCP server — syncs across all devices automatically:
+- **URL**: `https://garmin-mcp.batserver.dev/mcp`
+- **Auth**: OAuth — auto-discovered via protected resource metadata
+- **Login**: Keycloak (`auth.batserver.dev`, realm `batserver`)
 
-**Claude Desktop/Code (local, via SSH):**
-```json
-{
-  "mcpServers": {
-    "garmin-health": {
-      "command": "ssh",
-      "args": ["batman@192.168.178.61", "cd /home/batman/docker/garmin-grafana/mcp-server && ./run-server.sh"]
-    }
-  }
-}
+The stdio transport is still available as a fallback for local debugging:
+```bash
+cd mcp-server && ./run-server.sh  # defaults to stdio
 ```
 
 ### Example Queries
@@ -230,22 +223,23 @@ Garmin Connect Cloud
 │  Grafana  │    │   MCP Server     │
 │  :3001    │    │  :8090 (HTTP)    │
 └───────────┘    └───────┬──────────┘
-                    │         │
-               SSH/stdio   Cloudflare Tunnel
-                    │    (garmin-mcp.batserver.dev)
-                    ▼         │
-             ┌──────────┐    │    ┌──────────────┐
-             │  Claude  │    └──► │ Claude.ai /  │
-             │ Desktop/ │         │ ChatGPT      │
-             │  Code    │         │ (mobile)     │
-             └──────────┘         └──────┬───────┘
-                                         │ OAuth 2.1
-                                         ▼
-                                  ┌──────────────┐
-                                  │   Keycloak   │
-                                  │ auth.bat-    │
-                                  │ server.dev   │
-                                  └──────────────┘
+                         │
+                  Cloudflare Tunnel
+              (garmin-mcp.batserver.dev)
+                         │
+                         ▼
+              ┌──────────────────┐
+              │ Claude.ai /      │  All devices:
+              │ ChatGPT          │  web, mobile,
+              │                  │  desktop, Code
+              └────────┬─────────┘
+                       │ OAuth 2.1
+                       ▼
+              ┌──────────────────┐
+              │    Keycloak      │
+              │ auth.batserver   │
+              │     .dev         │
+              └──────────────────┘
 ```
 
 ## Key Files
