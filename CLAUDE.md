@@ -121,21 +121,29 @@ Data is automatically aggregated based on query duration to prevent context over
 
 Override with `aggregation="raw"` for full data (max 5000 points).
 
-### Running Locally (stdio, for SSH)
+### Deployment
+
+The MCP server runs as a Docker service (`garmin-mcp`) inside the compose stack, alongside garmin-fetch-data, influxdb, and grafana. It auto-starts, auto-restarts, and connects to InfluxDB via Docker internal networking.
+
+```bash
+# Start/rebuild the MCP server
+docker compose up -d --build garmin-mcp
+
+# View MCP server logs
+docker logs <mcp-container-name> --tail 30
+
+# Restart MCP server
+docker compose restart garmin-mcp
+```
+
+Instance-specific config (container name, port, public URL) is set in `.env` — see `.env.example` for available variables.
+
+### Running Locally (stdio, for debugging)
 
 ```bash
 cd mcp-server
 ./run-server.sh
 ```
-
-### Running as HTTP Server (for remote access via Cloudflare Tunnel)
-
-```bash
-cd mcp-server
-GARMIN_MCP_TRANSPORT=streamable-http ./run-server.sh
-```
-
-This starts the MCP server on port 8090 with OAuth 2.1 authentication via Keycloak.
 
 ### Authentication
 
@@ -150,14 +158,9 @@ This starts the MCP server on port 8090 with OAuth 2.1 authentication via Keyclo
 ### Client Configuration
 
 Register in Claude.ai or ChatGPT as a remote MCP server — syncs across all devices automatically:
-- **URL**: `https://garmin-mcp.batserver.dev/mcp`
+- **URL**: Your MCP server's public URL (set via `MCP_RESOURCE_URL` in `.env`) + `/mcp`
 - **Auth**: OAuth — auto-discovered via protected resource metadata
-- **Login**: Keycloak (`auth.batserver.dev`, realm `batserver`)
-
-The stdio transport is still available as a fallback for local debugging:
-```bash
-cd mcp-server && ./run-server.sh  # defaults to stdio
-```
+- **Login**: Via your Keycloak instance (set via `KEYCLOAK_ISSUER_URL` in `.env`)
 
 ### Example Queries
 
