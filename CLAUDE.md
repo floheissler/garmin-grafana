@@ -121,15 +121,40 @@ Data is automatically aggregated based on query duration to prevent context over
 
 Override with `aggregation="raw"` for full data (max 5000 points).
 
-### Running Locally
+### Running Locally (stdio, for SSH)
 
 ```bash
 cd mcp-server
 ./run-server.sh
 ```
 
-### Claude Desktop/Code Configuration (SSH from main machine)
+### Running as HTTP Server (for remote access via Cloudflare Tunnel)
 
+```bash
+cd mcp-server
+GARMIN_MCP_TRANSPORT=streamable-http ./run-server.sh
+```
+
+This starts the MCP server on port 8090 with OAuth 2.1 authentication via Keycloak.
+
+### Authentication
+
+**Remote (streamable-http)**: OAuth 2.1 via Keycloak. The MCP SDK handles everything automatically:
+- Serves `/.well-known/oauth-protected-resource` pointing to Keycloak as the authorization server
+- Returns 401 with `WWW-Authenticate` header for unauthenticated requests
+- Validates Keycloak-issued JWTs using the JWKS endpoint (fetched internally, not through Cloudflare)
+- `KeycloakTokenVerifier` in `server.py` implements the SDK's `TokenVerifier` protocol
+
+**Local (stdio)**: No authentication — used for SSH-piped connections from Claude Desktop/Code.
+
+### Client Configuration
+
+**Claude.ai / ChatGPT (remote, via Cloudflare Tunnel):**
+- URL: `https://garmin-mcp.batserver.dev/mcp`
+- Auth: OAuth — automatically discovered via protected resource metadata
+- Users log in via Keycloak (`auth.batserver.dev`, realm `batserver`)
+
+**Claude Desktop/Code (local, via SSH):**
 ```json
 {
   "mcpServers": {
@@ -160,6 +185,11 @@ cd mcp-server
 | `GARMIN_MCP_INFLUXDB_USERNAME` | `influxdb_user` | DB username |
 | `GARMIN_MCP_INFLUXDB_PASSWORD` | `influxdb_secret_password` | DB password |
 | `GARMIN_MCP_TIMEZONE` | `Europe/Berlin` | Timezone for queries |
+| `GARMIN_MCP_TRANSPORT` | `stdio` | Transport: `stdio` or `streamable-http` |
+| `GARMIN_MCP_HTTP_PORT` | `8090` | HTTP port (streamable-http only) |
+| `KEYCLOAK_ISSUER_URL` | `https://auth.batserver.dev/realms/batserver` | Keycloak realm URL (public, for token issuer validation) |
+| `KEYCLOAK_INTERNAL_URL` | `http://192.168.178.61:8180/realms/batserver` | Keycloak realm URL (internal, for JWKS fetching — bypasses Cloudflare) |
+| `MCP_RESOURCE_URL` | `https://garmin-mcp.batserver.dev` | Public URL of this MCP server (used in OAuth resource metadata) |
 
 ---
 
@@ -196,17 +226,26 @@ Garmin Connect Cloud
     ┌─────────┴─────────┐
     │                   │
     ▼                   ▼
-┌───────────┐    ┌─────────────┐
-│  Grafana  │    │ MCP Server  │
-│  :3001    │    │ (stdio)     │
-└───────────┘    └──────┬──────┘
-                       │ SSH
-                       ▼
-                ┌─────────────┐
-                │   Claude    │
-                │ (Desktop/   │
-                │   Code)     │
-                └─────────────┘
+┌───────────┐    ┌──────────────────┐
+│  Grafana  │    │   MCP Server     │
+│  :3001    │    │  :8090 (HTTP)    │
+└───────────┘    └───────┬──────────┘
+                    │         │
+               SSH/stdio   Cloudflare Tunnel
+                    │    (garmin-mcp.batserver.dev)
+                    ▼         │
+             ┌──────────┐    │    ┌──────────────┐
+             │  Claude  │    └──► │ Claude.ai /  │
+             │ Desktop/ │         │ ChatGPT      │
+             │  Code    │         │ (mobile)     │
+             └──────────┘         └──────┬───────┘
+                                         │ OAuth 2.1
+                                         ▼
+                                  ┌──────────────┐
+                                  │   Keycloak   │
+                                  │ auth.bat-    │
+                                  │ server.dev   │
+                                  └──────────────┘
 ```
 
 ## Key Files
