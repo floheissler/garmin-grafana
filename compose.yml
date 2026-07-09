@@ -92,6 +92,27 @@ services:
       - '${GRAFANA_HOST_PORT:-3001}:3000'
     image: 'grafana/grafana:latest'
 
+  garmin-mcp:
+    build: ./mcp-server
+    container_name: ${MCP_CONTAINER_NAME:-garmin-mcp}
+    restart: unless-stopped
+    depends_on:
+      - influxdb
+    ports:
+      - '${MCP_HOST_PORT:-8090}:${MCP_HOST_PORT:-8090}'
+    environment:
+      - GARMIN_MCP_INFLUXDB_HOST=influxdb
+      - GARMIN_MCP_INFLUXDB_PORT=8086
+      - GARMIN_MCP_INFLUXDB_DATABASE=GarminStats
+      - GARMIN_MCP_INFLUXDB_USERNAME=influxdb_user
+      - GARMIN_MCP_INFLUXDB_PASSWORD=influxdb_secret_password
+      - GARMIN_MCP_TIMEZONE=${USER_TIMEZONE:-Europe/Berlin}
+      - GARMIN_MCP_TRANSPORT=streamable-http
+      - GARMIN_MCP_HTTP_PORT=${MCP_HOST_PORT:-8090}
+      - KEYCLOAK_ISSUER_URL=${KEYCLOAK_ISSUER_URL:-https://auth.batserver.dev/realms/batserver}
+      - KEYCLOAK_INTERNAL_URL=${KEYCLOAK_INTERNAL_URL:-http://192.168.178.61:8180/realms/batserver}
+      - MCP_RESOURCE_URL=${MCP_RESOURCE_URL:-https://garmin-mcp.batserver.dev}
+
 volumes:
   influxdb_data:
   grafana_data:
