@@ -1,12 +1,15 @@
 """MCP Server for querying Garmin health data from InfluxDB."""
 
 import base64
-import hmac
 import json
 import os
 from pathlib import Path
 from typing import Literal
 
+import jwt
+from jwt import PyJWKClient
+from mcp.server.auth.provider import AccessToken, TokenVerifier
+from mcp.server.auth.settings import AuthSettings
 from mcp.server.fastmcp import FastMCP
 from mcp.types import Icon
 
@@ -43,12 +46,61 @@ def _load_icon() -> list[Icon] | None:
     return [Icon(src=f"data:image/png;base64,{data}", mimeType="image/png")]
 
 
-# Initialize MCP server
-mcp = FastMCP(
-    "garmin-health",
-    instructions="Query Garmin health and fitness data from InfluxDB. Use tools like get_daily_summary, get_sleep, get_heart_rate, get_activities to retrieve health metrics.",
-    icons=_load_icon(),
-)
+class KeycloakTokenVerifier:
+    """Validates Keycloak-issued JWTs using the JWKS endpoint."""
+
+    def __init__(self, jwks_url: str, issuer: str):
+        self.issuer = issuer
+        self._jwks_client = PyJWKClient(jwks_url, cache_jwk_set=True, lifespan=300)
+
+    async def verify_token(self, token: str) -> AccessToken | None:
+        try:
+            signing_key = self._jwks_client.get_signing_key_from_jwt(token)
+            payload = jwt.decode(
+                token,
+                signing_key.key,
+                algorithms=["RS256"],
+                issuer=self.issuer,
+                options={"verify_aud": False},
+            )
+            return AccessToken(
+                token=token,
+                client_id=payload.get("azp", payload.get("client_id", "")),
+                scopes=payload.get("scope", "").split(),
+                expires_at=payload.get("exp"),
+            )
+        except jwt.exceptions.PyJWTError:
+            return None
+
+
+def _create_mcp() -> FastMCP:
+    """Create FastMCP instance with conditional OAuth configuration."""
+    transport = os.environ.get("GARMIN_MCP_TRANSPORT", "stdio")
+
+    kwargs: dict = {
+        "name": "garmin-health",
+        "instructions": "Query Garmin health and fitness data from InfluxDB. Use tools like get_daily_summary, get_sleep, get_heart_rate, get_activities to retrieve health metrics.",
+        "icons": _load_icon(),
+    }
+
+    if transport == "streamable-http":
+        keycloak_issuer = os.environ.get("KEYCLOAK_ISSUER_URL")
+        keycloak_internal = os.environ.get("KEYCLOAK_INTERNAL_URL", keycloak_issuer)
+        resource_url = os.environ.get("MCP_RESOURCE_URL")
+        if keycloak_issuer and resource_url:
+            kwargs["auth"] = AuthSettings(
+                issuer_url=keycloak_issuer,
+                resource_server_url=resource_url,
+            )
+            kwargs["token_verifier"] = KeycloakTokenVerifier(
+                jwks_url=f"{keycloak_internal}/protocol/openid-connect/certs",
+                issuer=keycloak_issuer,
+            )
+
+    return FastMCP(**kwargs)
+
+
+mcp = _create_mcp()
 
 
 @mcp.tool()
@@ -732,30 +784,6 @@ def get_status() -> str:
         return json.dumps({"connected": False, "error": str(e)}, indent=2)
 
 
-class _BearerAuthMiddleware:
-    """ASGI middleware that enforces bearer token authentication."""
-
-    def __init__(self, app, token):
-        self.app = app
-        self.token = token
-
-    async def __call__(self, scope, receive, send):
-        if scope["type"] == "http":
-            headers = dict(scope.get("headers", []))
-            auth_header = headers.get(b"authorization", b"").decode()
-            if not hmac.compare_digest(auth_header, f"Bearer {self.token}"):
-                from starlette.responses import JSONResponse
-
-                response = JSONResponse(
-                    {"error": "Unauthorized"},
-                    status_code=401,
-                    headers={"WWW-Authenticate": "Bearer"},
-                )
-                await response(scope, receive, send)
-                return
-        await self.app(scope, receive, send)
-
-
 def main():
     """Run the MCP server."""
     transport = os.environ.get("GARMIN_MCP_TRANSPORT", "stdio")
@@ -768,10 +796,7 @@ def main():
 
         async def _serve():
             port = int(os.environ.get("GARMIN_MCP_HTTP_PORT", "8090"))
-            auth_token = os.environ.get("GARMIN_MCP_AUTH_TOKEN")
             app = mcp.streamable_http_app()
-            if auth_token:
-                app = _BearerAuthMiddleware(app, auth_token)
             config = uvicorn.Config(app, host="0.0.0.0", port=port, log_level="info")
             server = uvicorn.Server(config)
             await server.serve()

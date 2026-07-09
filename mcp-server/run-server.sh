@@ -16,8 +16,10 @@ export GARMIN_MCP_TIMEZONE="${GARMIN_MCP_TIMEZONE:-Europe/Berlin}"
 export GARMIN_MCP_TRANSPORT="${GARMIN_MCP_TRANSPORT:-stdio}"
 # HTTP port (only used when transport is streamable-http)
 export GARMIN_MCP_HTTP_PORT="${GARMIN_MCP_HTTP_PORT:-8090}"
-# Bearer token for HTTP auth (if unset, no auth is enforced)
-# export GARMIN_MCP_AUTH_TOKEN="your-secret-token-here"
+# Keycloak OAuth (only used for streamable-http transport)
+export KEYCLOAK_ISSUER_URL="${KEYCLOAK_ISSUER_URL:-https://auth.batserver.dev/realms/batserver}"
+export KEYCLOAK_INTERNAL_URL="${KEYCLOAK_INTERNAL_URL:-http://192.168.178.61:8180/realms/batserver}"
+export MCP_RESOURCE_URL="${MCP_RESOURCE_URL:-https://garmin-mcp.batserver.dev}"
 
 # Run the server
 exec ~/.local/bin/uv run python -m garmin_mcp.server
