@@ -91,6 +91,7 @@ services:
       - GF_DATE_FORMATS_INTERVAL_DAY=MMM DD
       - GF_DATE_FORMATS_INTERVAL_MONTH=YYYY-MM
       - GF_DATE_FORMATS_INTERVAL_YEAR=YYYY
+      - GF_SERVER_ROOT_URL=${GF_SERVER_ROOT_URL:-https://grafana.batserver.dev}
     volumes:
       - grafana_data:/var/lib/grafana
       - ./Grafana_Datasource:/etc/grafana/provisioning/datasources # (optional) Self provisioning influxdb datasource
