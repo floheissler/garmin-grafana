@@ -1,6 +1,7 @@
 #!/bin/bash
-# Garmin MCP Server runner script
-# Used for connecting via SSH from remote machines
+# Garmin MCP Server runner script (local stdio debugging)
+# NOTE: InfluxDB is not exposed to the host by default. To use this script,
+# temporarily add a ports mapping in compose.yml or use docker exec instead.
 
 cd "$(dirname "$0")"
 
