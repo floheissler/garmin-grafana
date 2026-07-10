@@ -5,6 +5,9 @@ services:
     restart: unless-stopped
     build: .  # Local build with running dynamics (upstream: thisisarpanghosh/garmin-fetch-data:latest)
     container_name: ${GARMIN_CONTAINER_NAME:-garmin-fetch-data}
+    labels:
+      batserver.tier: app
+      batserver.group: ${BATSERVER_GROUP:-garmin-flo}
     # user: root # Runs the container as root user, uncomment this line if you are getting permission issues which can't be resolved otherwise. For this, you also need to change the below volume mount from './garminconnect-tokens:/home/appuser/.garminconnect' to './garminconnect-tokens:/root/.garminconnect' to ensure the token files persist during container rebuilding. 
     depends_on:
       - influxdb
@@ -47,6 +50,9 @@ services:
     restart: unless-stopped
     container_name: ${INFLUXDB_CONTAINER_NAME:-influxdb}
     hostname: influxdb
+    labels:
+      batserver.tier: data
+      batserver.group: ${BATSERVER_GROUP:-garmin-flo}
     environment:
       - INFLUXDB_DB=GarminStats
       - INFLUXDB_USER=influxdb_user
@@ -71,6 +77,9 @@ services:
     restart: unless-stopped
     container_name: ${GRAFANA_CONTAINER_NAME:-grafana}
     hostname: grafana
+    labels:
+      batserver.tier: app
+      batserver.group: ${BATSERVER_GROUP:-garmin-flo}
     environment:
       - GF_SECURITY_ADMIN_USER=admin
       - GF_SECURITY_ADMIN_PASSWORD=admin
@@ -94,6 +103,9 @@ services:
     build: ./mcp-server
     container_name: ${MCP_CONTAINER_NAME:-garmin-mcp}
     restart: unless-stopped
+    labels:
+      batserver.tier: app
+      batserver.group: ${BATSERVER_GROUP:-garmin-flo}
     depends_on:
       - influxdb
     ports:
