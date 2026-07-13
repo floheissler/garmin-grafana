@@ -8,6 +8,7 @@ services:
     labels:
       batserver.tier: app
       batserver.group: ${BATSERVER_GROUP:-garmin-flo}
+      com.centurylinklabs.watchtower.enable: "false"
     # user: root # Runs the container as root user, uncomment this line if you are getting permission issues which can't be resolved otherwise. For this, you also need to change the below volume mount from './garminconnect-tokens:/home/appuser/.garminconnect' to './garminconnect-tokens:/root/.garminconnect' to ensure the token files persist during container rebuilding. 
     depends_on:
       - influxdb
@@ -107,6 +108,7 @@ services:
     labels:
       batserver.tier: app
       batserver.group: ${BATSERVER_GROUP:-garmin-flo}
+      com.centurylinklabs.watchtower.enable: "false"
     depends_on:
       - influxdb
     ports:
