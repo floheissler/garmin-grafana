@@ -35,6 +35,7 @@ from .formatters import (
     format_stress_body_battery,
     format_training_status,
 )
+from .momentum import compute_health_regime
 
 _ICON_PATH = Path(__file__).resolve().parent.parent.parent / "icon.png"
 
@@ -683,6 +684,35 @@ def get_training_status(
     status_data = db.query(status_query)
     readiness_data = db.query(readiness_query)
     result = format_training_status(status_data, readiness_data)
+    return json.dumps(result, indent=2, default=str)
+
+
+@mcp.tool()
+def get_health_regime(date: str | None = None) -> str:
+    """Get current health regime by analyzing biomarker trends (RHR, HRV, sleep stress).
+
+    Classifies your health trajectory into regimes like Thriving, Improving, Stable,
+    Strained, or Critical using momentum indicators on resting heart rate, overnight
+    HRV, and sleep stress. Use this to understand your overall recovery/stress state
+    — not for raw data (use get_daily_summary or get_trends for that).
+
+    Returns:
+        - Overall assessment: Recovery Phase, Mostly Favorable, Neutral, Building Stress,
+          or Stress Accumulation
+        - Per-metric regime: position (percentile vs 180-day baseline), trend direction,
+          and whether an extreme alert is active
+        - Alerts when metrics are at statistically extreme levels with high-confidence
+          reversion expected
+
+    Args:
+        date: Target date YYYY-MM-DD (default: today). Looks back 180 days for context.
+
+    Examples:
+        - "How am I doing?" → get_health_regime()
+        - "Am I overtraining?" → get_health_regime()
+        - "What was my health regime mid-July?" → get_health_regime(date="2026-07-15")
+    """
+    result = compute_health_regime(date)
     return json.dumps(result, indent=2, default=str)
 
 

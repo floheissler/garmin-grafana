@@ -89,7 +89,7 @@ Query Garmin health data directly from Claude using the MCP (Model Context Proto
 
 **Location**: `mcp-server/`
 
-### Available Tools (13)
+### Available Tools (14)
 
 | Tool | Description |
 |------|-------------|
@@ -105,6 +105,7 @@ Query Garmin health data directly from Claude using the MCP (Model Context Proto
 | `get_body_composition` | Weight tracking |
 | `get_blood_pressure` | Blood pressure readings (systolic, diastolic, pulse) |
 | `get_training_status` | Training status, readiness, load, and recovery |
+| `get_health_regime` | Health regime classification: recovery/stress state from RHR, HRV, and sleep stress momentum |
 | `query_measurement` | Advanced: direct InfluxQL queries |
 
 ### Smart Aggregation
@@ -170,6 +171,7 @@ Register in Claude.ai or ChatGPT as a remote MCP server — syncs across all dev
 - "Tell me about yesterday's run" → `get_activity_details(activity_id=12345)`
 - "How's my HRV trending?" → `get_hrv(duration="30d")`
 - "What's my current VO2 max?" → `get_fitness_metrics()`
+- "How am I doing? Am I overtraining?" → `get_health_regime()`
 
 ### Environment Variables
 
