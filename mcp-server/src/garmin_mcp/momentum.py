@@ -290,11 +290,15 @@ def _analyze_metric(key: str, series: list[tuple[str, float]]) -> dict:
     current = values[-1]
     metric_std = stdev(values) if len(values) >= 2 else 1.0
 
-    pctl = compute_percentile_rank(values[:-1], current)
-    position, direction = classify_position(pctl, cfg["inverted"])
-
     macd_cfg = cfg["macd"]
     macd_result = compute_macd(values, macd_cfg["fast"], macd_cfg["slow"], macd_cfg["signal"])
+
+    # Use the fast EMA for position — smooths out single-day noise so the
+    # regime reflects the recent trend, not one lucky/unlucky reading.
+    ema_fast = compute_ema(values, macd_cfg["fast"])
+    smoothed = ema_fast[-1] if ema_fast else current
+    pctl = compute_percentile_rank(values[:-1], smoothed)
+    position, direction = classify_position(pctl, cfg["inverted"])
 
     rsi_cfg = cfg["rsi"]
     rsi_val = compute_rsi(values, rsi_cfg["period"])
@@ -314,6 +318,7 @@ def _analyze_metric(key: str, series: list[tuple[str, float]]) -> dict:
 
     result = {
         "value": round(current, 1),
+        "smoothed_value": round(smoothed, 1),
         "unit": cfg["unit"],
         "percentile": round(pctl, 1),
         "position": position if direction == "neutral" else f"{position}_{direction}",
