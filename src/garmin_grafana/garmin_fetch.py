@@ -14,6 +14,19 @@ from garminconnect import (
     GarminConnectTooManyRequestsError,
 )
 garmin_obj = None
+NTFY_URL = os.getenv("NTFY_URL", "")
+NTFY_TOPIC = os.getenv("NTFY_TOPIC", "")
+
+def send_ntfy(title, message, priority="default", tags=""):
+    if not NTFY_URL or not NTFY_TOPIC:
+        return
+    try:
+        headers = {"Title": title, "Priority": priority}
+        if tags:
+            headers["Tags"] = tags
+        requests.post(f"{NTFY_URL}/{NTFY_TOPIC}", data=message, headers=headers, timeout=5)
+    except Exception:
+        pass
 banner_text = """
 
 *****  █▀▀ ▄▀█ █▀█ █▀▄▀█ █ █▄ █    █▀▀ █▀█ ▄▀█ █▀▀ ▄▀█ █▄ █ ▄▀█  *****
@@ -116,6 +129,7 @@ try:
         influxdbclient.write(record=[demo_point])
 except (InfluxDBClientError, InfluxDBError) as err:
     logging.error("Unable to connect with influxdb database! Aborted")
+    send_ntfy("Garmin sync failed", f"{GARMIN_DEVICENAME}: InfluxDB connection failed", priority="high", tags="warning")
     raise InfluxDBClientError("InfluxDB connection failed:" + str(err))
 
 # %%
@@ -164,6 +178,7 @@ def garmin_login():
             requests.exceptions.HTTPError,
         ) as err:
             logging.error(str(err))
+            send_ntfy("Garmin sync failed", f"{GARMIN_DEVICENAME}: session expired, re-login needed", priority="high", tags="warning")
             raise Exception("Session is expired : please login again and restart the script")
 
     return garmin
