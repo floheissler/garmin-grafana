@@ -3,6 +3,9 @@
 services:
   garmin-fetch-data:
     restart: unless-stopped
+    # Reach the host's published ports (ntfy :8093) without the LAN IP.
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     build: .  # Local build with running dynamics (upstream: thisisarpanghosh/garmin-fetch-data:latest)
     container_name: ${GARMIN_CONTAINER_NAME:-garmin-fetch-data}
     labels:
@@ -107,6 +110,9 @@ services:
     build: ./mcp-server
     container_name: ${MCP_CONTAINER_NAME:-garmin-mcp}
     restart: unless-stopped
+    # Reach the host's published ports (Keycloak :8180) without the LAN IP.
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     labels:
       batserver.tier: app
       batserver.group: ${BATSERVER_GROUP:-garmin-flo}
@@ -125,7 +131,7 @@ services:
       - GARMIN_MCP_TRANSPORT=streamable-http
       - GARMIN_MCP_HTTP_PORT=${MCP_HOST_PORT:-8090}
       - KEYCLOAK_ISSUER_URL=${KEYCLOAK_ISSUER_URL:-https://auth.batserver.dev/realms/batserver}
-      - KEYCLOAK_INTERNAL_URL=${KEYCLOAK_INTERNAL_URL:-http://192.168.178.61:8180/realms/batserver}
+      - KEYCLOAK_INTERNAL_URL=${KEYCLOAK_INTERNAL_URL:-http://host.docker.internal:8180/realms/batserver}
       - MCP_RESOURCE_URL=${MCP_RESOURCE_URL:-https://garmin-mcp.batserver.dev}
 
 volumes:

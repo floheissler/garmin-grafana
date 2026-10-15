@@ -186,7 +186,7 @@ Register in Claude.ai or ChatGPT as a remote MCP server — syncs across all dev
 | `GARMIN_MCP_TRANSPORT` | `stdio` | Transport: `stdio` or `streamable-http` |
 | `GARMIN_MCP_HTTP_PORT` | `8090` | HTTP port (streamable-http only) |
 | `KEYCLOAK_ISSUER_URL` | `https://auth.batserver.dev/realms/batserver` | Keycloak realm URL (public, for token issuer validation) |
-| `KEYCLOAK_INTERNAL_URL` | `http://192.168.178.61:8180/realms/batserver` | Keycloak realm URL (internal, for JWKS fetching — bypasses Cloudflare) |
+| `KEYCLOAK_INTERNAL_URL` | `http://host.docker.internal:8180/realms/batserver` | Keycloak realm URL (internal, for JWKS fetching — bypasses Cloudflare) |
 | `MCP_RESOURCE_URL` | `https://garmin-mcp.batserver.dev` | Public URL of this MCP server (used in OAuth resource metadata) |
 
 ---
