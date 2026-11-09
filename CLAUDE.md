@@ -49,7 +49,7 @@ Automated monthly backups via crontab (`0 4 1 * *` — 1st of each month at 4 AM
 - **Off-site copy**: `/mnt/usb-backup/garmin-influxdb/` (if USB drive mounted)
 - **Retention**: Backups older than 30 days are automatically deleted (both local and USB)
 - **Format**: InfluxDB portable backup (`.tar.gz` shards + `.manifest` + `.meta`)
-- **USB setup**: Format drive as ext4, add to `/etc/fstab` with `nofail` option using its UUID
+- **USB setup**: The stick is LUKS2-encrypted and unlocks at boot via a key file; it mounts at `/mnt/usb-backup` with `nofail`, so a missing stick never blocks boot. Setup, recovery and replacing the stick: `~/docker/CLAUDE.md`, *USB stick encryption* (never plain ext4)
 
 ```bash
 # Manual backup
