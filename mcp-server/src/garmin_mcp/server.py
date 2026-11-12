@@ -6,13 +6,12 @@ import os
 from pathlib import Path
 from typing import Literal
 
-import jwt
-from jwt import PyJWKClient
-from mcp.server.auth.provider import AccessToken, TokenVerifier
 from mcp.server.auth.settings import AuthSettings
 from mcp.server.fastmcp import FastMCP
 from mcp.types import Icon
+from starlette.applications import Starlette
 
+from .auth import AuthServerUnavailableMiddleware, KeycloakTokenVerifier
 from .db import db
 from .queries import (
     AggregationType,
@@ -45,33 +44,6 @@ def _load_icon() -> list[Icon] | None:
         return None
     data = base64.b64encode(_ICON_PATH.read_bytes()).decode()
     return [Icon(src=f"data:image/png;base64,{data}", mimeType="image/png")]
-
-
-class KeycloakTokenVerifier:
-    """Validates Keycloak-issued JWTs using the JWKS endpoint."""
-
-    def __init__(self, jwks_url: str, issuer: str):
-        self.issuer = issuer
-        self._jwks_client = PyJWKClient(jwks_url, cache_jwk_set=True, lifespan=300)
-
-    async def verify_token(self, token: str) -> AccessToken | None:
-        try:
-            signing_key = self._jwks_client.get_signing_key_from_jwt(token)
-            payload = jwt.decode(
-                token,
-                signing_key.key,
-                algorithms=["RS256"],
-                issuer=self.issuer,
-                options={"verify_aud": False},
-            )
-            return AccessToken(
-                token=token,
-                client_id=payload.get("azp", payload.get("client_id", "")),
-                scopes=payload.get("scope", "").split(),
-                expires_at=payload.get("exp"),
-            )
-        except jwt.exceptions.PyJWTError:
-            return None
 
 
 def _create_mcp() -> FastMCP:
@@ -814,6 +786,13 @@ def get_status() -> str:
         return json.dumps({"connected": False, "error": str(e)}, indent=2)
 
 
+def http_app(server: FastMCP) -> Starlette:
+    """The streamable-http app, answering 503 instead of 401 while Keycloak is unreachable (see auth.py)."""
+    app = server.streamable_http_app()
+    app.add_middleware(AuthServerUnavailableMiddleware)
+    return app
+
+
 def main():
     """Run the MCP server."""
     transport = os.environ.get("GARMIN_MCP_TRANSPORT", "stdio")
@@ -826,8 +805,7 @@ def main():
 
         async def _serve():
             port = int(os.environ.get("GARMIN_MCP_HTTP_PORT", "8090"))
-            app = mcp.streamable_http_app()
-            config = uvicorn.Config(app, host="0.0.0.0", port=port, log_level="info")
+            config = uvicorn.Config(http_app(mcp), host="0.0.0.0", port=port, log_level="info")
             server = uvicorn.Server(config)
             await server.serve()
 

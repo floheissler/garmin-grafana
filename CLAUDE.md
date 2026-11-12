@@ -152,7 +152,8 @@ cd mcp-server
 - Serves `/.well-known/oauth-protected-resource` pointing to Keycloak as the authorization server
 - Returns 401 with `WWW-Authenticate` header for unauthenticated requests
 - Validates Keycloak-issued JWTs using the JWKS endpoint (fetched internally, not through Cloudflare)
-- `KeycloakTokenVerifier` in `server.py` implements the SDK's `TokenVerifier` protocol
+- `KeycloakTokenVerifier` in `auth.py` implements the SDK's `TokenVerifier` protocol
+- **401 only for a bad token, 503 while Keycloak is unreachable.** A 401 sends the client into OAuth recovery; if Keycloak is down at that moment the refresh fails and the connector drops its grant for good (astronomy-mcp, 2026-11-12: after a dockerd restart the MCP servers were up seconds before Keycloak). So the verifier retries the JWKS for up to 20 s, keeps verifying with keys it already knows, and otherwise raises `AuthServerUnavailable`, which the middleware added in `http_app()` (`server.py`) answers with 503 + Retry-After. Serve the app from `http_app()`, not `mcp.streamable_http_app()` directly
 
 **Local (stdio)**: No authentication — used for SSH-piped connections from Claude Desktop/Code.
 
